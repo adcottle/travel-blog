@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Book } from './Book';
+import { Trip } from './Trip';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -19,22 +19,22 @@ export class CrudService {
   constructor(private httpClient: HttpClient) { }
 
   // Add
-  AddBook(data: Book): Observable<any> {
-    let API_URL = `${this.REST_API}/add-book`;
+  AddTrip(data: Trip): Observable<any> {
+    let API_URL = `${this.REST_API}/add-trip`;
     return this.httpClient.post(API_URL, data)
       .pipe(
         catchError(this.handleError)
       )
   }
 
-  // Get all objects
-  GetBooks() {
-    return this.httpClient.get(`${this.REST_API}`);
+  // Get all trips
+  GetTrips() {
+    return this.httpClient.get(`${this.REST_API}/`);
   }
 
-  // Get single object
-  GetBook(id:any): Observable<any> {
-    let API_URL = `${this.REST_API}/read-book/${id}`;
+  // Get single trip
+  GetTrip(_id:any): Observable<any> {
+    let API_URL = `${this.REST_API}/trip/${_id}`;
     return this.httpClient.get(API_URL, { headers: this.httpHeaders })
       .pipe(map((res: any) => {
           return res || {}
@@ -44,8 +44,8 @@ export class CrudService {
   }
 
   // Update
-  updateBook(id:any, data:any): Observable<any> {
-    let API_URL = `${this.REST_API}/update-book/${id}`;
+  updateTrip(_id:any, data:any): Observable<any> {
+    let API_URL = `${this.REST_API}/update-trip/${_id}`;
     return this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
       .pipe(
         catchError(this.handleError)
@@ -53,8 +53,8 @@ export class CrudService {
   }
 
   // Delete
-  deleteBook(id:any): Observable<any> {
-    let API_URL = `${this.REST_API}/delete-book/${id}`;
+  deleteTrip(_id:any): Observable<any> {
+    let API_URL = `${this.REST_API}/delete-trip/${_id}`;
     return this.httpClient.delete(API_URL, { headers: this.httpHeaders}).pipe(
         catchError(this.handleError)
       )
