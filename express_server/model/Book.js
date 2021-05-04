@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Book = new Schema({
-  name: {
+let Trip = new Schema({
+  state: {
     type: String
   },
-  price: {
-    type: String
+  year: {
+    type: Number
   },
-  description: {
-    type: String
+  tags: {
+    type: Array
   }
 }, {
-  collection: 'books'
+  collection: 'trips'
 })
 
-module.exports = mongoose.model('Book', Book)
+module.exports = mongoose.model('Trip', Trip)

@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 const bookRoute = express.Router();
-let Book = require('../model/Book');
+let Trip = require('../model/Book');
 
 // Add Book
 bookRoute.route('/add-book').post((req, res, next) => {
@@ -17,7 +17,7 @@ bookRoute.route('/add-book').post((req, res, next) => {
 
 // Get all Book
 bookRoute.route('/').get((req, res) => {
-    Book.find((error, data) => {
+    Trip.find((error, data) => {
     if (error) {
       return next(error)
     } else {
