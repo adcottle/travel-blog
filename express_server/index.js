@@ -18,7 +18,7 @@ mongoose.connect(mongoDb.db, {
   }
 )
 
-const bookRoute = require('./routes/book.routes')
+const tripRoute = require('./routes/trip.routes')
 
 const app = express();
 app.use(bodyParser.json());
@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'dist/angular-mean-crud-tutorial')))
 
 
 // API root
-app.use('/api', bookRoute)
+app.use('/api', tripRoute)
 
 // PORT
 const port = process.env.PORT || 8000;
