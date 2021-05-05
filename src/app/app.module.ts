@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /*Customization Modules*/
 import { MaterialModule } from './material.component';
+import * as mdb from 'mdb-ui-kit'
+
 
 /*App Pages*/
 import { HomeComponent } from './pages/home/home.component';
@@ -25,6 +27,7 @@ import { AboutComponent } from './pages/about/about.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    mdb,
     MaterialModule,
     BrowserAnimationsModule
   ],
