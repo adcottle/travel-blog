@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CrudService } from './../../service/crud.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 
 export interface tableData {
-  id: string;
+  _id: string;
   year: number;
   state: any;
 }
@@ -17,16 +20,44 @@ export interface tableData {
 export class AboutComponent implements OnInit {
 
   Trips:any = [];
+  Table:any = [];
+
+  displayedColumns: string[] = ['id', 'state', 'year']; 
+  dataSource: MatTableDataSource<tableData>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private crudService: CrudService) { }
 
   ngOnInit(): void {
+    this.populateTable();
     this.crudService.GetTrips().subscribe(res => {
-      console.log(res)
-      console.log('hello')
+      /*console.log(res)*/
       this.Trips =res;
     });    
   }
+
+  populateTable() { 
+    this.crudService.GetTrips().subscribe(res => {
+      this.Table = res
+      console.log(this.Table)
+      this.dataSource = new MatTableDataSource(this.Table);      
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;                 
+    }, err => {
+      console.log(err);
+    });
+  };
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
 
   delete(id:any, i:any) {
     console.log(id);
