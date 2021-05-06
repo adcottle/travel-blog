@@ -13,13 +13,17 @@ import { MaterialModule } from './material.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AboutComponent } from './pages/about/about.component';
+import { IdeasComponent } from './pages/ideas/ideas.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    AboutComponent
+    AboutComponent,
+    IdeasComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
