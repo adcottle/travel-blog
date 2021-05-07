@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /*Customization Modules*/
 import { MaterialModule } from './material.component';
+import { StickyNavModule } from 'ng2-sticky-nav';
+/*import { MDBBootstrapModule } from 'angular-bootstrap-md';*/
 
 /*App Pages*/
 import { HomeComponent } from './pages/home/home.component';
@@ -30,7 +32,9 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    BrowserAnimationsModule
+    StickyNavModule,
+    BrowserAnimationsModule,
+    /*MDBBootstrapModule,*/
   ],
   providers: [],
   bootstrap: [AppComponent]
