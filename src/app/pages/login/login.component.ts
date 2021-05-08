@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-export interface Tile {
-  
-  cols: number;
-  rows: number;
-  text: string;
-  image?: string;
-}
+
 
 @Component({
   selector: 'app-login',
@@ -14,13 +8,31 @@ export interface Tile {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  Tiles: Tile[] = [
-    {text: 'One', cols: 3, rows: 2, image: '../../../assets/pics/mesa_arch.jpg'},
-    {text: 'Two', cols: 1, rows: 2, image: '../../../assets/pics/petrified_forest.jpg'},
-    {text: 'Three', cols: 2, rows: 2, image: '../../../assets/pics/red_rocks.jpg'},
-    {text: 'Four', cols: 2, rows: 2, image: '../../../assets/pics/navajo_bridge.JPG'},
-  ];
+    imageObject = [{
+        image: '../../../assets/pics/navajo_bridge.JPG',
+        thumbImage: '../../../assets/pics/navajo_bridge.JPG',
+        title: 'Navajo Bridge in Marble Canyon'
+    }, {
+        image: '../../../assets/pics/mesa_arch.jpg',
+        thumbImage: '../../../assets/pics/mesa_arch.jpg',
+        title: 'Mesa Arch Moab, UT'
+    }, {
+        image: '../../../assets/pics/cliff.jpg',
+        thumbImage:  '../../../assets/pics/cliff.jpg',
+        title: "Looking over a 1000(+)' cliff."
+    },{
+        image: '../../../assets/pics/camelback.jpg',
+        thumbImage: '../../../assets/pics/camelback.jpg',
+        title: 'Camelback Mountain Phoenix, Az'
+    }, {
+        image: '../../../assets/pics/red_rocks.jpg',
+        thumbImage: '../../../assets/pics/red_rocks.jpg',
+        title: 'Red Rocks of Sedona, AZ'
+    }, {
+        image: '../../../assets/pics/goblin_valley.JPG',
+        thumbImage: '../../../assets/pics/goblin_valley.JPG',
+        title: 'Goblin Valley, AZ'
+    }];
 
   constructor() { }
 

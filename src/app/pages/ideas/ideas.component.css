@@ -162,7 +162,7 @@ body {
 	animation-name: parallax_one; /* controls img.one movement */
 	animation-timing-function: linear;
 	animation-iteration-count: infinite;
-	animation-duration: 18s;
+	animation-duration: 25s;
 	animation-direction: forwards;
 	object-fit: cover;
 }
@@ -434,3 +434,16 @@ kenburns-4 {  73.4375% {
  transform: scale(1);
 }
 }
+
+/*****grid****/
+.mat-grid-tile {
+	background-size: cover;
+	background-repeat: no-repeat;
+	max-width:100%;
+  max-height:100%;
+  }
+
+  .collage {
+	background-image: url('https://cdn.pixabay.com/photo/2016/12/09/14/25/background-1894944_960_720.jpg');
+	width: 50vw;
+  }

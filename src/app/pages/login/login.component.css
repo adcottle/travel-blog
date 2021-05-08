@@ -1,4 +1,4 @@
-/* sample.component.css */
+/* sticky navbar */
 .sticky-nav-wrapper {
   min-height: 40px;
   margin-top: 15px;
@@ -16,11 +16,34 @@
   line-height: 120px;
   background-color: tomato;
 }
-
-.holder {
-  background-image: url('https://cdn.pixabay.com/photo/2016/12/09/14/25/background-1894944_960_720.jpg');
-}
-.mat-grid-tile {
+/***************Collage*******************/
+.grid-container {
+  display: grid;
+  grid-gap: 10px;
+  padding: 10px;
+  grid-template-rows: 60vh;
+  background-image: url(../../../assets/pics/map_small.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.grid-item {
+  text-align: center;
+  padding: 10px;
+  font-size: 30px;
+}
+
+.item1 {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+}
+
+.item2 {
+  grid-column: 3;
+  grid-row: 1 ;
+}
+
+.slider {
+  min-height: 58vh;
+
 }

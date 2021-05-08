@@ -15,3 +15,16 @@
       <img class="three" src="../../../assets/pics/forest_gump.jpg" />
     </div>
   </div>
+<br><br>
+  <div class="collage">
+        <mat-grid-list mat-elevation-z8 cols="4" rowHeight="100px" gutterSize="15px">
+          <mat-grid-tile
+              *ngFor="let tile of Tiles"
+              [colspan]="tile.cols"
+              [rowspan]="tile.rows"
+              [ngStyle]="{'background-image':'url(' + tile.image + ')'}">
+            {{tile.text}}
+          </mat-grid-tile>
+        </mat-grid-list>
+      
+      </div>
