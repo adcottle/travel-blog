@@ -11,27 +11,27 @@ export class LoginComponent implements OnInit {
     imageObject = [{
         image: '../../../assets/pics/navajo_bridge.JPG',
         thumbImage: '../../../assets/pics/navajo_bridge.JPG',
-        title: 'Navajo Bridge in Marble Canyon'
+        title: 'Navajo Bridge, Marble Canyon'
     }, {
-        image: '../../../assets/pics/mesa_arch.jpg',
-        thumbImage: '../../../assets/pics/mesa_arch.jpg',
+        image: '../../../assets/pics/forest_gump.jpg',
+        thumbImage: '../../../assets/pics/forest_gump.jpg',
         title: 'Mesa Arch Moab, UT'
     }, {
         image: '../../../assets/pics/cliff.jpg',
         thumbImage:  '../../../assets/pics/cliff.jpg',
-        title: "Looking over a 1000(+)' cliff."
+        title: "Looking over a scary cliff."
     },{
         image: '../../../assets/pics/camelback.jpg',
         thumbImage: '../../../assets/pics/camelback.jpg',
-        title: 'Camelback Mountain Phoenix, Az'
+        title: 'Camelback Mountain Phoenix'
     }, {
         image: '../../../assets/pics/red_rocks.jpg',
         thumbImage: '../../../assets/pics/red_rocks.jpg',
-        title: 'Red Rocks of Sedona, AZ'
+        title: 'Red Rocks of Sedona'
     }, {
         image: '../../../assets/pics/goblin_valley.JPG',
         thumbImage: '../../../assets/pics/goblin_valley.JPG',
-        title: 'Goblin Valley, AZ'
+        title: 'Goblin Valley'
     }];
 
   constructor() { }
