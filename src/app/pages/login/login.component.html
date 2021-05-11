@@ -1,8 +1,13 @@
-<div class="grid-container">
+<div class="grid-container mat-elevation-z8">
   <div class="grid-item item1">
-    <div class="module-inside">
-    Welcome to our adventures
-  </div>
+   <div class="module-inside">
+      <div class="box demo1">Come Explore with Us</div>
+      <div class="box compass"><img class="compass" src="../../../assets/pics/vc.png"></div>
+       <div class="box introText"><h2><strong>Welcome to Our Adventures</strong></h2>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+       </div>   
+  </div> 
+  
 </div>
   <div class="grid-item item2">
     <div class="slider ">
@@ -23,13 +28,66 @@
 
 
 
-
 <!-- start nav-->
 <div class="sticky-nav-wrapper mat-elevation-z8">
-  <nav class="sticky-nav" ngStickyNav stickyClass="sticky-box-shadow">link text name icon logo</nav>
+  <nav class="sticky-nav" ngStickyNav stickyClass="sticky-box-shadow">
+  </nav>
 </div>
 
+<!--practice nav-->
+
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+              <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link waves-light" mdbWavesEffect>Features</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
+          </li>
+
+          <!-- Dropdown -->
+          <li class="nav-item dropdown" dropdown>
+              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+              Basic dropdown<span class="caret"></span></a>
+              <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+                  <div class="divider dropdown-divider"></div>
+                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+              </div>
+          </li>
+
+      </ul>
+      <!-- Links -->
+
+<!-- Search form -->
+      <form class="form-inline waves-light" mdbWavesEffect>
+          <div class="md-form my-0">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          </div>
+      </form>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
 <!--Start content-->
+
+
 
 <div class="content">
   Lorem ipsum dolor sit amet, consectetur adipisicing elit.

@@ -24,7 +24,7 @@
   grid-template-rows: 60vh;
   position: relative;
   width: 100%;
- 
+  font-family: 'Handlee', cursive;
 }
 .grid-container::before {
   background-image: url(../../../assets/pics/postcard.jpg);
@@ -64,4 +64,77 @@
   border-style: solid;
   border-color: burlywood;
   border-width: 4px;
+}
+
+/*****************/
+module, demo1 {
+ /* width: 300px;
+  height: 300px;
+  display: grid;
+  place-items: center;
+  color: #ff43ea;*/
+  position: relative;
+  font-family: 'Handlee', cursive;
+}
+.module::before {
+  content: "";
+  top: 0;
+  left: 0;
+ /* width: 100%;
+  height: 100%;*/
+  position: absolute;
+  /*background-image: url(https://images.unsplash.com/photo-1494645009625-cc17363a5f20?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=bd502af39c922553e5a13624d4f44f40);
+  background-size: cover;
+  filter: grayscale(100%);*/
+}
+.module-inside {
+  position: relative;
+  font-family: 'Handlee', cursive;
+  font-size: large;
+}
+/*******************************/
+.container{
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 20px;
+}
+.box{
+  width: 100%;
+  height: 100%;            
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;  /* for demo purpose  */
+}
+.stack-top{
+  z-index: 9;
+  margin: 20px; /* for demo purpose  */
+}
+.introText h2{
+  font-family: 'Handlee', cursive;
+  font-size: 48px;
+  color: #003366;
+  margin-top: 60px;
+  margin-left: 46px;
+}
+.introText p {
+  text-align: justify;
+  font-size: 26px;
+  margin-left: 285px;
+  margin-top: 40px;
+  margin-right: 80px;
+  color: #003366;
+  line-height: 1.5;
+}
+.compass {
+  float: left;
+  height: 170px;
+  width: 175px;;
+  margin-left: 40px;
+  margin-top: 13px;
+  transform: rotate(10deg);
+}
+.demo1 {
+  float: left;
 }

@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /*Customization Modules*/
 import { MaterialModule } from './material.component';
 import { StickyNavModule } from 'ng2-sticky-nav';
-/*import { MDBBootstrapModule } from 'angular-bootstrap-md';*/
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgImageSliderModule } from 'ng-image-slider';
 
 /*App Pages*/
@@ -35,7 +35,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     MaterialModule,
     StickyNavModule,
     BrowserAnimationsModule,
-    /*MDBBootstrapModule,*/
+    MDBBootstrapModule.forRoot(),
     NgImageSliderModule
   ],
   providers: [],
