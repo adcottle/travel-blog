@@ -1,132 +1,180 @@
 <div class="grid-container mat-elevation-z8">
   <div class="grid-item item1">
-   <div class="module-inside">
-      <div class="box demo1">Come Explore with Us</div>
-      <div class="box compass"><img class="compass" src="../../../assets/pics/vc.png"></div>
-       <div class="box introText"><h2><strong>Welcome to Our Adventures</strong></h2>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-       </div>   
-  </div> 
-  
-</div>
+     <div class="module-inside">
+        <div class="box demo1">Come Explore with Us</div>
+        <div class="box compass"><img class="compass" src="../../../assets/pics/vc.png"></div>
+        <div class="box introText">
+           <h2><strong>Welcome to Our Adventures</strong></h2>
+           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+     </div>
+  </div>
   <div class="grid-item item2">
-    <div class="slider ">
-      <div class="mat-elevation-z8" style="width: '100%'; height: '100%'; text-align:left;margin:0; padding:0;">
-        <ng-image-slider #nav
-          [images]="imageObject"
-          [infinite]="true"
-          [autoSlide]="1"
-          [showArrow]="false"
-          [imageSize]="{width: '30%', height: 433}"
-          [animationSpeed]="5"
-          slideImage="1">
-        </ng-image-slider>
-      </div>
-    </div>
+     <div class="slider ">
+        <div class="mat-elevation-z8" style="width: '100%'; height: '100%'; text-align:left;margin:0; padding:0;">
+           <ng-image-slider #nav
+           [images]="imageObject"
+           [infinite]="true"
+           [autoSlide]="1"
+           [showArrow]="false"
+           [imageSize]="{width: '30%', height: 445}"
+           [animationSpeed]="5"
+           slideImage="1">
+           </ng-image-slider>
+        </div>
+     </div>
   </div>
 </div>
-
 <br>
-
 <!-- start nav-->
 <div class="sticky-nav-wrapper mat-elevation-z8">
-  
-
-
-<!--Navbar-->
-<mdb-navbar class="sticky-nav" SideClass="navbar navbar-expand-lg navbar-light blue-grey lighten-5" [containerInside]="false" ngStickyNav stickyClass="sticky-box-shadow">
-  
-  <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
-
-  <!-- Collapsible content -->
-  <links>
-
-    <!-- Links -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="envelope"></mdb-icon> Contact<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="cog"></mdb-icon> Settings</a>
-      </li>
-
-      <!-- Dropdown -->
-      <li class="nav-item dropdown" dropdown>
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span></a>
-        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
-        </div>
-      </li>
-
-    </ul>
-    <!-- Links -->
-  </links>
-  <!-- Collapsible content -->
-
-</mdb-navbar>
-<!--/.Navbar-->
+  <!--Navbar-->
+  <mdb-navbar class="sticky-nav"  style="background-color: #deb887;" SideClass="navbar navbar-expand-lg navbar-dark " [containerInside]="false" ngStickyNav stickyClass="sticky-box-shadow">
+     <!-- Navbar brand -->
+     <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
+     <!-- Collapsible content -->
+     <links>
+        <!-- Links -->
+        <ul class="navbar-nav ml-auto">
+           <li class="nav-item active">
+              <a class="nav-link waves-light" mdbWavesEffect>
+                 <mdb-icon fas icon="envelope"></mdb-icon>
+                 Contact<span class="sr-only">(current)</span>
+              </a>
+           </li>
+           <li class="nav-item">
+              <a class="nav-link waves-light" mdbWavesEffect>
+                 <mdb-icon fas icon="cog"></mdb-icon>
+                 Settings
+              </a>
+           </li>
+           <!-- Dropdown -->
+           <li class="nav-item dropdown" dropdown>
+              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                 <mdb-icon fas icon="user"></mdb-icon>
+                 Profile<span class="caret"></span>
+              </a>
+              <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                 <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
+                 <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+              </div>
+           </li>
+        </ul>
+        <!-- Links -->
+     </links>
+     <!-- Collapsible content -->
+  </mdb-navbar>
+  <!--/.Navbar-->
 </div>
 <!--Start content-->
-
-
-
-<div class="content">
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-  Qui officia deserunt mollit anim id est laborum. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
-
-  Excepteur sint occaecat cupidatat non proident, sunt in culpa. Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Qui officia deserunt mollit anim id est laborum. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
-  
-  Non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Laboris nisi ut aliquip ex ea commodo consequat.
-  
-  Non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo. Excepteur sint occaecat cupidatat non proident, sunt in culpa.
-  
-  Cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. Excepteur sint occaecat cupidatat non proident, sunt in culpa.
-  
-  Esse cillum dolore eu fugiat nulla pariatur. Animi, id est laborum et dolorum fuga. Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam.
-  
-  Architecto beatae vitae dicta sunt explicabo. Et harum quidem rerum facilis est et expedita distinctio. Animi, id est laborum et dolorum fuga. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.
-  
-  Esse cillum dolore eu fugiat nulla pariatur. Et harum quidem rerum facilis est et expedita distinctio. Qui officia deserunt mollit anim id est laborum. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
-  
-  Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam. Do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa.
-  
-  Do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo. Et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.
-Excepteur sint occaecat cupidatat non proident, sunt in culpa. Inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Qui officia deserunt mollit anim id est laborum. Fugiat quo voluptas nulla pariatur?
-
-    Corrupti quos dolores et quas molestias excepturi sint occaecati.
-    Totam rem aperiam.
-    Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
-</div>
-
-<br><br>
-
-
-<div class="wall">
-    <section class="polaroid-gallery">
-     
-      <figure class="polaroid-card">
+<br>
+<br>
+<mat-grid-list cols="4" rowHeight="75px" gutterSize="10px">
+  <mat-grid-tile colspan="1"><img class="plane" src="../../../assets/pics/plane.gif" alt="Airplane"></mat-grid-tile>
+  <mat-grid-tile colspan="2">
+     <h1 class="mapTitle">Where We've Been</h1>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1"><img class="compass2" src="../../../assets/pics/vc.png"></mat-grid-tile>
+  <mat-grid-tile colspan="4">
+     <div class="mapNum col-md-4"> 6 States</div>
+     <div class="mapNum col-md-4">2 Countries</div>
+     <div class="mapNum col-md-4">1 Natural Wonder</div>
+  </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="4" rowHeight="200px" gutterSize="10px" class="mat-elevation-z8">
+  <mat-grid-tile colspan="3" rowspan="2"><img class="mapImg " src="../../../assets/pics/map.png"></mat-grid-tile>
+  <mat-grid-tile rowspan="1" rowspan="2">
+     <blockquote class="blockquote">
+        <ul type='disc'>
+           <li>
+              Country
+              <ul type='circle'>
+                 <li>
+                    USA
+                 </li>
+                 <li>
+                    Bahamas
+                 </li>
+                 <li>
+                    Virgin Islands
+                 </li>
+              </ul>
+           </li>
+           <li>
+              States
+              <ul type='circle'>
+                 <li>
+                    WV
+                 </li>
+                 <li>
+                    TX
+                 </li>
+                 <li>
+                    OH
+                 </li>
+                 <li>
+                    VA
+                 </li>
+              </ul>
+           </li>
+           <li>
+              Point of Interest
+              <ul type='circle'>
+                 <li>
+                    National Parks
+                    <ul type='square'>
+                       <li>
+                          Zion
+                       </li>
+                       <li>
+                          Grand Canyon
+                       </li>
+                    </ul>
+                 </li>
+                 <li>
+                    Capitols
+                    <ul type='square'>
+                       <li>
+                          DC
+                       </li>
+                       <li>
+                          Austin
+                       </li>
+                    </ul>
+                 </li>
+              </ul>
+           </li>
+        </ul>
+     </blockquote>
+  </mat-grid-tile>
+</mat-grid-list>
+<br>
+<div class="wall mat-elevation-z8">
+  <section class="polaroid-gallery">
+     <figure class="polaroid-card">
         <img src="../../../assets/pics/navajo_bridge.JPG" alt="img" width="250px" height="200px" >
         <figcaption class="polaroid-card-caption">Navajo Bridge</figcaption>
-      </figure>
-      <figure class="polaroid-card">
+     </figure>
+     <figure class="polaroid-card">
         <img src="../../../assets/pics/mesa_arch.jpg" width="250px" height="200px" alt="Geese">
         <figcaption class="polaroid-card-caption">Mesa Arch</figcaption>
-      </figure>
-      <figure class="polaroid-card">
+     </figure>
+     <figure class="polaroid-card">
         <img src="../../../assets/pics/red_rocks.jpg" width="250px" height="200px" alt="Kingfisher">
         <figcaption class="polaroid-card-caption">Red Rocks of Sedona</figcaption>
-      </figure>
-      <figure class="polaroid-card">
+     </figure>
+     <figure class="polaroid-card">
         <img src="../../../assets/pics/camelback.jpg" width="250px" height="200px" alt="Owl">
         <figcaption class="polaroid-card-caption">Cambel Back Phoenix</figcaption>
-      </figure>
-      <figure class="polaroid-card">
-        <img src="../../../assets/pics/petrified_forest.jpg" width="250px" height="200" alt="Kingfisher">
-        <figcaption class="polaroid-card-caption">Petrified Forest</figcaption>
-      </figure>
-    </section>
-   
+     </figure>
+  </section>
 </div>
+<!-- Footer -->
+<footer class="page-footer font-small lighten-5">
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+     <a href="#"> Cottle Family Adventures</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->

@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
 .wall {
   background: url(https://images.pexels.com/photos/172277/pexels-photo-172277.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) repeat;
+  height: 350px;
+  margin-bottom: 30px;
 }
 
 .polaroid-gallery {
   text-align: center;
+  padding-top: 40px;
 }
 
 .polaroid-gallery-title {
@@ -31,10 +35,12 @@
 
 .polaroid-card:nth-of-type(even) {
   transform: rotate(12deg);
+  margin-left: 125px;
 }
 
 .polaroid-card:nth-of-type(odd) {
   transform: rotate(-12deg);
+  margin-left: 125px;
 }
 /*Tape corners*/
 .polaroid-card:nth-of-type(even)::before {
@@ -68,23 +74,23 @@
 }
 
 /* sticky navbar */
+mdb-navbar {
+  z-index: 999;
+}
 .sticky-nav-wrapper {
   min-height: 40px;
   margin-top: 15px;
+  background-color:burlywood;
 }
 .sticky-nav {
   height: 40px;
-  background-color: burlywood;
   width: 100%;
+  background-color:  burlywood;
 }
 .sticky-box-shadow {
   box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
 }
-.content {
-  margin-top: 15px;
-  line-height: 6;
-  background-color: tomato;
-}
+
 /***************Collage*******************/
 .grid-container {
   display: grid;
@@ -152,11 +158,9 @@ module, demo1 {
   font-size: large;
 }
 /*******************************/
-.container{
-  width: 200px;
-  height: 200px;
-  position: relative;
-  margin: 20px;
+.places {
+  color: maroon;
+  font-size: large;
 }
 .box{
   width: 100%;
@@ -197,4 +201,52 @@ module, demo1 {
 .demo1 {
   float: left;
   margin-left: -30px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+mat-grid-tile {
+  /* box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12); */
+  width: auto;
+ }
+.plane {
+  height: 100px;
+  width: 125px;
+  float: left;
+  padding-left: 50px;
+}
+.mapTitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: 76px;
+  color: cornflowerblue;
+  font-weight: 700;
+  text-align: center;
+  padding-left: 10%;
+}
+.compass2 {
+  height: 100px;
+  width: 125px;
+  transform: rotate(12deg);
+  float: right;  
+  margin-top: -50px;
+}
+.line-sep{
+  border-top: solid 3px cornflowerblue;
+  width: 75%;
+  margin-left: 10%;
+  margin-top: 15px;  
+}
+.mapNum {
+  font-size: x-large;
+  font-weight: 700;
+  color: cornflowerblue;
+  text-transform: uppercase;
+}
+.mapImg {
+  height: 330px;
+  width: 500px;
+}
+
+footer {
+  border-radius: 5px;
+  background-color: mediumseagreen;
 }
