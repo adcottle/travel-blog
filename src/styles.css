@@ -5,6 +5,10 @@
     font-family: "Handlee";
     src: local("Handlee"), url(./assets/fonts/Handlee/Handlee-Regular.ttf) format("truetype");
 }
+@font-face {
+    font-family: "Dancing Script";
+    src: local("Dancing Script"), url(./assets/fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf) format("truetype")
+}
 
 html, body { height: 100%; }
 body { margin: 15px; font-family: Roboto, "Helvetica Neue", sans-serif; }
