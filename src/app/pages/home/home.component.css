@@ -27,7 +27,7 @@
   font-size: 46px;
   color: #003366;
   text-align: center;
-  font-family: 'Handlee', cursive;
+  font-family: 'Dancing Script', cursive;
   margin-top: 15px;
 }
 .introText {
@@ -93,8 +93,11 @@ mdb-navbar {
   font-family: 'Noto Sans TC', sans-serif;
 }
 .mapImg {
-  height: 330px;
-  width: 500px;
+ /* height: 330px;
+  width: 500px;*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto;  
 }
 mat-icon, mat-tree-node{
  
@@ -106,23 +109,13 @@ mat-icon, mat-tree-node{
   text-align: center;
 }
 .postBox {
- /* height: 350px;
-  width: 350px;*/
   border-right: 5px inset #003366;
-  display: -webkit-box;
-display: -webkit-flex;
-display: -moz-box;
-display: -ms-flexbox;
-display: flex;
--webkit-flex-align: center;
--ms-flex-align: center;
--webkit-align-items: center;
-align-items: center;
-display: flex;
-justify-content: center; /* align horizontal */
-align-items: center; /* align vertical */ 
 }
-
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;  
+}
 footer {
   width: 100%;
   height: 5%;
@@ -130,13 +123,17 @@ footer {
   color: white;
   text-align: center;
   font-size: medium;
+  border-radius: 5px;
+}
+.footerText {
+  padding-top: 12px;
 }
 figcaption {
-  background-color: antiquewhite;
-  color: #003366;
+  color: cornflowerblue;
   font-style: italic;
-  margin-top: 5%;
-  
+  font-weight: 700;
+  font-size: large;
+  padding-top: 1%;  
 }
  /*****************Cellphone sizing****/
  @media only screen and (min-device-width : 414px) and (max-device-width : 736px) {
@@ -175,9 +172,11 @@ figcaption {
       font-weight: 700;
   }
   .postBox {
-    /* height: 350px;
-     width: 350px;*/
-     border: 5px double #003366;
+    border-bottom: 5px inset #003366;
+     border-right:none;
+  }
+  .footerText {
+    padding-top: 0;
   }
   }
   /* Desktops and laptops ----------- 
