@@ -1,107 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&family=Noto+Sans:wght@700&display=swap');
 
-.wall {
-  background: url(https://images.pexels.com/photos/172277/pexels-photo-172277.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) repeat;
-  height: 350px;
-  margin-bottom: 30px;
-}
 
-.polaroid-gallery {
-  text-align: center;
-  padding-top: 40px;
+.fillerText {
+  background-color: cornsilk;
+  color: maroon;
+  line-height: 3;
+  font-size: xx-large;
 }
-
-.polaroid-gallery-title {
-  font-size: 32px;
-  font-weight: 400;
-  color: #333;
-}
-
-.polaroid-card {
-  display: inline-block;
-  background-color: #eee6d8;
-  padding: 10px;
-  box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.7); 
-}
-
-.polaroid-card-caption {
-  text-align: center;
-  font-family: 'Rock Salt', cursive;
-  font-size: 12px;
-  margin-top: 6px;
-  letter-spacing: 2px;
-}
-
-.polaroid-card:nth-of-type(even) {
-  transform: rotate(12deg);
-  margin-left: 125px;
-}
-
-.polaroid-card:nth-of-type(odd) {
-  transform: rotate(-12deg);
-  margin-left: 125px;
-}
-/*Tape corners*/
-.polaroid-card:nth-of-type(even)::before {
-  content: '';
-  display: block;
-  background-color: rgba(222, 220, 200, 0.66);
-  width: 100px;
-  height: 25px;
-  transform: rotate(-24deg) translate(-30px, -25px);
-}
-
-.polaroid-card:nth-of-type(odd)::before {
-  content: '';
-  display: block;
-  background-color: rgba(222, 220, 200, 0.66);
-  width: 150px;
-  height: 25px;
-  transform: translate(140px, -5px) rotate(25deg);
-}
-
-/*Photo transition*/
-.polaroid-card:nth-of-type(1), .polaroid-card:nth-of-type(2), .polaroid-card:nth-of-type(3), 
-.polaroid-card:nth-of-type(4), .polaroid-card:nth-of-type(5) {
-  transition: transform 0.75s;
-}
-
-.polaroid-card:nth-of-type(1):hover, .polaroid-card:nth-of-type(2):hover, 
-.polaroid-card:nth-of-type(3):hover, .polaroid-card:nth-of-type(4):hover,
-.polaroid-card:nth-of-type(5):hover{
-  transform: scale(1.5);
-}
-
-/* sticky navbar */
-mdb-navbar {
-  z-index: 999;
-}
-.sticky-nav-wrapper {
-  min-height: 40px;
-  margin-top: 15px;
-  background-color:burlywood;
-}
-.sticky-nav {
-  height: 40px;
-  width: 100%;
-  background-color:  burlywood;
-}
-.sticky-box-shadow {
-  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
-}
-
-/***************Collage*******************/
-.grid-container {
-  display: grid;
-  grid-gap: 10px;
-  padding: 10px;
-  grid-template-rows: 60vh;
+.intro {
+  font-family: 'Handlee', cursive;  
   position: relative;
   width: 100%;
-  font-family: 'Handlee', cursive;
 }
-.grid-container::before {
+.intro::before{
   background-image: url(../../../assets/pics/postcard.jpg);
   /*filter: sepia(100%);*/
   opacity: 0.3;
@@ -112,136 +23,173 @@ mdb-navbar {
   top: 0; left: 0;
   width: 100%; height: 100%;
 }
-.module-inside {
-  position: relative;
-  font-family: 'Handlee', cursive;
-  color: #704214;
-  
-}
-.grid-item {
+.introHead {
+  font-size: 46px;
+  color: #003366;
   text-align: center;
-  padding: 10px;
-  font-size: 30px;
-}
-
-.item1 {
-  grid-column: 1 / span 2;
-  grid-row: 1;
-}
-
-.item2 {
-  grid-column: 3;
-  grid-row: 1 ;
-}
-
-.slider {
-  min-height: 58vh;
-  border-style: solid;
-  border-color: burlywood;
-  border-width: 4px;
-}
-
-/*****************/
-module, demo1 {
-  position: relative;
   font-family: 'Handlee', cursive;
+  margin-top: 15px;
 }
-.module::before {
-  content: "";
-  top: 0;
-  left: 0;
-  position: absolute; 
-}
-.module-inside {
-  position: relative;
-  font-family: 'Handlee', cursive;
-  font-size: large;
-}
-/*******************************/
-.places {
-  color: maroon;
-  font-size: large;
-}
-.box{
-  width: 100%;
-  height: 100%;            
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.stack-top{
-  z-index: 9;
-}
-
-.introText h2{
-  font-family: 'Handlee', cursive;
-  font-size: 48px;
-  color: #003366;
-  margin-top: 60px;
-  margin-left: 46px;
-}
-.introText p {
-  text-align: justify;
-  font-size: 26px;
-  margin-left: 285px;
-  margin-top: 40px;
-  margin-right: 80px;
-  color: #003366;
+.introText {
+  font-size: 28px;
+  color: #003366; 
   line-height: 1.5;
 }
 .compass {
   float: left;
-  margin-left: -40px;
-  height: 170px;
-  width: 175px;;
-  margin-left: 17px;
-  margin-top: 13px;
+  margin-top: 20px;
   transform: rotate(10deg);
+  height: 150px;
+  width: 145px;
 }
-.demo1 {
-  float: left;
-  margin-left: -30px;
-  margin-bottom: 25px;
-  text-align: center;
-}
-mat-grid-tile {
-  /* box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12); */
-  width: auto;
- }
-.plane {
-  height: 75px;
-  width: 100px;
-  float: right;
-}
-.mapTitle {
-  font-family: 'Dancing Script', cursive;
-  font-size: 76px;
-  color: cornflowerblue;
-  font-weight: 700;
-  text-align: center;
-  padding-left: 10%;
-  text-decoration: cornflowerblue underline;
-}
-.compass2 {
-  height: 72px;
-  width: 100px;
-  transform: rotate(160deg);
-  float: left;  
+ng-image-slider {
+  margin-left: 15%;
 
 }
-.mapNum {
-  font-size: x-large;
+ /********************************************MINE****/
+ /* sticky navbar */
+mdb-navbar {
+    z-index: 999;
+    width: 100%;
+  }
+  .sticky-nav-wrapper {
+    min-height: 40px;
+    margin-top: 15px;
+    background-color:#003366;
+  }
+  /*.sticky-nav {
+    height: 40px;
+    width: 100%;
+    background-color:  burlywood;
+  }
+  .sticky-box-shadow {
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
+  }*/
+  .plane{
+      height: 75px;
+      width: 100px;
+      float: right;
+      margin-top: -15px;
+      clear: left;
+}
+ 
+.mapTitle, .postTitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: 52px;
+  color: cornflowerblue;
   font-weight: 700;
+  text-decoration: cornflowerblue underline;
+  }
+.mapTitle {
+  text-align: left;
+}
+
+.mapNum { 
+  font-size: 28px;
+  font-weight: 900;
   color: cornflowerblue;
   text-transform: uppercase;
   text-align: center;
+  font-family: 'Noto Sans TC', sans-serif;
 }
 .mapImg {
   height: 330px;
   width: 500px;
 }
+mat-icon, mat-tree-node{
+ 
+    font-size: x-large;
+    color: #003366;
+    font-weight: 700;
+}
+.postTitle {
+  text-align: center;
+}
+.postBox {
+ /* height: 350px;
+  width: 350px;*/
+  border-right: 5px inset #003366;
+  display: -webkit-box;
+display: -webkit-flex;
+display: -moz-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-flex-align: center;
+-ms-flex-align: center;
+-webkit-align-items: center;
+align-items: center;
+display: flex;
+justify-content: center; /* align horizontal */
+align-items: center; /* align vertical */ 
+}
 
 footer {
-  border-radius: 5px;
-  background-color: mediumseagreen;
+  width: 100%;
+  height: 5%;
+  background-color:mediumseagreen;
+  color: white;
+  text-align: center;
+  font-size: medium;
 }
+figcaption {
+  background-color: antiquewhite;
+  color: #003366;
+  font-style: italic;
+  margin-top: 5%;
+  
+}
+ /*****************Cellphone sizing****/
+ @media only screen and (min-device-width : 414px) and (max-device-width : 736px) {
+    .introText {
+      line-height: 1;
+    }
+    .compass {
+      height: 100px;
+      width: 100px;
+    }
+    .mapTitle, postTitlee {
+      font-family: 'Dancing Script', cursive;
+      font-size: 52px;
+      color: cornflowerblue;
+      font-weight: 700;     
+      text-decoration: cornflowerblue underline;      
+      }
+      .mapTitle {
+        text-align: left;
+      }
+    .mapNum { 
+      font-size: large;
+      font-weight: 900;
+      color: cornflowerblue;
+      text-transform: uppercase;
+      text-align: center;
+      font-family: 'Noto Sans TC', sans-serif;      
+    }
+    .mapImg {
+      height: 230px;
+      width: 300px;
+    }
+    mat-icon, mat-tree-node{
+      font-size: x-large;
+      color: #003366;
+      font-weight: 700;
+  }
+  .postBox {
+    /* height: 350px;
+     width: 350px;*/
+     border: 5px double #003366;
+  }
+  }
+  /* Desktops and laptops ----------- 
+@media only screen  and (min-width : 1224px) {
+  /* Styles 
+  }
+  
+  /* Large screens ----------- 
+  @media only screen  and (min-width : 1824px) {
+  /* Styles
+  } 
+  /* iPads (portrait and landscape) ----------- 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  /* Styles 
+}*/

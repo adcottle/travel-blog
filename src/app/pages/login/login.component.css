@@ -55,7 +55,7 @@ mdb-navbar {
   .sticky-nav-wrapper {
     min-height: 40px;
     margin-top: 15px;
-    background-color:burlywood;
+    background-color:#003366;
   }
   /*.sticky-nav {
     height: 40px;
@@ -95,6 +95,11 @@ mdb-navbar {
 .mapImg {
   height: 330px;
   width: 500px;
+}
+mat-icon, mat-tree-node{
+    font-size: xx-large;
+    color: burlywood;
+    font-weight: 700;
 }
 .postTitle {
   text-align: center;

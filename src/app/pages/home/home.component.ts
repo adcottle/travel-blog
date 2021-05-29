@@ -1,4 +1,77 @@
 import { Component, OnInit } from '@angular/core';
+import {FlatTreeControl} from '@angular/cdk/tree';
+import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+
+interface FoodNode {
+  name: string;
+  children?: FoodNode[];
+}
+
+const TREE_DATA: FoodNode[] = [
+  {
+    name: 'Countries',
+    children: [
+      {name: 'US Virgin Islands'},
+      {name: 'Bahamas'},
+      {name: 'British Virgin Islands'},
+    ]
+  }, {
+    name: 'States',
+    children: [
+      {
+        name: 'Tennessee',
+        children: [
+          {name: 'Chattanooga'},
+          {name: 'Gatlinburg'},
+          {name: 'Nashbille'},
+        ]
+      }, {
+        name: 'Texas',
+        children: [
+          {name: 'Austin'},
+          {name: 'San Antonio'},
+        ]
+      },{
+        name: 'West Viginia',
+        children: [
+          {name: 'Elkins'},
+          {name: 'WV Games'},
+        ]
+      },{
+        name: 'Utah',
+        children: [
+          {name: 'Hot Pots'},
+          {name: 'Salt Lake'},
+          {name: 'Provo'},
+          {name: 'Belly of the Dragon'},
+        ]
+      },
+      
+    ]
+  },{
+    name: 'Marching Band',
+    children: [
+      {name: 'Battle of the Bands'},
+      {name: 'Disney'},
+      {name: 'Parades'},
+    ]
+  },{
+    name: 'National Parks',
+    children: [
+      {name: 'Grand Canyon'},
+      {name: 'Zion'},
+      {name: 'Cloud Canyon'},
+    ]
+  },
+];
+
+/** Flat node with expandable and level information */
+interface ExampleFlatNode {
+  expandable: boolean;
+  name: string;
+  level: number;
+}
+
 
 @Component({
   selector: 'app-home',
@@ -6,6 +79,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+    private _transformer = (node: FoodNode, level: number) => {
+        return {
+          expandable: !!node.children && node.children.length > 0,
+          name: node.name,
+          level: level,
+        };
+      }
+    
+      treeControl = new FlatTreeControl<ExampleFlatNode>(
+          node => node.level, node => node.expandable);
+    
+      treeFlattener = new MatTreeFlattener(
+          this._transformer, node => node.level, node => node.expandable, node => node.children);
+    
+    dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
  imageObject = [{
     image: '../../../assets/pics/navajo_bridge.JPG',
     thumbImage: '../../../assets/pics/navajo_bridge.JPG',
@@ -32,7 +121,13 @@ export class HomeComponent implements OnInit {
     title: 'Goblin Valley'
 }];
 
-constructor() { }
+constructor() { 
+
+    this.dataSource.data = TREE_DATA;
+}
+hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+
+
 
 ngOnInit(): void {
   this.circleText();
