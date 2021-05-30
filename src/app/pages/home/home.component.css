@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&family=Noto+Sans:wght@700&display=swap');
+
+
+.fillerText {
+  background-color: cornsilk;
+  color: maroon;
+  line-height: 3;
+  font-size: xx-large;
+}
+.intro {
+  font-family: 'Handlee', cursive;  
+  position: relative;
+  width: 100%;
+}
+.intro::before{
+  background-image: url(../../../assets/pics/postcard.jpg);
+  /*filter: sepia(100%);*/
+  opacity: 0.3;
+  background-size: cover;
+  background-repeat: no-repeat;
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.introHead {
+  font-size: 46px;
+  color: #003366;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  margin-top: 15px;
+}
+.introText {
+  font-size: 28px;
+  color: #003366; 
+  line-height: 1.5;
+}
+.compass {
+  float: left;
+  margin-top: 20px;
+  transform: rotate(10deg);
+  height: 150px;
+  width: 145px;
+}
+ng-image-slider {
+  margin-left: 15%;
+
+}
+ /********************************************MINE****/
+ /* sticky navbar */
+mdb-navbar {
+    z-index: 999;
+    width: 100%;
+  }
+  .sticky-nav-wrapper {
+    min-height: 40px;
+    margin-top: 15px;
+    background-color:#003366;
+  }
+  /*.sticky-nav {
+    height: 40px;
+    width: 100%;
+    background-color:  burlywood;
+  }
+  .sticky-box-shadow {
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
+  }*/
+  .plane{
+      height: 75px;
+      width: 100px;
+      float: right;
+      margin-top: -15px;
+      clear: left;
+}
+ 
+.mapTitle, .postTitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: 52px;
+  color: cornflowerblue;
+  font-weight: 700;
+  text-decoration: cornflowerblue underline;
+  }
+.mapTitle {
+  text-align: left;
+}
+
+.mapNum { 
+  font-size: 28px;
+  font-weight: 900;
+  color: cornflowerblue;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.mapImg {
+ /* height: 330px;
+  width: 500px;*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto;  
+}
+mat-icon, mat-tree-node{
+ 
+    font-size: x-large;
+    color: #003366;
+    font-weight: 700;
+}
+.postTitle {
+  text-align: center;
+}
+.postBox {
+  border-right: 5px inset #003366;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;  
+}
+footer {
+  width: 100%;
+  height: 5%;
+  background-color:mediumseagreen;
+  color: white;
+  text-align: center;
+  font-size: medium;
+  border-radius: 5px;
+}
+.footerText {
+  padding-top: 12px;
+}
+figcaption {
+  color: cornflowerblue;
+  font-style: italic;
+  font-weight: 700;
+  font-size: large;
+  padding-top: 1%;  
+}
+ /*****************Cellphone sizing****/
+ @media only screen and (min-device-width : 414px) and (max-device-width : 736px) {
+    .introText {
+      line-height: 1;
+    }
+    .compass {
+      height: 100px;
+      width: 100px;
+    }
+    .mapTitle, postTitlee {
+      font-family: 'Dancing Script', cursive;
+      font-size: 52px;
+      color: cornflowerblue;
+      font-weight: 700;     
+      text-decoration: cornflowerblue underline;      
+      }
+      .mapTitle {
+        text-align: left;
+      }
+    .mapNum { 
+      font-size: large;
+      font-weight: 900;
+      color: cornflowerblue;
+      text-transform: uppercase;
+      text-align: center;
+      font-family: 'Noto Sans TC', sans-serif;      
+    }
+    .mapImg {
+      height: 230px;
+      width: 300px;
+    }
+    mat-icon, mat-tree-node{
+      font-size: x-large;
+      color: #003366;
+      font-weight: 700;
+  }
+  .postBox {
+    border-bottom: 5px inset #003366;
+     border-right:none;
+  }
+  .footerText {
+    padding-top: 0;
+  }
+  }
+  /* Desktops and laptops ----------- 
+@media only screen  and (min-width : 1224px) {
+  /* Styles 
+  }
+  
+  /* Large screens ----------- 
+  @media only screen  and (min-width : 1824px) {
+  /* Styles
+  } 
+  /* iPads (portrait and landscape) ----------- 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  /* Styles 
+}*/
