@@ -1,12 +1,10 @@
-let express = require('express'),
-  path = require('path'),
-  mongoose = require('mongoose'),
-  cors = require('cors'),
-  bodyParser = require('body-parser'),
-  mongoDb = require('./database/db');
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dbConfig = require('./database/db');
 
 mongoose.Promise = global.Promise;
-mongoose.connect(mongoDb.db, {
+mongoose.connect(dbConfig.db, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true
@@ -18,27 +16,31 @@ mongoose.connect(mongoDb.db, {
   }
 )
 
-const tripRoute = require('./routes/trip.routes')
+// Express APIs
+const api = require('./routes/trip.routes')
 
+// Remvoe MongoDB warning error
+mongoose.set('useCreateIndex', true);
+
+//Express Settings
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
+app.use(express.json());
+app.use(express.urlencoded({
   extended: false
 }));
 app.use(cors());
 
-// Static directory path
-app.use(express.static(path.join(__dirname, 'dist/angular-mean-crud-tutorial')));
-
 
 // API root
-app.use('/api', tripRoute)
+app.use('/api', api)
 
-// PORT
+// Serve static resources
+app.use('/public', express.static('public'));
+
+// Define PORT
 const port = process.env.PORT || 8000;
-
 app.listen(port, () => {
-  console.log('Listening on port ' + port)
+  console.log('Connected to port ' + port)
 })
 
 // 404 Handler
@@ -51,11 +53,13 @@ app.get('/', (req, res) => {
   res.send('invaild endpoint');
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/angular-mean-crud-tutorial/index.html'));
+// Express error handling
+app.use((req, res, next) => {
+  setImmediate(() => {
+      next(new Error('Something went wrong'));
+  });
 });
 
-// error handler
 app.use(function (err, req, res, next) {
   console.error(err.message);
   if (!err.statusCode) err.statusCode = 500;
