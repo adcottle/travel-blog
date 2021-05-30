@@ -18,6 +18,7 @@ mongoose.connect(dbConfig.db, {
 
 // Express APIs
 const api = require('./routes/trip.routes')
+const user = require('./routes/auth.routes')
 
 // Remvoe MongoDB warning error
 mongoose.set('useCreateIndex', true);
@@ -33,6 +34,7 @@ app.use(cors());
 
 // API root
 app.use('/api', api)
+app.use('/users', user)
 
 // Serve static resources
 app.use('/public', express.static('public'));
