@@ -1,11 +1,10 @@
-const express = require('express');
-const app = express();
+const express = require("express");
+const router = express.Router();
 
-const tripRoute = express.Router();
 let Trip = require('../model/Trip');
 
 // Add Trip
-tripRoute.route('/add-trip').post((req, res, next) => {
+router.route('/add-trip').post((req, res, next) => {
     Trip.create(req.body, (error, data) => {
     if (error) {
       return next(error)
@@ -16,7 +15,7 @@ tripRoute.route('/add-trip').post((req, res, next) => {
 });
 
 // Get all Trips
-tripRoute.route('/').get((req, res) => {
+router.route('/').get((req, res) => {
     Trip.find((error, data) => {
     if (error) {
       return next(error)
@@ -27,7 +26,7 @@ tripRoute.route('/').get((req, res) => {
 })
 
 // Get specific Trip
-tripRoute.route('/trip/:_id').get((req, res) => {
+router.route('/trip/:_id').get((req, res) => {
     Trip.findById(req.params._id, (error, data) => {
     if (error) {
       return next(error)
@@ -39,7 +38,7 @@ tripRoute.route('/trip/:_id').get((req, res) => {
 
 
 // Update a Trip
-tripRoute.route('/update-trip/:_id').put((req, res, next) => {
+router.route('/update-trip/:_id').put((req, res, next) => {
     Trip.findByIdAndUpdate(req.params._id, {
     $set: req.body
   }, (error, data) => {
@@ -54,7 +53,7 @@ tripRoute.route('/update-trip/:_id').put((req, res, next) => {
 })
 
 // Delete a Trip
-tripRoute.route('/delete-trip/:_id').delete((req, res, next) => {
+router.route('/delete-trip/:_id').delete((req, res, next) => {
     Trip.findByIdAndRemove(req.params._id, (error, data) => {
     if (error) {
       return next(error);
@@ -66,4 +65,4 @@ tripRoute.route('/delete-trip/:_id').delete((req, res, next) => {
   })
 })
 
-module.exports = tripRoute;
+module.exports = router;
