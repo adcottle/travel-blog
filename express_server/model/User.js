@@ -8,12 +8,9 @@ let userSchema = new Schema({
     name: {
         type: String
     },
-    user_name: {
+    email: {
         type: String,
         unique: true
-    },
-    email: {
-        type: String        
     },
     password: {
         type: String
@@ -22,5 +19,5 @@ let userSchema = new Schema({
     collection: 'users'
 })
 
-userSchema.plugin(uniqueValidator, { message: 'Username is already in use.' });
+userSchema.plugin(uniqueValidator, { message: 'Email already in use.' });
 module.exports = mongoose.model('User', userSchema)
