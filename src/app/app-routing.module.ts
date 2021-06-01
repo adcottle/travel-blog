@@ -13,13 +13,13 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthGuard } from './service/auth/auth.guard'
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
-  {path: 'user-profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'user-profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'ideas', component: IdeasComponent, canActivate: [AuthGuard]},
-  {path: '404', component: NotFoundComponent},
+  { path: '404', component: NotFoundComponent},
   
 
   // otherwise redirect to 404 Error

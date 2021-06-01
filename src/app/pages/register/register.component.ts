@@ -12,14 +12,15 @@ export class RegisterComponent implements OnInit {
   
   signupForm: FormGroup;
 
-  constructor(public fb: FormBuilder,
+  constructor(
+    public fb: FormBuilder,
     public authService: AuthService,
     public router: Router
   ) {
     this.signupForm = this.fb.group({
       name: [''],
       email: [''],
-      user_name: [''],
+      mobile: [''],
       password: ['']
     })
   }
