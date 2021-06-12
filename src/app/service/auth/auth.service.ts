@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 
-export class AuthService {endpoint: string = 'http://localhost:4000/users';
+export class AuthService {
+  endpoint: string = 'http://localhost:4000/users';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
@@ -22,10 +23,11 @@ export class AuthService {endpoint: string = 'http://localhost:4000/users';
   // Sign-up
   signUp(user: User): Observable<any> {
     let api = `${this.endpoint}/register-user`;
-    return this.http.post(api, user)
+       return this.http.post(api, user)
       .pipe(
         catchError(this.handleError)
       )
+      
   }
 
   // Sign-in

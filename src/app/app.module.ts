@@ -20,7 +20,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { AboutComponent } from './pages/about/about.component';
 import { IdeasComponent } from './pages/ideas/ideas.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { RegisterComponent } from './pages/register/register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
@@ -31,7 +30,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
     AboutComponent,
     IdeasComponent,
     NotFoundComponent,
-    RegisterComponent,
     ProfileComponent
   ],
   imports: [
