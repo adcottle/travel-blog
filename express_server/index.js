@@ -16,7 +16,7 @@ app.set('view engine','ejs');
 
 //mongodb uri
 const mongouri = process.env.DB;
-const connection = mongoose.createConnection(mongouri, { useNewUrlParser: true,useUnifiedTopology: true });
+const connection = mongoose.createConnection(mongouri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let gfs;
 const bucket_name = "fs"
@@ -26,8 +26,14 @@ connection.once('open', () => {
     gfs = Grid(connection.db, mongoose.mongo);
     gfs.collection(bucket_name);
 })
-var storage = new GridFsStorage({
+
+
+const storage = new GridFsStorage({
     url: mongouri,
+    options: {
+      useUnifiedTopology: true,
+      useNewUrlParser: true
+    },
     file: (req, file) => {
       return new Promise((resolve, reject) => {
         crypto.randomBytes(16, (err, buf) => {
@@ -102,7 +108,7 @@ gfs.files.find().toArray((err, files) =>{
 
 const port=3000;
 
-app.listen(port, () => console.log('Server started on port ' + port));
+app.listen(port, () => console.log(`server started on port ${port}`));
 
 // const express = require('express');
 // const mongoose = require('mongoose');
