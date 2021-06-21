@@ -8,6 +8,7 @@ const fs  = require('fs');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
+let Image = require('./model/Image');
 
 
 app.use(express.json());
@@ -15,42 +16,61 @@ app.use(express.json());
 app.set('view engine','ejs');
 
 //mongodb uri
-const mongouri = process.env.DB;
-const connection = mongoose.createConnection(mongouri, { useNewUrlParser: true, useUnifiedTopology: true });
+// const mongouri = process.env.DB;
+// const connection = mongoose.createConnection(mongouri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-let gfs;
-const bucket_name = "fs"
+// let gfs;
+// const bucket_name = "fs"
 
-connection.once('open', () => {
-    // Init stream
-    gfs = Grid(connection.db, mongoose.mongo);
-    gfs.collection(bucket_name);
-})
-
+// connection.once('open', () => {
+//     // Init stream
+//     gfs = Grid(connection.db, mongoose.mongo);
+//     gfs.collection(bucket_name);
+// })
 
 const storage = new GridFsStorage({
-    url: mongouri,
-    options: {
-      useUnifiedTopology: true,
-      useNewUrlParser: true
-    },
-    file: (req, file) => {
-      return new Promise((resolve, reject) => {
-        crypto.randomBytes(16, (err, buf) => {
-          if (err) {
-            return reject(err);
-          }
-        //   const filename = buf.toString('hex') + path.extname(file.originalname);
+  url: process.env.DB,
+  options: { useNewUrlParser: true, useUnifiedTopology: true },
+  file: (req, file) => {
+      const match = ["image/png", "image/jpeg"];
+   
+      if (match.indexOf(file.mimetype) === -1) {
         const filename = file.originalname;
-          const fileInfo = {
-            filename: filename,
-            bucketName: 'fs'
-          };
-          resolve(fileInfo);
-        });
-      });
-    }
-  });
+          // const filename = `${Date.now()}-any-name-${file.originalname}`;
+          return filename;
+      }
+
+      return {
+          bucketName: "fs",
+          // filename: `${Date.now()}-any-name-${file.originalname}`,
+          filename: file.originalname,
+          desc: "image to retrieve"
+      };
+  },
+});
+// const storage = new GridFsStorage({
+//     url: mongouri,
+//     options: {
+//       useUnifiedTopology: true,
+//       useNewUrlParser: true
+//     },
+//     file: (req, file) => {
+//       return new Promise((resolve, reject) => {
+//         crypto.randomBytes(16, (err, buf) => {
+//           if (err) {
+//             return reject(err);
+//           }
+//         //   const filename = buf.toString('hex') + path.extname(file.originalname);
+//         const filename = file.originalname;
+//           const fileInfo = {
+//             filename: filename,
+//             bucketName: 'fs'
+//           };
+//           resolve(fileInfo);
+//         });
+//       });
+//     }
+//   });
   const upload = multer({ storage });
 
 
@@ -112,32 +132,32 @@ app.listen(port, () => console.log(`server started on port ${port}`));
 
 // const express = require('express');
 // const mongoose = require('mongoose');
-// const cors = require('cors');
-// const dbConfig = require('./database/db');
+const cors = require('cors');
+const dbConfig = require('./database/db');
 
 // // Express APIs
-// const trip = require('./routes/trip.routes')
-// const users = require('./routes/auth.routes')
+const trips = require('./routes/trip.routes')
+const users = require('./routes/auth.routes')
 
 
 // // Express APIs
 // const api = require('./routes/auth.routes');
 
-// // MongoDB conection
-// mongoose.Promise = global.Promise;
-// mongoose.connect(dbConfig.db, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// }).then(() => {
-//     console.log('Database connected')
-// },
-//     error => {
-//         console.log("Database can't be connected: " + error)
-//     }
-// )
+// MongoDB conection
+mongoose.Promise = global.Promise;
+mongoose.connect(dbConfig.db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log('Database connected')
+},
+    error => {
+        console.log("Database can't be connected: " + error)
+    }
+)
 
-// // Remvoe MongoDB warning error
-// mongoose.set('useCreateIndex', true);
+// Remvoe MongoDB warning error
+mongoose.set('useCreateIndex', true);
 
 
 // // Express settings
@@ -146,13 +166,13 @@ app.listen(port, () => console.log(`server started on port ${port}`));
 // app.use(express.urlencoded({
 //     extended: false
 // }));
-// app.use(cors());
+app.use(cors());
 
 // // Serve static resources
 // app.use('/public', express.static('public'));
 
-// app.use('/trip', trip)
-// app.use('/users', users)
+app.use('/trips', trips)
+app.use('/users', users)
 
 // // Define PORT
 // const port = process.env.PORT || 4000;
