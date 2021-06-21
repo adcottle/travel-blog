@@ -1,14 +1,10 @@
 require('dotenv/config');
 const express = require('express');
+const upload = require("./middlewares/gridfs");
 const app = express();
-const path = require('path');
-const crypto = require('crypto');
 const mongoose = require('mongoose');
 const fs  = require('fs');
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
-let Image = require('./model/Image');
 
 
 app.use(express.json());
@@ -16,64 +12,17 @@ app.use(express.json());
 app.set('view engine','ejs');
 
 //mongodb uri
-// const mongouri = process.env.DB;
-// const connection = mongoose.createConnection(mongouri, { useNewUrlParser: true, useUnifiedTopology: true });
+const mongouri = process.env.DB;
+const connection = mongoose.createConnection(mongouri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// let gfs;
-// const bucket_name = "fs"
+let gfs;
+const bucket_name = "fs"
 
-// connection.once('open', () => {
-//     // Init stream
-//     gfs = Grid(connection.db, mongoose.mongo);
-//     gfs.collection(bucket_name);
-// })
-
-const storage = new GridFsStorage({
-  url: process.env.DB,
-  options: { useNewUrlParser: true, useUnifiedTopology: true },
-  file: (req, file) => {
-      const match = ["image/png", "image/jpeg"];
-   
-      if (match.indexOf(file.mimetype) === -1) {
-        const filename = file.originalname;
-          // const filename = `${Date.now()}-any-name-${file.originalname}`;
-          return filename;
-      }
-
-      return {
-          bucketName: "fs",
-          // filename: `${Date.now()}-any-name-${file.originalname}`,
-          filename: file.originalname,
-          desc: "image to retrieve"
-      };
-  },
-});
-// const storage = new GridFsStorage({
-//     url: mongouri,
-//     options: {
-//       useUnifiedTopology: true,
-//       useNewUrlParser: true
-//     },
-//     file: (req, file) => {
-//       return new Promise((resolve, reject) => {
-//         crypto.randomBytes(16, (err, buf) => {
-//           if (err) {
-//             return reject(err);
-//           }
-//         //   const filename = buf.toString('hex') + path.extname(file.originalname);
-//         const filename = file.originalname;
-//           const fileInfo = {
-//             filename: filename,
-//             bucketName: 'fs'
-//           };
-//           resolve(fileInfo);
-//         });
-//       });
-//     }
-//   });
-  const upload = multer({ storage });
-
-
+connection.once('open', () => {
+    // Init stream
+    gfs = Grid(connection.db, mongoose.mongo);
+    gfs.collection(bucket_name);
+})
 
 //root path 
 app.get('/',(req,res)=>{

@@ -1,40 +1,27 @@
-const crypto = require('crypto');
-const mongoose = require('mongoose');
-const multer = require('multer');
-const Gridfs = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
 
-//mongodb uri
-const mongouri = process.env.DB
+const storage = new GridFsStorage({
+    url: process.env.DB,
+    options: { useNewUrlParser: true, useUnifiedTopology: true },
+    file: (req, file) => {
+        const match = ["image/png", "image/jpeg"];
+       
+        if (match.indexOf(file.mimetype) === -1) {
+            const filename = file.originalname;
+            // const filename = `${Date.now()}-any-name-${file.originalname}`;
+            return filename;
+        }
 
-const conn = mongoose.createConnection(mongouri,{ useNewUrlParser: true,useUnifiedTopology: true } );
-
-//gridfs variable
-let gfs;
-
-conn.once('open', ()=> {
-gfs = Grid(conn.db,mongoose.mongo);
-gfs.collection('fs');
+        return {
+            bucketName: "fs",
+            // filename: `${Date.now()}-any-name-${file.originalname}`,
+            filename: file.originalname,
+        };
+        
+    },
 });
 
-//create file storage
-const storage = new Gridfs({
-url:mongouri,
-file:(req,file) =>{
-   return new Promise((resolve,reject) =>{
-   crypto.randomBytes(16, (err, buf)=>{
-  if(err) {
-      return reject(err);
-  }
-  //const filename = buf.toString('hex') + path.extname(file.originalname);
-  const filename = file.originalname;
-  const fileinfo = {
-      filename:filename,
-      bucketName:'fs'
-       };
-       resolve(fileinfo);
-     });
-   });
-  }
-});
-// const upload = multer({ storage} );
+module.exports = multer({ storage });
+
+  
