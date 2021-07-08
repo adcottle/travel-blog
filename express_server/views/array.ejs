@@ -33,15 +33,15 @@
         <% if(files){ %>
           <% files.forEach(function(file) { %>
             <div class="card card-body mb-3">
-              <% if(file.isImage) { %> <% console.log(file) %> 
-                <%= file.filename %>
+              <% if(file.isImage) { %> 
+                <a href = "/images/file/<%= file.filename %>" target = "_blank"><%= file.title %></a>
                 <img src="/images/file/<%= file.filename %>" alt="">
                 <% } else { %>
-                  <a href = "/files/<%= file.filename %>" target = "_blank"><%= file.filename %></a>
+                  <a href = "/images/file/<%= file.filename %>" target = "_blank"></a>
                     <% } %>
-                      <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                      <!-- <form method="POST" action="delete/file/<%= file._id %>?_method=DELETE">
                         <button class="btn btn-danger btn-block mt-4">Delete</button>
-                      </form>
+                      </form> -->
             </div>
             <% }) %>
               <% } else { %>
