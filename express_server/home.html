@@ -15,30 +15,8 @@
     <span style="color:red" id="fail-msg"></span>
   </form>
   <br />
-  <!-- Javascript functions -->
-  <script>
-    $(document).ready(function() {
-      $("#file-input").on("change", uploadFile);
 
-    });
-    function uploadFile() {
-      $.ajax({
-        url: "images/upload",
-        type: "POST",
-        data: new FormData($("#form-gridfs")[0]),
-        enctype: 'multipart/form-data',
-        processData: false,
-        contentType: false,
-        cache: false,
-        success: function () {          
-          $("#success-msg").text("File uploaded succesfully!");
-        },
-        error: function (xhr) {
-          $("#fail-msg").text("Oops something went wrong! File not uploaded!!");
-          console.log(xhr.responseText);            
-        }
-      });
-    } 
-  </script>
+
+  
 </body>
 </html>

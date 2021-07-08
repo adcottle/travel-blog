@@ -1,6 +1,6 @@
 require('dotenv/config');
 const express = require('express');
-const app = express();
+const app = express(); 
 const mongoose = require('mongoose');
 const cors = require('cors');
 const chalk = require('chalk');
@@ -12,10 +12,11 @@ app.use(express.urlencoded({
 }));
 app.use(cors());
 
+
 //Express APIs
-const trips = require('./routes/trip.routes')
-const users = require('./routes/auth.routes')
-const images = require('./routes/image.route')
+const trips = require('./routes/trip.routes');
+const users = require('./routes/auth.routes');
+const images = require('./routes/image.route');
 
 //MongoDB conection
 mongoose.Promise = global.Promise;
@@ -33,13 +34,17 @@ mongoose.connect(process.env.DB, {
 // Remvoe MongoDB warning error
 mongoose.set('useCreateIndex', true);
 
+app.set('view engine','ejs');
+
+//Define Routes
 app.use('/trips', trips)
 app.use('/users', users)
 app.use('/images', images)
 
-app.set('view engine','ejs');
-
-
 // Define PORT
 const port = process.env.PORT || 4000;
-app.listen(port, () => console.log('server started on port ${port}'));
+app.listen(port, err => {
+    if (err)
+        throw err
+    console.log('Server listening on port', port)
+})

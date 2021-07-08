@@ -4,9 +4,9 @@ const router = express.Router();
 const fs  = require('fs');
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
-const chalk = require('chalk')
-
+const chalk = require('chalk');
 Grid.mongo = mongoose.mongo;
+
 
 const conn = mongoose.createConnection(process.env.DB, {
   useNewUrlParser: true,
@@ -19,7 +19,7 @@ conn.on("error", () => {
   console.log(chalk.red("[-] Error occurred from the database"));
 });
 
-let gfs, gridFSBucket;
+let gfs;
 
 conn.once("open", () => {
   gridFSBucket = new mongoose.mongo.GridFSBucket(conn.db, {
@@ -62,16 +62,16 @@ router.post('/upload', upload.single('file'), (req, res,error) =>{
 
 
 //show all files
-router.get('/files', (req,res) =>{
-gfs.files.find().toArray((err, files) =>{
-  if(!files || files.length === 0) {
-      return res.status(404).json({
-      err: "No file exist"
-      });
-  }
-  return res.json(files);
-});
-});
+// router.get('/files', (req,res) =>{
+// gfs.files.find().toArray((err, files) =>{
+//   if(!files || files.length === 0) {
+//       return res.status(404).json({
+//       err: "No file exist"
+//       });
+//   }
+//   return res.json(files);
+// });
+// });
 
 // search files by original name
   router.get('/file/:filename', (req,res) =>{
@@ -87,6 +87,71 @@ gfs.files.find().toArray((err, files) =>{
           }
     });
 });
+
+/*
+GET: Fetches all the files in the the collection as JSON
+*/
+router.route('/files')
+.get((req, res, next) => {
+    gfs.files.find().toArray((err, files) => {
+        if (!files || files.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: 'No files available'
+            });
+        }
+        
+        files.map(file => {
+            if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
+                file.isImage = true;
+                // console.log(files)
+            } else {
+                file.isImage = false;
+            }
+        });
+
+        res.status(200).json({
+            success: true,
+            files,
+        });
+    });
+});
+
+
+//  router.get('/array', (req, res) => {
+//     gfs.files.find().toArray( (err, items) => {
+//         if (err) {
+//             console.log(err);
+//             res.status(500).send('An error occurred', err);
+//         }
+//         else {
+//             res.render('array', { items: items });
+//         }
+//     });
+// });
+
+
+router.get('/array', (req, res) => {
+    gfs.files.find().toArray((err, files) => { 
+    //   Check if files
+      if (!files || files.length === 0) {
+        res.render('array', { files: false });
+      } else {
+        files.map(file => {
+          if (
+            file.contentType === 'image/jpeg' ||
+            file.contentType === 'image/png'
+          ) {
+            file.isImage = true;
+            console.log(file.filename)
+          } else {
+            file.isImage = false;
+          }
+        });
+        res.render('array', { files: files });
+      }
+    });
+  });
 
 
 module.exports = router;
