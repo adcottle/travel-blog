@@ -1,0 +1,55 @@
+<p>pics works!</p>
+
+<!-- <img src="http://localhost:4000/images/file/navajo_bridge.jpg" style="width: 150px;height: 150px;"/> -->
+
+<!-- 
+<div *ngFor="let image of Images">
+    <div style="max-width: 150px;max-height: 150px;">filename: {{image}}</div>
+</div>-->
+
+
+<!-- <div *ngFor="let p of Pic">
+    <ul>
+        <li>{p}</li>
+    </ul>
+
+    </div> -->
+
+     <ul>
+        <li *ngFor="let p of Pic">
+            
+            <p> {{p}} </p>
+        </li>
+        </ul>
+        <br>
+       <ul>
+
+
+
+ <div *ngFor="let i of Images">
+<img [src]=i width="100" height="100" />
+</div>  
+
+
+
+
+
+
+
+<!-- <div *ngFor="let i of Images">
+    <img src="{{i}}" width="100" height="100" />
+    </div>  -->
+
+
+    <!-- <div *ngFor="let i of Images">
+        <div background-image: [ngStyle]="{'background-image': 'url('+i+')'}" ></div>
+        </div>  -->
+    
+    
+
+  
+<!-- <div *ngFor="let list of Lists">
+    <div>filename: {{list.filename}}</div>
+    <div>tripID: {{list.tripID}}</div>
+    <div>Title: {{list.title}}</div>
+</div>  -->

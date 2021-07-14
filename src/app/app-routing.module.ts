@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { IdeasComponent } from './pages/ideas/ideas.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { PicsComponent } from './pages/pics/pics.component';
 
 
 import { AuthGuard } from './service/auth/auth.guard'
@@ -14,6 +15,7 @@ import { AuthGuard } from './service/auth/auth.guard'
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'pics', component: PicsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'user-profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'ideas', component: IdeasComponent, canActivate: [AuthGuard]},

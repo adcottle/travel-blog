@@ -8,6 +8,7 @@ const chalk = require('chalk');
 Grid.mongo = mongoose.mongo;
 
 
+
 const conn = mongoose.createConnection(process.env.DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -19,7 +20,7 @@ conn.on("error", () => {
   console.log(chalk.red("[-] Error occurred from the database"));
 });
 
-let gfs;
+let gfs, gridFSBucket;
 
 conn.once("open", () => {
   gridFSBucket = new mongoose.mongo.GridFSBucket(conn.db, {
@@ -60,18 +61,6 @@ router.post('/upload', upload.single('file'), (req, res,error) =>{
     // console.log(error)
 });
 
-
-//show all files
-// router.get('/files', (req,res) =>{
-// gfs.files.find().toArray((err, files) =>{
-//   if(!files || files.length === 0) {
-//       return res.status(404).json({
-//       err: "No file exist"
-//       });
-//   }
-//   return res.json(files);
-// });
-// });
 
 // search files by original name
   router.get('/file/:filename', (req,res) =>{
@@ -118,19 +107,6 @@ router.route('/files')
 });
 
 
-//  router.get('/array', (req, res) => {
-//     gfs.files.find().toArray( (err, items) => {
-//         if (err) {
-//             console.log(err);
-//             res.status(500).send('An error occurred', err);
-//         }
-//         else {
-//             res.render('array', { items: items });
-//         }
-//     });
-// });
-
-
 router.get('/array', (req, res) => {
     gfs.files.find().toArray((err, files) => { 
     //   Check if files
@@ -154,11 +130,14 @@ router.get('/array', (req, res) => {
 
 
 ///Query parameters
-router.get('/array', (req, res) => {
-    gfs.files.find({ tripID: 2 }).toArray((err, files) => { 
+router.get('/query', (req, res) => {
+    gfs.files.find({ tripID: 3 }).toArray((err, files) => { 
+      if (err) {
+        return res.status(404).json({ err: err });
+      }
     //   Check if files
       if (!files || files.length === 0) {
-        res.render('array', { files: false });
+        // res.render('array', { files: false });
       } else {
         files.map(file => {
           if (
@@ -186,5 +165,8 @@ router.get('/array', (req, res) => {
       res.redirect('/array');
     });
   });
+
+ 
+
 
 module.exports = router;

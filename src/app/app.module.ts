@@ -21,6 +21,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { IdeasComponent } from './pages/ideas/ideas.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { PicsComponent } from './pages/pics/pics.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     AboutComponent,
     IdeasComponent,
     NotFoundComponent,
-    ProfileComponent
+    ProfileComponent,
+    PicsComponent
   ],
   imports: [
     BrowserModule,
