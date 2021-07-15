@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AuthInterceptor } from './service/authconfig.interceptor'
@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SafePipeModule } from 'safe-pipe';
 
 /*Customization Modules*/
 import { MaterialModule } from './material.component';
@@ -44,7 +45,8 @@ import { PicsComponent } from './pages/pics/pics.component';
     MDBBootstrapModule.forRoot(),
     NgImageSliderModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SafePipeModule
   ],
   providers: [
     {

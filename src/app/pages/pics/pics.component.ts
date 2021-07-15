@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ImagesService } from '../../service/images/images.service';
 import {  takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -17,7 +16,9 @@ export class PicsComponent implements OnInit, OnDestroy {
   Pic: any = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private imageService: ImagesService, private sanitizer: DomSanitizer) { }
+  public pictureUrl: string = `http://localhost:4000/images/file/navajo_bridge.jpg`;
+
+  constructor(private imageService: ImagesService) { }
 
   ngOnInit(): void {
     this.getList();
@@ -28,11 +29,11 @@ export class PicsComponent implements OnInit, OnDestroy {
   getList() {
     return this.imageService.GetImagesList().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
       // console.log(data) 
-      this.Pic = data.files.map(({ filename }) => "localhost:4000/images/file/"+filename);
-      
+      this.Pic = data.files.map(({ filename }) => "http://localhost:4000/images/file/"+filename);
+      // this.Pic = 'http://localhost:4000/images/file/navajo_bridge.jpg'
       console.log(this.Pic);  
-      this.Images = this.sanitizer.bypassSecurityTrustUrl(this.Pic);
-      console.log(this.Images); 
+      // this.Images = this.sanitizer.bypassSecurityTrustUrl(this.Pic);
+      // console.log(this.Images); 
     }, err => {
       console.log(err);
     }
