@@ -125,25 +125,58 @@
    </div>
  </div>
 <hr>
+
+<!-- <div style="width: 250px;">
+<mat-card>
+   <mat-card-header>
+     
+     <mat-card-title>Shiba Inu</mat-card-title>
+     <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+   </mat-card-header>
+   <img mat-card-image [src]="('http://localhost:4000/images/file/' + m.filename) | safe: 'url'" alt="Photo of a Shiba Inu">
+   <mat-card-content>
+      <p class="card-text">Include an album description</p>
+      <figcaption>{{m.title}}</figcaption>
+   </mat-card-content>
+   <mat-card-actions>
+     <button mat-button>LIKE</button>
+     <button mat-button>SHARE</button>
+   </mat-card-actions>
+ </mat-card>
+ 
+</div> -->
+
+
+
  <div class="postTitle my-5">Latest Posts</div>
 
- <div class="row">
-   <div class="col-md-4 postBox mt-2"><img alt="bridge" class="center" src="https://cdn.pixabay.com/photo/2012/03/01/00/21/bridge-19513_960_720.jpg" width="90%" height="90%">
-      <div class="row">
-         <div class="col-md-12"><figcaption>Latest Post Title</figcaption></div>
-      </div>
+
+   
+   <div class="row">    
+       <ng-container *ngFor="let m of Metadata">
+         <div class="col-12 col-md-4 postBox">
+            <mat-card>
+               <mat-card-header>
+                 
+                 <mat-card-title>{{m.title}}</mat-card-title>
+                 <!-- <mat-card-subtitle>Trip ID: {{m.tripID}}</mat-card-subtitle> -->
+               </mat-card-header>
+               <img mat-card-image [src]="('http://localhost:4000/images/file/' + m.filename) | safe: 'url'" alt="m.title">
+               <mat-card-content>
+                  <p class="card-text">Date: {{m.uploadDate}}</p>
+                  <figcaption>Include an album description</figcaption>
+               </mat-card-content>
+               <mat-card-actions>
+                  <p>TODO: add scripting to permit images to be favorited</p>
+                 <button mat-button><mdb-icon far icon="heart"></mdb-icon></button>
+                 <button mat-button><mdb-icon fas icon="heart"></mdb-icon></button>
+               </mat-card-actions>
+             </mat-card>
+         </div>
+       </ng-container>          
    </div>
-   <div class="col-md-4 postBox mt-2"><img alt="bridge" class="center" src="https://cdn.pixabay.com/photo/2016/02/13/12/27/northern-lights-1197755_960_720.jpg" width="90%" height="90%">
-      <div class="row">
-         <div class="col-md-12"><figcaption>Latest Post Title</figcaption></div>
-      </div>
-   </div>
-   <div class="col-md-4 postBox mt-2"><img alt="bridge" class="center" src="https://cdn.pixabay.com/photo/2019/06/06/17/42/california-4256429_960_720.jpg" width="90%" height="90%">
-      <div class="row">
-         <div class="col-md-12"><figcaption>Latest Post Title</figcaption></div>
-      </div>
-   </div>
-</div>
+ 
+
 
 <br>
 <br>

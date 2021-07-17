@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ImagesService } from '../../service/images/images.service';
 import {  takeUntil } from 'rxjs/operators';
-import { Subject, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -15,8 +15,6 @@ export class PicsComponent implements OnInit, OnDestroy {
   Lists: any = [];
   Pic: any = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
-
-  public pictureUrl: string = `http://localhost:4000/images/file/navajo_bridge.jpg`;
 
   constructor(private imageService: ImagesService) { }
 
