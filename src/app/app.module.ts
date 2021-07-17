@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AuthInterceptor } from './service/authconfig.interceptor'
@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SafePipeModule } from 'safe-pipe';
 
 /*Customization Modules*/
 import { MaterialModule } from './material.component';
@@ -21,6 +22,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { IdeasComponent } from './pages/ideas/ideas.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { PicsComponent } from './pages/pics/pics.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     AboutComponent,
     IdeasComponent,
     NotFoundComponent,
-    ProfileComponent
+    ProfileComponent,
+    PicsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     MDBBootstrapModule.forRoot(),
     NgImageSliderModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SafePipeModule
   ],
   providers: [
     {

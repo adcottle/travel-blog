@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&family=Noto+Sans:wght@700&display=swap');
 
-
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Create 2 columns and auto-place rows */
+}
 .fillerText {
   background-color: cornsilk;
   color: maroon;
@@ -105,8 +108,15 @@ mat-icon, mat-tree-node{
     color: #003366;
     font-weight: 700;
 }
+/**********************Latest Post Styling*/
+
 .postTitle {
   text-align: center;
+}
+mat-card > img {
+  min-height: 400px;
+  max-height: 400px;
+  min-width: 100%;
 }
 .postBox {
   border-right: 5px inset #003366;
@@ -116,6 +126,8 @@ mat-icon, mat-tree-node{
   margin-left: auto;
   margin-right: auto;  
 }
+
+/************************Footer Styling*/
 footer {
   width: 100%;
   height: 5%;
