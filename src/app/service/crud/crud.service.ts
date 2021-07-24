@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Trip } from '../Trip';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
@@ -11,17 +12,20 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 export class CrudService { 
 
   // Node/Express API
-  REST_API: string = 'http://localhost:4000/trips';
+  endpoint: string = 'http://localhost:4000/trips';
 
   // Http Header
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient,
+    public router: Router) { }
 
-  // Add
+ 
+    // Add
   AddTrip(data: Trip): Observable<any> {
-    let API_URL = `${this.REST_API}/add-trip`;
-    return this.httpClient.post(API_URL, data)
+    let api = `${this.endpoint}/add-trip`;
+      // console.log(data);
+    return this.http.post(api, data)
       .pipe(
         catchError(this.handleError)
       )
@@ -29,13 +33,13 @@ export class CrudService {
 
   // Get all trips
   GetTrips() {
-    return this.httpClient.get(`${this.REST_API}/`);
+    return this.http.get(`${this.endpoint}/`);
   }
 
   // Get single trip
   GetTrip(_id:any): Observable<any> {
-    let API_URL = `${this.REST_API}/trip/${_id}`;
-    return this.httpClient.get(API_URL, { headers: this.httpHeaders })
+    let API_URL = `${this.endpoint}/trip/${_id}`;
+    return this.http.get(API_URL, { headers: this.httpHeaders })
       .pipe(map((res: any) => {
           return res || {}
         }),
@@ -45,8 +49,8 @@ export class CrudService {
 
   // Update
   updateTrip(_id:any, data:any): Observable<any> {
-    let API_URL = `${this.REST_API}/update-trip/${_id}`;
-    return this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
+    let API_URL = `${this.endpoint}/update-trip/${_id}`;
+    return this.http.put(API_URL, data, { headers: this.httpHeaders })
       .pipe(
         catchError(this.handleError)
       )
@@ -54,8 +58,8 @@ export class CrudService {
 
   // Delete
   deleteTrip(_id:any): Observable<any> {
-    let API_URL = `${this.REST_API}/delete-trip/${_id}`;
-    return this.httpClient.delete(API_URL, { headers: this.httpHeaders}).pipe(
+    let API_URL = `${this.endpoint}/delete-trip/${_id}`;
+    return this.http.delete(API_URL, { headers: this.httpHeaders}).pipe(
         catchError(this.handleError)
       )
   }

@@ -8,7 +8,7 @@ import { IdeasComponent } from './pages/ideas/ideas.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PicsComponent } from './pages/pics/pics.component';
-
+import { AddMediaComponent } from './pages/add-media/add-media.component';
 
 import { AuthGuard } from './service/auth/auth.guard'
 
@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'pics', component: PicsComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'add-media', component: AddMediaComponent },
   { path: 'user-profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'ideas', component: IdeasComponent, canActivate: [AuthGuard]},
   { path: '404', component: NotFoundComponent},

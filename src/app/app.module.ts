@@ -23,6 +23,7 @@ import { IdeasComponent } from './pages/ideas/ideas.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PicsComponent } from './pages/pics/pics.component';
+import { AddMediaComponent } from './pages/add-media/add-media.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PicsComponent } from './pages/pics/pics.component';
     IdeasComponent,
     NotFoundComponent,
     ProfileComponent,
-    PicsComponent
+    PicsComponent,
+    AddMediaComponent
   ],
   imports: [
     BrowserModule,
