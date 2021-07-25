@@ -15,11 +15,18 @@ const storage = new GridFsStorage({
             bucketName: "fs",
             // filename: `${Date.now()}-any-name-${file.originalname}`,
             filename: file.originalname,
+            metadata: { caption: req.body.caption, 
+                        city: req.body.city, 
+                        state: req.body.state, 
+                        country: req.body.country,
+                        photo_date: req.body.photo_date
+                    }
         };        
     },
     
 });
 
+
+
 module.exports = multer({ storage });
 
-  

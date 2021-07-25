@@ -2,7 +2,13 @@ var mongoose = require('mongoose');
  
 var imageSchema = new mongoose.Schema({
     filename: String,
-    tripID: Number,
+    // photo_id: String,
+    caption: String,
+//     photo_date: Date,
+//     state: String, 
+//   city: String,
+//   country: String,
+//   favorites: Array,
     img:
     {
         data: Buffer,
