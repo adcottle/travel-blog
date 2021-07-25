@@ -17,6 +17,7 @@ app.use(cors());
 const trips = require('./routes/trip.routes');
 const users = require('./routes/auth.routes');
 const images = require('./routes/image.route');
+const meta = require('./routes/meta.routes');
 
 //MongoDB conection
 mongoose.Promise = global.Promise;
@@ -40,6 +41,7 @@ app.set('view engine','ejs');
 app.use('/trips', trips)
 app.use('/users', users)
 app.use('/images', images)
+app.use('/meta', meta)
 
 // Define PORT
 const port = process.env.PORT || 4000;

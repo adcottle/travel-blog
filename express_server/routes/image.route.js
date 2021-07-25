@@ -39,26 +39,26 @@ conn.once("open", () => {
 
 //root path 
 router.get('/',(req,res)=>{
-    res.writeHead(200, {
-        'Content-Type': 'text/html'
-    });
-    fs.readFile('./home.html', null, function (error, data) {
-        if (error) {
-            res.writeHead(404);
-            res.write('Oops! Unable to load main page.');
-        } else {
-            res.write(data);
-        }
-        res.end();
-    });
+  res.writeHead(200, {
+      'Content-Type': 'text/html'
+  });
+  fs.readFile('./home.html', null, function (error, data) {
+      if (error) {
+          res.writeHead(404);
+          res.write('Oops! Unable to load main page.');
+      } else {
+          res.write(data);
+      }
+      res.end();
+  });
 });
 
 
+
 //post file
-router.post('/upload', upload.single('file'), (req, res,error) =>{
-    console.log(req.file.originalname);
-    res.json({ "file": req.file.originalname });
-    // console.log(error)
+router.post('/upload', upload.single('file'), (req, res) =>{
+  console.log(req.file.originalname);
+res.json({ "file": req.file.originalname });
 });
 
 

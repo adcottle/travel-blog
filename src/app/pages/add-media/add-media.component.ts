@@ -1,15 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray} from "@angular/forms";
-import {  takeUntil } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { takeUntil } from 'rxjs/operators';
 import { CrudService } from '../../service/crud/crud.service';
+import { MetadataService } from '../../service/metadata/metadata.service';
+import { ImagesService } from '../../service/images/images.service';
 import { Subject } from 'rxjs';
-import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-add-media',
   templateUrl: './add-media.component.html',
-  styleUrls: ['./add-media.component.css'],
-  providers: [DatePipe]
+  styleUrls: ['./add-media.component.css'],  
 })
 export class AddMediaComponent implements OnInit , OnDestroy{
 
@@ -17,14 +18,15 @@ export class AddMediaComponent implements OnInit , OnDestroy{
   submitted = false;
   destroy$: Subject<boolean> = new Subject<boolean>();
   List: any = [];
-  
-  
-  
-  constructor(public fb: FormBuilder, public tripService: CrudService, private datePipe: DatePipe) {}
+  uploadForm: FormGroup;
+   
+  constructor(public fb: FormBuilder, public tripService: CrudService,
+              public metaService: MetadataService) {  }
 
   ngOnInit(): void {
 
-    this.getTripList();
+    // this.getTripList();
+    this.getAllMetadata();
 
     const currentDate = new Date().toISOString().substring(0, 10);
     
@@ -39,9 +41,19 @@ export class AddMediaComponent implements OnInit , OnDestroy{
         category: ['', [Validators.required]],
         upload_date: [currentDate]    
       });
+      this.uploadForm = this.fb.group({
+        caption: [''],
+        photo_id: [''],               
+        country: [''],
+        state: [''],
+        city: [''],
+        photo_date: [''],           
+      });
+    
   }
 
   get f() { return this.addMediaForm.controls; }
+  get u() { return this.uploadForm.controls; }
 
   
 
@@ -62,9 +74,8 @@ export class AddMediaComponent implements OnInit , OnDestroy{
       console.log(res);
       this.addMediaForm.reset();
     });    
-    
-    
   }
+ 
 
 
   getTripList(){
@@ -76,11 +87,24 @@ export class AddMediaComponent implements OnInit , OnDestroy{
       console.log(err);
     }
   )};
+
+  getAllMetadata(){
+    return this.metaService.GetMeta().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
+      console.log(data);
+      // this.List=data
+      // console.log(this.Metadata);    
+    }, err => {
+      console.log(err);
+    }
+  )};
+  
   
   ngOnDestroy() {
     this.destroy$.next(true);
     // Unsubscribe from the subject
     this.destroy$.unsubscribe();
   }
+
+  
 
 }

@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 let Trip = new Schema({
   __id: mongoose.Schema.Types.ObjectId, 
-  state: { type: Array },
-  city: { type: String},
+  state: { type: Array },  
   trip_date: {type: Date },
   tags: { type: Array },
   album_desc: {type: String},
