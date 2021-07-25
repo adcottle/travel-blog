@@ -6,10 +6,8 @@ const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const chalk = require('chalk');
 Grid.mongo = mongoose.mongo;
+const { check, validationResult } = require('express-validator');
 
-var path = require('path');
-
-let Image = require('../model/Image');
 
 const conn = mongoose.createConnection(process.env.DB, {
   useNewUrlParser: true,
@@ -58,10 +56,13 @@ router.get('/',(req,res)=>{
 
 
 // //post file
+
+// //post file
 router.post('/upload', upload.single('file'), (req, res) =>{
   // console.log(req.file)
 res.json({ "file": req.file.originalname });
 });
+
 
 
 // search files by original name

@@ -8,28 +8,61 @@
 <body>
   <!-- Upload form -->
   <form id="form-gridfs">
-    <label for="file-input">Caption</label>
-    <input id="caption" type="text" name="caption" accept="*" />
-    <label for="file-input">City</label>
-    <input id="city" type="text" name="city" accept="*" />
-    <label for="file-input">State</label>
-    <input id="state" type="text" name="state" accept="*" />
-    <label for="file-input">Country</label>
-    <input id="country" type="text" name="country" accept="*" />
-    <label for="photo_date">Photo Date:</label>
-    <input type="date" id="photo_date" name="photo_date"> 
-    <label for="file-input">Upload your file:</label>
-    <input id="file-input" type="file" name="file" accept="*" />
+    <table>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td><label for="file-input">Caption</label></td>
+        <td><input class="req-field" id="caption" type="text" name="caption" accept="*" required/></td>
+      </tr>
+      <tr>
+        <td><label for="file-input">City</label></td>
+        <td><input class="req-field" id="city" type="text" name="city" accept="*" required/></td>
+      </tr>
+      <tr>
+          <td><label for="file-input">State</label></td>
+          <td><input class="req-field" id="state" type="text" name="state" accept="*" required /></td>
+        </tr>
+        <tr>
+          <td><label for="file-input">Country</label></td>
+          <td><input  class="req-field" id="country" type="text" name="country" accept="*" required/></td>
+        </tr>
+        <tr>
+          <td><label for="file-input">Photo Date</label></td>
+          <td><input class="req-field" type="date" id="photo_date" name="photo_date" required/> </td>
+        </tr>
+        <tr>
+          <td><label for="file-input">Album ID</label></td>
+          <td><input class="req-field" id="album_id" type="text" name="album_id" accept="*" required/></td>
+        </tr>
+        <tr>
+          <td><label for="file-input">Upload File</label></td>
+          <td><input class="req-field" id="file-input" type="file" name="file" accept="*" required/></td>
+        </tr>
+        <tr>
+          <td>
+            <button id=submit type="button" name="submit">Submit</button>
+          </td>
+        </tr>
+
+    </table> 
     <br />
     <span style="color:green" id="success-msg"></span>
     <span style="color:red" id="fail-msg"></span>
   </form>
   <br />
   <!-- Javascript functions -->
+  <style>
+    .req-field { background:skyblue }
+    .req-field:valid { outline: solid blue 2px; background: none; }
+    .req-field:invalid { border: solid red 2px; background-color: red;}
+    </style>
   <script>
     $(document).ready(function() {
-      $("#file-input").on("change", uploadFile);
-
+      $("#submit").on("click", uploadFile);
+      
     });
     function uploadFile() {
       $.ajax({

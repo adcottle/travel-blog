@@ -11,6 +11,12 @@
   text-align: left;
   font-family: 'Marmelad';
 }
+#album_id {
+  color:blueviolet; 
+  font-size: larger;
+  text-align: center;
+  
+}
 mat-form-field {
   width: 100%;
 }

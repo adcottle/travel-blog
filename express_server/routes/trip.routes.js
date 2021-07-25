@@ -4,21 +4,6 @@ const { check, validationResult } = require('express-validator');
 
 let Trip = require('../model/Trip');
 
-// Add Trip
-// router.route('/add-trip').post((req, res, next) => {
-//     Trip.insertOne(req.body, (error, data) => {
-      
-//     if (error) {
-//       console.log(req);
-//       console.log(res);
-//       return next(error)
-//     } else {
-//       res.json(data);
-//       console.log(req);
-//       console.log(res);
-//     }
-//   })
-// });
 
 // Get all Trips
 router.route('/').get((req, res) => {

@@ -6,7 +6,7 @@ export class Trip {
     trip_date!: Date;
     country: String;
     state!: Array<any>;
-    city!: String; 
+    // city!: String; 
     upload_date: Date;
     category: Array<any>;
 }

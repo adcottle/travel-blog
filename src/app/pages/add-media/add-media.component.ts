@@ -69,9 +69,10 @@ export class AddMediaComponent implements OnInit , OnDestroy{
     this.addMediaForm.get('tags').setValue(tagArray);   
     console.log(tagArray)
 
-    this.tripService.AddTrip(this.addMediaForm.value).subscribe((res) =>{
-      console.log(this.addMediaForm.get('state').value);
-      console.log(res);
+    this.tripService.AddTrip(this.addMediaForm.value).subscribe((res) =>{     
+      console.log(res.result._id);
+      var album_id = res.result._id
+      document.getElementById("album_id").innerHTML = album_id;
       this.addMediaForm.reset();
     });    
   }

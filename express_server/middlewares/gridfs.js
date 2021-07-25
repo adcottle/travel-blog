@@ -19,7 +19,8 @@ const storage = new GridFsStorage({
                         city: req.body.city, 
                         state: req.body.state, 
                         country: req.body.country,
-                        photo_date: req.body.photo_date
+                        photo_date: req.body.photo_date,
+                        album_id: req.body.album_id
                     }
         };        
     },
