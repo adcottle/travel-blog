@@ -14,6 +14,7 @@ import { MaterialModule } from './material.component';
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { NgMarqueeModule } from 'ng-marquee';
 
 /*App Pages*/
 import { HomeComponent } from './pages/home/home.component';
@@ -48,7 +49,8 @@ import { AddMediaComponent } from './pages/add-media/add-media.component';
     NgImageSliderModule,
     ReactiveFormsModule,
     FormsModule,
-    SafePipeModule
+    SafePipeModule,
+    NgMarqueeModule
   ],
   providers: [
     {

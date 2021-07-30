@@ -145,6 +145,14 @@ figcaption {
   font-size: large;
   padding-top: 1%;  
 }
+.scrollText {
+  font-family: Overlock;
+  padding: 30px;
+  margin: 30px;
+  font-size: 42px;
+  color: maroon;
+  background-color: transparent;
+}
  /*****************Cellphone sizing****/
  @media only screen and (min-device-width : 414px) and (max-device-width : 736px) {
     .introText {
