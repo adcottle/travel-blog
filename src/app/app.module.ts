@@ -14,6 +14,7 @@ import { MaterialModule } from './material.component';
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { NgMarqueeModule } from 'ng-marquee';
 
 /*App Pages*/
 import { HomeComponent } from './pages/home/home.component';
@@ -23,6 +24,7 @@ import { IdeasComponent } from './pages/ideas/ideas.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PicsComponent } from './pages/pics/pics.component';
+import { AddMediaComponent } from './pages/add-media/add-media.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { PicsComponent } from './pages/pics/pics.component';
     IdeasComponent,
     NotFoundComponent,
     ProfileComponent,
-    PicsComponent
+    PicsComponent,
+    AddMediaComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import { PicsComponent } from './pages/pics/pics.component';
     NgImageSliderModule,
     ReactiveFormsModule,
     FormsModule,
-    SafePipeModule
+    SafePipeModule,
+    NgMarqueeModule
   ],
   providers: [
     {

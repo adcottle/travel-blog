@@ -10,6 +10,20 @@
     src: local("Dancing Script"), url(./assets/fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf) format("truetype")
 }
 
+@font-face {
+    font-family: "Marmelad";
+    src: local('Marmelad'), url(./assets/fonts/Marmelad/Marmelad-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Overlock";
+    src: local('Overlock'), url(./assets/fonts/Overlock/Overlock-Black.ttf) format("truetype");
+}
+@font-face {
+    font-family: 'Noto Sans TC';
+    src: local('Noto Sans TC'), url(./assets/fonts/Noto_Sans_TC/NotoSansTC-Regular.otf) format("opentype");
+}
+
 html, body { height: 100%; }
 body { margin: 15px; font-family: Roboto, "Helvetica Neue", sans-serif; }
 

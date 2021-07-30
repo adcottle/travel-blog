@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&family=Noto+Sans:wght@700&display=swap');
-
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr; /* Create 2 columns and auto-place rows */
@@ -146,6 +144,14 @@ figcaption {
   font-weight: 700;
   font-size: large;
   padding-top: 1%;  
+}
+.scrollText {
+  font-family: Overlock;
+  padding: 30px;
+  margin: 30px;
+  font-size: 42px;
+  color: maroon;
+  background-color: transparent;
 }
  /*****************Cellphone sizing****/
  @media only screen and (min-device-width : 414px) and (max-device-width : 736px) {

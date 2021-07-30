@@ -1,0 +1,26 @@
+.introHead {
+  font-size: 46px;
+  color: #003366;
+  text-align: center;
+  font-family: 'Overlock';
+  margin-top: 15px;
+}
+.formTitle {
+    font-size: 24px;
+    color: #003366;
+  text-align: left;
+  font-family: 'Marmelad';
+}
+#album_id {
+  color:blueviolet; 
+  font-size: larger;
+  text-align: center;
+  
+}
+mat-form-field {
+  width: 100%;
+}
+mat-label, input {
+  font-family: 'Marmelad';
+  font-size: large;
+}

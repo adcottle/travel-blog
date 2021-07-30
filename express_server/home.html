@@ -8,15 +8,80 @@
 <body>
   <!-- Upload form -->
   <form id="form-gridfs">
-    <label for="file-input">Upload your file:</label>
-    <input id="file-input" type="file" name="file" accept="*" />
+    <table>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td><label for="file-input">Caption</label></td>
+        <td><input class="req-field" id="caption" type="text" name="caption" accept="*" required/></td>
+      </tr>
+      <tr>
+        <td><label for="file-input">City</label></td>
+        <td><input class="req-field" id="city" type="text" name="city" accept="*" required/></td>
+      </tr>
+      <tr>
+          <td><label for="file-input">State</label></td>
+          <td><input class="req-field" id="state" type="text" name="state" accept="*" required /></td>
+        </tr>
+        <tr>
+          <td><label for="file-input">Country</label></td>
+          <td><input  class="req-field" id="country" type="text" name="country" accept="*" required/></td>
+        </tr>
+        <tr>
+          <td><label for="file-input">Photo Date</label></td>
+          <td><input class="req-field" type="date" id="photo_date" name="photo_date" required/> </td>
+        </tr>
+        <tr>
+          <td><label for="file-input">Album ID</label></td>
+          <td><input class="req-field" id="album_id" type="text" name="album_id" accept="*" required/></td>
+        </tr>
+        <tr>
+          <td><label for="file-input">Upload File</label></td>
+          <td><input class="req-field" id="file-input" type="file" name="file" accept="*" required/></td>
+        </tr>
+        <tr>
+          <td>
+            <button id=submit type="button" name="submit">Submit</button>
+          </td>
+        </tr>
+
+    </table> 
     <br />
     <span style="color:green" id="success-msg"></span>
     <span style="color:red" id="fail-msg"></span>
   </form>
   <br />
-
-
-  
+  <!-- Javascript functions -->
+  <style>
+    .req-field { background:skyblue }
+    .req-field:valid { outline: solid blue 2px; background: none; }
+    .req-field:invalid { border: solid red 2px; background-color: red;}
+    </style>
+  <script>
+    $(document).ready(function() {
+      $("#submit").on("click", uploadFile);
+      
+    });
+    function uploadFile() {
+      $.ajax({
+        url: "images/upload",
+        type: "POST",
+        data: new FormData($("#form-gridfs")[0]),
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        success: function () {          
+          $("#success-msg").text("File uploaded succesfully!");
+        },
+        error: function (xhr) {
+          $("#fail-msg").text("Oops something went wrong! File not uploaded!!");
+          console.log(xhr.responseText);            
+        }
+      });
+    } 
+  </script>
 </body>
 </html>

@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const chalk = require('chalk');
 Grid.mongo = mongoose.mongo;
-
+const { check, validationResult } = require('express-validator');
 
 
 const conn = mongoose.createConnection(process.env.DB, {
@@ -39,27 +39,30 @@ conn.once("open", () => {
 
 //root path 
 router.get('/',(req,res)=>{
-    res.writeHead(200, {
-        'Content-Type': 'text/html'
-    });
-    fs.readFile('./home.html', null, function (error, data) {
-        if (error) {
-            res.writeHead(404);
-            res.write('Oops! Unable to load main page.');
-        } else {
-            res.write(data);
-        }
-        res.end();
-    });
+  res.writeHead(200, {
+      'Content-Type': 'text/html'
+  });
+  fs.readFile('./home.html', null, function (error, data) {
+      if (error) {
+          res.writeHead(404);
+          res.write('Oops! Unable to load main page.');
+      } else {
+          res.write(data);
+      }
+      res.end();
+  });
 });
 
 
-//post file
-router.post('/upload', upload.single('file'), (req, res,error) =>{
-    console.log(req.file.originalname);
-    res.json({ "file": req.file.originalname });
-    // console.log(error)
+
+// //post file
+
+// //post file
+router.post('/upload', upload.single('file'), (req, res) =>{
+  // console.log(req.file)
+res.json({ "file": req.file.originalname });
 });
+
 
 
 // search files by original name
@@ -105,6 +108,20 @@ router.route('/files')
         });
     });
 });
+
+//Get single file json
+router.get('/image/:filename', (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+      //check if files exist
+      if (!file || file.length == 0) {
+          return res.status(404).json({
+              err: "No files exist"
+          })
+      }
+      //file exist
+      return res.json(file)
+  })
+})
 
 
 router.get('/array', (req, res) => {
@@ -155,6 +172,7 @@ router.get('/query', (req, res) => {
   });
 
 
+
   //Delete a file
   router.delete('delete/file/:id', (req, res) => {
     gfs.remove({ _id: req.params.id, root: 'fs' }, (err, gridStore) => {
@@ -166,7 +184,9 @@ router.get('/query', (req, res) => {
     });
   });
 
- 
+//   
+
+
 
 
 module.exports = router;
