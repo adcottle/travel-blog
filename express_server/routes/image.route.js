@@ -124,54 +124,6 @@ router.get('/image/:filename', (req, res) => {
 })
 
 
-router.get('/array', (req, res) => {
-    gfs.files.find().toArray((err, files) => { 
-    //   Check if files
-      if (!files || files.length === 0) {
-        res.render('array', { files: false });
-      } else {
-        files.map(file => {
-          if (
-            file.contentType === 'image/jpeg' ||
-            file.contentType === 'image/png'
-          ) {
-            file.isImage = true;
-          } else {
-            file.isImage = false;
-          }
-        });
-        res.render('array', { files: files });
-      }
-    });
-  });
-
-
-///Query parameters
-router.get('/query', (req, res) => {
-    gfs.files.find({ tripID: 3 }).toArray((err, files) => { 
-      if (err) {
-        return res.status(404).json({ err: err });
-      }
-    //   Check if files
-      if (!files || files.length === 0) {
-        // res.render('array', { files: false });
-      } else {
-        files.map(file => {
-          if (
-            file.contentType === 'image/jpeg' ||
-            file.contentType === 'image/png'
-          ) {
-            file.isImage = true;
-          } else {
-            file.isImage = false;
-          }
-        });
-        res.render('array', { files: files });
-      }
-    });
-  });
-
-
 
   //Delete a file
   router.delete('delete/file/:id', (req, res) => {
@@ -184,9 +136,88 @@ router.get('/query', (req, res) => {
     });
   });
 
-//   
+/*
+GET: Fetches all the lastest as JSON
+*/
+router.route('/latest-posts')
+.get((req, res, next) => {
+    gfs.files.find({"metadata.cover_photo": "on"}).sort('uploadDate', -1).limit(3).toArray((err, files) => {
+        if (!files || files.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: 'No files available'
+            });
+        }
+        
+        files.map(file => {
+            if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
+                file.isImage = true;
+                // console.log(files)
+            } else {
+                file.isImage = false;
+            }
+        });
+
+        res.status(200).json({
+            success: true,
+            files,
+        });
+    });
+});   
 
 
 
 
 module.exports = router;
+
+//GETS ACTUAL IMAGES -- NO LONGER NECESSARY SINCE JUST GETTING METADATA
+
+// router.get('/array', (req, res) => {
+//   gfs.files.find().toArray((err, files) => { 
+//   //   Check if files
+//     if (!files || files.length === 0) {
+//       res.render('array', { files: false });
+//     } else {
+//       files.map(file => {
+//         if (
+//           file.contentType === 'image/jpeg' ||
+//           file.contentType === 'image/png'
+//         ) {
+//           file.isImage = true;
+//         } else {
+//           file.isImage = false;
+//         }
+//       });
+//       res.render('array', { files: files });
+//     }
+//   });
+// });
+
+
+// ///Query to get 3 latest images
+// router.get('/query', (req, res) => {
+//   gfs.files.find({"metadata.cover_photo": "on"}).sort('upload_date', -1).limit(3).toArray((err, files) => { 
+//     if (err) {
+//       return res.status(404).json({ err: err });
+//     }
+//   //   Check if files
+//     if (!files || files.length === 0) {
+//       // res.render('array', { files: false });
+//     } else {
+//       files.map(file => {
+//         if (
+//           file.contentType === 'image/jpeg' ||
+//           file.contentType === 'image/png'
+//         ) {
+//           file.isImage = true;
+//         } else {
+//           file.isImage = false;
+//         }
+//       });
+//       res.render('array', { files: files });
+//     }
+    
+//   });
+// });
+
+

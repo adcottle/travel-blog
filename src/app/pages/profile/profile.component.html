@@ -1,10 +1,29 @@
-<div class="container">
-    <div class="row">
-        <div class="inner-main">
-            <h2 class="mb-4">User Profile</h2>
-            <p><strong>First Name:</strong> {{this.currentUser.firstName}}</p>
-            <p><strong>Last Name:</strong> {{this.currentUser.lastName}}</p>
-            <p><strong>Email:</strong> {{this.currentUser.email}}</p>
-        </div>
+<div class="row">
+    <div class="col-3">
+        <mdb-card>
+            <mdb-card-body>
+                <div class="inner-main">
+                    <h2 class="mb-4">User Profile</h2>
+                    <p><strong>First Name:</strong> {{this.currentUser.firstName}}</p>
+                    <p><strong>Last Name:</strong> {{this.currentUser.lastName}}</p>
+                    <p><strong>Email:</strong> {{this.currentUser.email}}</p>
+                </div>
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+
+    <div class="col-9">
+        <mat-tab-group dynamicHeight>
+            <mat-tab label="Activity">
+                <div class="example-small-box mat-elevation-z4">
+                    latest comments with pic
+                </div>
+            </mat-tab>
+            <mat-tab value="accent" label="My Favorites">
+                <div class="example-large-box mat-elevation-z4">
+                    just an ngfor with pictures
+                </div>
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </div>

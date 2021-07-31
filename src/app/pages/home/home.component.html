@@ -78,6 +78,28 @@
     <!--/.Navbar-->
   </div>
 
+
+  <div class="container">
+   <div class="row">
+     <div class="col-md-3 mx-auto my-5" *ngFor="let i of Images">
+       <mdb-card>
+         <!-- <mdb-card-img [src]="card.img" alt="Card image cap"></mdb-card-img> -->
+         <mdb-card-body>
+           <mdb-card-title>
+             <!-- <h4>{{t.album_title}}</h4> -->
+           </mdb-card-title>
+           <p> </p>
+           <mdb-card-text>
+            should see something above
+           </mdb-card-text>
+ 
+           <button mdbBtn color="primary"></button>
+         </mdb-card-body>
+       </mdb-card>
+     </div>
+   </div>
+ </div>
+
   <div class="row" >
      <div class="col-sm-5"><img class="plane" src="../../../assets/pics/plane2.gif"></div>
       <div class="col-sm-7 mapTitle my-2">Where we've Been</div>      
@@ -147,13 +169,12 @@
             <mat-card>
                <mat-card-header>
                  
-                 <mat-card-title>{{m.title}}</mat-card-title>
+                 <mat-card-title>{{m.album_title}}</mat-card-title>
                  <!-- <mat-card-subtitle>Trip ID: {{m.tripID}}</mat-card-subtitle> -->
                </mat-card-header>
-               <img mat-card-image [src]="('http://localhost:4000/images/file/' + m.filename) | safe: 'url'" alt="m.title">
+               <img mat-card-image [src]="('http://localhost:4000/images/file/' + m.filename) | safe: 'url'" alt="m.metadata.caption">
                <mat-card-content>
-                  <p class="card-text">Date: {{m.uploadDate}}</p>
-                  <figcaption>Include an album description</figcaption>
+                  <figcaption>{{m.metadata.caption}}</figcaption>
                </mat-card-content>
                <mat-card-actions>
                   <p>TODO: add scripting to permit images to be favorited</p>
@@ -165,6 +186,7 @@
        </ng-container>          
    </div>
  
+   
 
 
 <br>

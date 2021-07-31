@@ -22,8 +22,8 @@ export class ImagesService {
     return this.httpClient.get(`${this.REST_API}/files`);
   }
   
-  GetImages() {
-    return this.httpClient.get(`${this.REST_API}/query`);
+  GetLatest() {
+    return this.httpClient.get(`${this.REST_API}/latest-posts`);
   }
 
   GetPic(_id:any) {

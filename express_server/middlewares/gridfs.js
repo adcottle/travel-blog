@@ -20,6 +20,7 @@ const storage = new GridFsStorage({
                         state: req.body.state, 
                         country: req.body.country,
                         photo_date: req.body.photo_date,
+                        cover_photo: req.body.cover_photo,
                         album_id: req.body.album_id
                     }
         };        

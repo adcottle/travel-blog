@@ -47,6 +47,11 @@ export class CrudService {
       )
   }
 
+  // Get latest posts
+  GetLatest() {
+    return this.http.get(`${this.endpoint}/latest-posts`);
+  }
+
   // Update
   updateTrip(_id:any, data:any): Observable<any> {
     let API_URL = `${this.endpoint}/update-trip/${_id}`;

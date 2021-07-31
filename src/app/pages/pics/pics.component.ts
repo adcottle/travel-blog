@@ -55,14 +55,14 @@ export class PicsComponent implements OnInit, OnDestroy {
   //   }
   // )};
 
-  getImages() {
-    return this.imageService.GetImages().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
-      console.log(data)
-      this.Images = data.files;
-    }, err => {
-      console.log(err);
-    }
-  )};
+  // getImages() {
+  //   return this.imageService.GetImages().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
+  //     console.log(data)
+  //     this.Images = data.files;
+  //   }, err => {
+  //     console.log(err);
+  //   }
+  // )};
 
   
   onePic() {var name = 'navajo_bridge.jpg'; return this.imageService.GetPic(name).pipe(takeUntil(this.destroy$)).subscribe( (data) => {

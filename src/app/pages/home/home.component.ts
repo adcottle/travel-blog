@@ -3,10 +3,9 @@ import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 
 import { ImagesService } from '../../service/images/images.service';
+import { CrudService } from '../../service/crud/crud.service';
 import {  takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
-
 
 
 
@@ -89,8 +88,8 @@ interface ExampleFlatNode {
 export class HomeComponent implements OnInit, OnDestroy {
 
   Metadata: any = [];
-  // Lists: any = [];
-  Pics: any = [];
+  Images: any = [];
+  Trips: any = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
 
     private _transformer = (node: FoodNode, level: number) => {
@@ -135,7 +134,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     title: 'Goblin Valley'
 }];
 
-constructor(private imageService: ImagesService) { 
+constructor(private imageService: ImagesService, private crudService: CrudService) { 
 
     this.dataSource.data = TREE_DATA;
 }
@@ -145,15 +144,59 @@ hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
 ngOnInit(): void {
   // this.circleText();
-  this.getList();
+  // this.getLatestImages();
+  // this.getLatestTrips();
+  this.getMerged();
 }
 
 
+getMerged(){
 
-getList() {
-  return this.imageService.GetImagesList().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
+  let trip;
+  var image: any = [];
+  this.crudService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (tripData: any =[]) => {   
+    this.imageService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (imageData: any =[]) => {
+      
+      trip = tripData;
+      console.log(trip);
+      image = imageData.files;
+      console.log(image);
+      // this.mergeArrayObjects(trip,image);
+
+      // this.Metadata = {trip, image};
+    // console.log(this.Metadata)
+    
+    this.Metadata = this.mergeArrayObjects(trip,image);
+      console.log(this.Metadata)
+    });    
+  });    
+}
+mergeArrayObjects(arr1,arr2){
+  return arr1.map((item,i)=>{
+     if(item._id === arr2[i].metadata.album_id){
+         //merging two objects
+       return Object.assign({},item,arr2[i])
+     }
+  })
+}
+
+
+getLatestImages() {
+  return this.imageService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
     // console.log(data);
-    this.Metadata = data.files;
+    this.Images = data.files;
+    console.log(this.Images);    
+    
+    console.log(data.files.metadata)
+  }, err => {
+    console.log(err);
+  }
+)};
+
+getLatestTrips() {
+  return this.crudService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
+    console.log(data);
+    this.Trips = data;
     // console.log(this.Metadata);    
   }, err => {
     console.log(err);

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
   <!-- Upload form -->
@@ -38,6 +36,10 @@
           <td><input class="req-field" id="album_id" type="text" name="album_id" accept="*" required/></td>
         </tr>
         <tr>
+          <td><label for="file-input">Cover Photo</label></td>
+          <td><input class="req-field" id="cover_photoe" type="checkbox" name="cover_photo" accept="*" required/></td>
+        </tr>
+        <tr>
           <td><label for="file-input">Upload File</label></td>
           <td><input class="req-field" id="file-input" type="file" name="file" accept="*" required/></td>
         </tr>
@@ -62,6 +64,7 @@
   <script>
     $(document).ready(function() {
       $("#submit").on("click", uploadFile);
+       
       
     });
     function uploadFile() {
@@ -75,6 +78,7 @@
         cache: false,
         success: function () {          
           $("#success-msg").text("File uploaded succesfully!");
+          document.getElementById("form-gridfs").reset();
         },
         error: function (xhr) {
           $("#fail-msg").text("Oops something went wrong! File not uploaded!!");

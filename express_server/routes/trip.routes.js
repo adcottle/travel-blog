@@ -97,6 +97,17 @@ router.post("/add-trip",
         }
     });
 
+    // Get 3 latest posts for home page
+router.route('/latest-posts').get((req, res) => {
+  Trip.find().sort('-upload_date').limit(3).exec((error, data) => {
+  if (error) {
+    return next(error)
+  } else {      
+    res.json(data)
+  }
+});
+});
+
 
 
 module.exports = router;

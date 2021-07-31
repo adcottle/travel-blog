@@ -11,7 +11,7 @@
   text-align: left;
   font-family: 'Marmelad';
 }
-#album_id {
+.forRef {
   color:blueviolet; 
   font-size: larger;
   text-align: center;
