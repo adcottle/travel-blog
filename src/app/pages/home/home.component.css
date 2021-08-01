@@ -1,15 +1,9 @@
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Create 2 columns and auto-place rows */
-}
-.fillerText {
-  background-color: cornsilk;
-  color: maroon;
-  line-height: 3;
-  font-size: xx-large;
-}
+@import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
+
+
+
 .intro {
-  font-family: 'Handlee', cursive;  
+  font-family: 'Handlee', cursive; 
   position: relative;
   width: 100%;
 }
@@ -77,9 +71,9 @@ mdb-navbar {
 .mapTitle, .postTitle {
   font-family: 'Dancing Script', cursive;
   font-size: 52px;
-  color: cornflowerblue;
+  color: #003366;;
   font-weight: 700;
-  text-decoration: cornflowerblue underline;
+  text-decoration: #003366;;
   }
 .mapTitle {
   text-align: left;
@@ -88,7 +82,7 @@ mdb-navbar {
 .mapNum { 
   font-size: 28px;
   font-weight: 900;
-  color: cornflowerblue;
+  color: #003366;;
   text-transform: uppercase;
   text-align: center;
   font-family: 'Noto Sans TC', sans-serif;
@@ -117,14 +111,18 @@ mat-card > img {
   min-width: 100%;
 }
 .postBox {
-  border-right: 5px inset #003366;
+  border-right: 5px inset #4c7093;
 }
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;  
 }
-
+.mat-card-title {
+  font-family: 'Delius', cursive;
+  color: #4c7093;
+  font-size: x-large;
+}
 /************************Footer Styling*/
 footer {
   width: 100%;
@@ -142,8 +140,9 @@ figcaption {
   color: cornflowerblue;
   font-style: italic;
   font-weight: 700;
-  font-size: large;
+  font-size: 22px;
   padding-top: 1%;  
+  font-family: 'Handlee';
 }
 .scrollText {
   font-family: Overlock;
@@ -165,9 +164,7 @@ figcaption {
     .mapTitle, postTitlee {
       font-family: 'Dancing Script', cursive;
       font-size: 52px;
-      color: cornflowerblue;
-      font-weight: 700;     
-      text-decoration: cornflowerblue underline;      
+      font-weight: 700;         
       }
       .mapTitle {
         text-align: left;
@@ -175,7 +172,6 @@ figcaption {
     .mapNum { 
       font-size: large;
       font-weight: 900;
-      color: cornflowerblue;
       text-transform: uppercase;
       text-align: center;
       font-family: 'Noto Sans TC', sans-serif;      

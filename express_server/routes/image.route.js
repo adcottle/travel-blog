@@ -165,6 +165,35 @@ router.route('/latest-posts')
     });
 });   
 
+/*
+GET: Fetches all images of specified album as JSON
+*/
+router.route('/view-album/:id')
+.get((req, res, next) => {
+  gfs.files.find({"metadata.album_id": req.params.id}).sort('uploadDate', -1).toArray((err, files) => {
+        if (!files || files.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: 'No files available'
+            });
+        }
+        
+        files.map(file => {
+            if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
+                file.isImage = true;
+                // console.log(files)
+            } else {
+                file.isImage = false;
+            }
+        });
+
+        res.status(200).json({
+            success: true,
+            files,
+        });
+    });
+});  
+
 
 
 

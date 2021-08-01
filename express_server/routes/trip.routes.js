@@ -7,10 +7,10 @@ let Trip = require('../model/Trip');
 
 // Get all Trips
 router.route('/').get((req, res) => {
-    Trip.find((error, data) => {
+  Trip.find((error, data) => {
     if (error) {
       return next(error)
-    } else {      
+    } else {
       res.json(data)
     }
   })
@@ -18,7 +18,7 @@ router.route('/').get((req, res) => {
 
 // Get specific Trip
 router.route('/trip/:_id').get((req, res) => {
-    Trip.findById(req.params._id, (error, data) => {
+  Trip.findById(req.params._id, (error, data) => {
     if (error) {
       return next(error)
     } else {
@@ -30,11 +30,11 @@ router.route('/trip/:_id').get((req, res) => {
 
 // Update a Trip
 router.route('/update-trip/:_id').put((req, res, next) => {
-    Trip.findByIdAndUpdate(req.params._id, {
+  Trip.findByIdAndUpdate(req.params._id, {
     $set: req.body
   }, (error, data) => {
     if (error) {
-      return next(error);      
+      return next(error);
     } else {
       res.json(data)
       console.log('Trip updated successfully!')
@@ -44,7 +44,7 @@ router.route('/update-trip/:_id').put((req, res, next) => {
 
 // Delete a Trip
 router.route('/delete-trip/:_id').delete((req, res, next) => {
-    Trip.findByIdAndRemove(req.params._id, (error, data) => {
+  Trip.findByIdAndRemove(req.params._id, (error, data) => {
     if (error) {
       return next(error);
     } else {
@@ -56,56 +56,54 @@ router.route('/delete-trip/:_id').delete((req, res, next) => {
 })
 
 router.post("/add-trip",
-    [
-        check('album_title')
-            .not()
-            .isEmpty()               
-    ],
-    (req, res, next) => { 
-        const errors = validationResult(req);
-        console.log(errors);
+  [
+    check('album_title')
+      .not()
+      .isEmpty()
+  ],
+  (req, res, next) => {
+    const errors = validationResult(req);
+    console.log(errors);
 
-        if (!errors.isEmpty()) {
-            return res.status(422).json(errors.array());
-        }
-        else {
-            
-                const trip = new Trip({
-                    album_title: req.body.album_title,
-                    album_desc: req.body.album_desc,
-                    city: req.body.city,
-                    state: req.body.state,
-                    tags: req.body.tags,
-                    trip_date: req.body.trip_date,
-                    category: req.body.category,
-                    upload_date: req.body.upload_date
-                });
-                trip.save().then((response) => {
-                    console.log(response)
-                    res.status(201).json({
-                        message: "trip successfully created!",
-                        result: response
-                    });
-                }).catch(error => {
-                    console.log(error);
-                    res.status(500).json({
-                        error: error
-                        
-                    });
-                });
-            
-        }
-    });
+    if (!errors.isEmpty()) {
+      return res.status(422).json(errors.array());
+    }
+    else {
 
-    // Get 3 latest posts for home page
+      const trip = new Trip({
+        album_title: req.body.album_title,
+        album_desc: req.body.album_desc,
+        city: req.body.city,
+        state: req.body.state,
+        tags: req.body.tags,
+        trip_date: req.body.trip_date,
+        category: req.body.category,
+        upload_date: req.body.upload_date
+      });
+      trip.save().then((response) => {
+        console.log(response)
+        res.status(201).json({
+          message: "trip successfully created!",
+          result: response
+        });
+      }).catch(error => {
+        console.log(error);
+        res.status(500).json({
+          error: error
+        });
+      });
+    };
+  });
+
+// Get 3 latest posts for home page
 router.route('/latest-posts').get((req, res) => {
   Trip.find().sort('-upload_date').limit(3).exec((error, data) => {
-  if (error) {
-    return next(error)
-  } else {      
-    res.json(data)
-  }
-});
+    if (error) {
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  });
 });
 
 

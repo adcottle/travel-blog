@@ -1,0 +1,37 @@
+<h1 class="heading">{{Post.album_title}} </h1>
+<p>{{Post.album_desc}}</p>
+
+
+
+<div class="gallery">
+    <div class="gallery-item" *ngFor="let a of albumImage">
+        <img class="gallery-image" [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
+            alt="a.metadata.caption">
+    </div>
+   
+</div>
+
+
+<mat-card *ngFor="let a of albumImage" style="max-width: 450px;">
+    <div class="gallery-item">
+        <img class="gallery-image" [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
+            alt="a.metadata.caption">
+        <br>
+        <br>
+        <mat-card-title>Title</mat-card-title>
+        <mat-card-subtitle>{{a.tags}}</mat-card-subtitle>
+        <mat-card-content>
+            <figcaption>{{a.metadata.caption}}</figcaption>
+            <p>{{a.metadata.city}}, {{a.metadata.state}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <p>TODO: add scripting to permit images to be favorited</p>
+            <button mat-button>
+                <mdb-icon far icon="heart"></mdb-icon>
+            </button>
+            <button mat-button>
+                <mdb-icon fas icon="heart"></mdb-icon>
+            </button>
+        </mat-card-actions>
+    </div>
+</mat-card>

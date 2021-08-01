@@ -32,6 +32,17 @@ export class ImagesService {
     return this.httpClient.get(API_URL, { responseType: 'blob' })      
   }
 
+  // Get single trip
+  GetAlbum(id: any): Observable<any> {
+    let API_URL = `${this.REST_API}/view-album/${id}`;
+    return this.httpClient.get(API_URL, { headers: this.httpHeaders })
+      .pipe(map((res: any) => {
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
+
    
   // Error 
   handleError(error: HttpErrorResponse) {

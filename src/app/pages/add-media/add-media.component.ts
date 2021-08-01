@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { takeUntil } from 'rxjs/operators';
 import { CrudService } from '../../service/crud/crud.service';
-import { MetadataService } from '../../service/metadata/metadata.service';
 import { ImagesService } from '../../service/images/images.service';
 import { Subject } from 'rxjs';
 
@@ -21,12 +20,12 @@ export class AddMediaComponent implements OnInit , OnDestroy{
   
    
   constructor(public fb: FormBuilder, public tripService: CrudService,
-              public metaService: MetadataService) {  }
+              ) {  }
 
   ngOnInit(): void {
 
     // this.getTripList();
-    this.getAllMetadata();
+    
 
     // const currentDate = new Date().toISOString().substring(0, 10);
     
@@ -82,15 +81,6 @@ export class AddMediaComponent implements OnInit , OnDestroy{
     }
   )};
 
-  getAllMetadata(){
-    return this.metaService.GetMeta().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
-      console.log(data);
-      // this.List=data
-      // console.log(this.Metadata);    
-    }, err => {
-      console.log(err);
-    }
-  )};
   
   
   ngOnDestroy() {

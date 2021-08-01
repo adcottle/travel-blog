@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-
+import { Router } from '@angular/router';
 import { ImagesService } from '../../service/images/images.service';
 import { CrudService } from '../../service/crud/crud.service';
-import {  takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 
@@ -134,7 +134,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     title: 'Goblin Valley'
 }];
 
-constructor(private imageService: ImagesService, private crudService: CrudService) { 
+constructor(private imageService: ImagesService, private crudService: CrudService, public router: Router) { 
 
     this.dataSource.data = TREE_DATA;
 }
@@ -151,34 +151,28 @@ ngOnInit(): void {
 
 
 getMerged(){
-
   let trip;
   var image: any = [];
   this.crudService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (tripData: any =[]) => {   
-    this.imageService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (imageData: any =[]) => {
-      
+    this.imageService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (imageData: any =[]) => {      
       trip = tripData;
-      console.log(trip);
+      // console.log(trip);
       image = imageData.files;
-      console.log(image);
-      // this.mergeArrayObjects(trip,image);
-
-      // this.Metadata = {trip, image};
-    // console.log(this.Metadata)
-    
-    this.Metadata = this.mergeArrayObjects(trip,image);
+      // console.log(image);
+      this.Metadata = this.mergeArrayObjects(trip,image);
       console.log(this.Metadata)
     });    
   });    
-}
+};
+
 mergeArrayObjects(arr1,arr2){
   return arr1.map((item,i)=>{
      if(item._id === arr2[i].metadata.album_id){
          //merging two objects
        return Object.assign({},item,arr2[i])
-     }
-  })
-}
+     };
+  });
+};
 
 
 getLatestImages() {
@@ -202,6 +196,11 @@ getLatestTrips() {
     console.log(err);
   }
 )};
+
+openAlbum(id) {
+  console.log(id);
+  this.router.navigate(['album-view/' + id]);
+}
 
 ngOnDestroy() {
   this.destroy$.next(true);

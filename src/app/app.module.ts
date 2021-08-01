@@ -25,6 +25,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PicsComponent } from './pages/pics/pics.component';
 import { AddMediaComponent } from './pages/add-media/add-media.component';
+import { AlbumViewComponent } from './pages/album-view/album-view.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AddMediaComponent } from './pages/add-media/add-media.component';
     NotFoundComponent,
     ProfileComponent,
     PicsComponent,
-    AddMediaComponent
+    AddMediaComponent,
+    AlbumViewComponent
   ],
   imports: [
     BrowserModule,
