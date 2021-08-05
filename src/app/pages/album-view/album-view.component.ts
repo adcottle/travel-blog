@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../../service/images/images.service';
 import { CrudService } from '../../service/crud/crud.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { pipe, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-album-view',
@@ -13,9 +13,10 @@ import { Subject } from 'rxjs';
 export class AlbumViewComponent implements OnInit {
 
   id:  any;
-  albumImage: any = [];
-  // Images: any = [];
+  albumImage: any = []; 
   Post: any = [];
+  Cover: any;
+
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private actRoute: ActivatedRoute, private imageService: ImagesService, private crudService: CrudService) {
@@ -23,7 +24,8 @@ export class AlbumViewComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.getMerged(this.id)
+    this.getMerged(this.id);
+    this.getCover(this.id)
   }
 
   getMerged(id){   
@@ -39,7 +41,7 @@ export class AlbumViewComponent implements OnInit {
         // console.log(image);         
         image.forEach(element => {          
           const mergedObj = { ...element, ...trip };
-          console.log(mergedObj);
+          // console.log(mergedObj);
           this.albumImage.push(mergedObj);
           // console.log(this.albumImage)
         });
@@ -48,6 +50,13 @@ export class AlbumViewComponent implements OnInit {
     });    
   };
   
+  getCover(id) {
+    this.imageService.GetCover(id).pipe(takeUntil(this.destroy$)).subscribe( coverImage => {
+      // console.log(coverImage);
+      var ci = coverImage.files
+      this.Cover = ci[0].filename;     
+    }
+  )};
 
 
   ngOnDestroy() {

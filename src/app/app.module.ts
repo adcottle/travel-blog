@@ -14,7 +14,6 @@ import { MaterialModule } from './material.component';
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgImageSliderModule } from 'ng-image-slider';
-import { NgMarqueeModule } from 'ng-marquee';
 
 /*App Pages*/
 import { HomeComponent } from './pages/home/home.component';
@@ -23,7 +22,6 @@ import { AboutComponent } from './pages/about/about.component';
 import { IdeasComponent } from './pages/ideas/ideas.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { PicsComponent } from './pages/pics/pics.component';
 import { AddMediaComponent } from './pages/add-media/add-media.component';
 import { AlbumViewComponent } from './pages/album-view/album-view.component';
 
@@ -36,7 +34,6 @@ import { AlbumViewComponent } from './pages/album-view/album-view.component';
     IdeasComponent,
     NotFoundComponent,
     ProfileComponent,
-    PicsComponent,
     AddMediaComponent,
     AlbumViewComponent
   ],
@@ -51,8 +48,7 @@ import { AlbumViewComponent } from './pages/album-view/album-view.component';
     NgImageSliderModule,
     ReactiveFormsModule,
     FormsModule,
-    SafePipeModule,
-    NgMarqueeModule
+    SafePipeModule
   ],
   providers: [
     {

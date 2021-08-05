@@ -7,7 +7,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { IdeasComponent } from './pages/ideas/ideas.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { PicsComponent } from './pages/pics/pics.component';
 import { AddMediaComponent } from './pages/add-media/add-media.component';
 import { AlbumViewComponent } from './pages/album-view/album-view.component';
 
@@ -16,7 +15,6 @@ import { AuthGuard } from './service/auth/auth.guard'
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'pics', component: PicsComponent },
   { path: 'album-view/:id', component: AlbumViewComponent },
   { path: 'about', component: AboutComponent },
   { path: 'add-media', component: AddMediaComponent },

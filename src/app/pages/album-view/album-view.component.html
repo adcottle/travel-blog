@@ -1,37 +1,68 @@
-<h1 class="heading">{{Post.album_title}} </h1>
-<p>{{Post.album_desc}}</p>
+<!-- News jumbotron -->
+<div class="jumbotron text-center hoverable p-4">
 
+  <!-- Grid row -->
+  <div class="row">
 
+    <!-- Grid column -->
+    <div class="col-md-4 offset-md-1 mx-3 my-3">
 
-<div class="gallery">
-    <div class="gallery-item" *ngFor="let a of albumImage">
-        <img class="gallery-image" [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
-            alt="a.metadata.caption">
+      <!-- Featured image -->
+      <div class="view overlay waves-light" mdbWavesEffect>
+        <img [src]="('http://localhost:4000/images/file/' +Cover) | safe: 'url'" class="img-fluid"
+          alt="Sample image for first version of blog listing">
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+
     </div>
-   
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-7 text-md-left ml-3 mt-3"> 
+
+      <h2 class="h3-responsive">{{Post.album_title}}</h2>
+
+      <p class="font-weight-normal">{{Post.album_desc}}</p>
+      
+
+      <a mdbBtn color="success" mdbWavesEffect>Read more</a>
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
 </div>
+<!-- News jumbotron -->
 
-
-<mat-card *ngFor="let a of albumImage" style="max-width: 450px;">
-    <div class="gallery-item">
+<div class="row">
+  <div class="col-12 col-md-4" *ngFor="let a of albumImage">
+    <mat-card style="max-width: 450px;">
+      <div class="gallery-item">
         <img class="gallery-image" [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
-            alt="a.metadata.caption">
+          alt="a.metadata.caption">
         <br>
         <br>
         <mat-card-title>Title</mat-card-title>
         <mat-card-subtitle>{{a.tags}}</mat-card-subtitle>
         <mat-card-content>
-            <figcaption>{{a.metadata.caption}}</figcaption>
-            <p>{{a.metadata.city}}, {{a.metadata.state}}</p>
+          <figcaption>{{a.metadata.caption}}</figcaption>
+          <p>{{a.metadata.city}}, {{a.metadata.state}}</p>
         </mat-card-content>
         <mat-card-actions>
-            <p>TODO: add scripting to permit images to be favorited</p>
-            <button mat-button>
-                <mdb-icon far icon="heart"></mdb-icon>
-            </button>
-            <button mat-button>
-                <mdb-icon fas icon="heart"></mdb-icon>
-            </button>
+          <p>TODO: add scripting to permit images to be favorited</p>
+          <button mat-button>
+            <mdb-icon far icon="heart"></mdb-icon>
+          </button>
+          <button mat-button>
+            <mdb-icon fas icon="heart"></mdb-icon>
+          </button>
         </mat-card-actions>
-    </div>
-</mat-card>
+      </div>
+    </mat-card>
+  </div>
+
+</div>

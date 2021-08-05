@@ -1,34 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Delius&display=swap");
 
 .intro {
-  font-family: 'Handlee', cursive; 
+  font-family: "Handlee", cursive;
   position: relative;
   width: 100%;
 }
-.intro::before{
+.intro::before {
   background-image: url(../../../assets/pics/postcard.jpg);
   /*filter: sepia(100%);*/
-  opacity: 0.3;
+  opacity: 0.2;
   background-size: cover;
   background-repeat: no-repeat;
   content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 .introHead {
   font-size: 46px;
   color: #003366;
   text-align: center;
-  font-family: 'Dancing Script', cursive;
+  font-family: "Dancing Script", cursive;
   margin-top: 15px;
 }
 .introText {
   font-size: 28px;
-  color: #003366; 
+  color: #003366;
   line-height: 1.5;
+  font-family: "Delius", cursive;
 }
 .compass {
   float: left;
@@ -39,66 +40,59 @@
 }
 ng-image-slider {
   margin-left: 15%;
-
 }
- /********************************************MINE****/
- /* sticky navbar */
+/********************************************NAV****/
+/* sticky navbar */
 mdb-navbar {
-    z-index: 999;
-    width: 100%;
-  }
-  .sticky-nav-wrapper {
-    min-height: 40px;
-    margin-top: 15px;
-    background-color:#003366;
-  }
-  /*.sticky-nav {
-    height: 40px;
-    width: 100%;
-    background-color:  burlywood;
-  }
-  .sticky-box-shadow {
-    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
-  }*/
-  .plane{
-      height: 75px;
-      width: 100px;
-      float: right;
-      margin-top: -15px;
-      clear: left;
+  z-index: 999;
+  width: 100%;
+  font-family: "Delius";
 }
- 
-.mapTitle, .postTitle {
-  font-family: 'Dancing Script', cursive;
+.sticky-nav-wrapper {
+  min-height: 40px;
+  margin-top: 15px;
+  background-color: #003366;
+}
+
+.plane {
+  height: 75px;
+  width: 100px;
+  float: right;
+  margin-top: -15px;
+  clear: left;
+}
+.mapTitle,
+.postTitle {
+  font-family: "Dancing Script", cursive;
   font-size: 52px;
-  color: #003366;;
+  color: #003366;
   font-weight: 700;
-  text-decoration: #003366;;
-  }
+  text-decoration: #003366;
+}
 .mapTitle {
   text-align: left;
 }
 
-.mapNum { 
+.mapNum {
   font-size: 28px;
   font-weight: 900;
-  color: #003366;;
+  color: #003366;
   text-transform: uppercase;
   text-align: center;
-  font-family: 'Noto Sans TC', sans-serif;
+  font-family: "Noto Sans TC", sans-serif;
 }
 .mapImg {
- /* height: 330px;
+  /* height: 330px;
   width: 500px;*/
   display: block;
   margin-left: auto;
-  margin-right: auto;  
+  margin-right: auto;
 }
-mat-icon, mat-tree-node{
- 
-    font-size: x-large;
-    color: #003366;
-    font-weight: 700;
+mat-icon,
+mat-tree-node {
+  font-size: x-large;
+  color: #003366;
+  font-weight: 700;
 }
 /**********************Latest Post Styling*/
 
@@ -109,25 +103,33 @@ mat-card > img {
   min-height: 400px;
   max-height: 400px;
   min-width: 100%;
+  cursor: pointer;
 }
+
 .postBox {
   border-right: 5px inset #4c7093;
 }
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;  
-}
+
 .mat-card-title {
-  font-family: 'Delius', cursive;
+  font-family: "Delius", cursive;
   color: #4c7093;
   font-size: x-large;
 }
+.albumBtn {
+  margin-bottom: 10px;
+}
+.trip-date {
+  font-family: "Delius", cursive;
+  color: #003366;
+  float: right;
+  font-size: large;
+}
+
 /************************Footer Styling*/
 footer {
   width: 100%;
   height: 5%;
-  background-color:mediumseagreen;
+  background-color: mediumseagreen;
   color: white;
   text-align: center;
   font-size: medium;
@@ -137,63 +139,149 @@ footer {
   padding-top: 12px;
 }
 figcaption {
-  color: cornflowerblue;
+  color: mediumseagreen;
   font-style: italic;
   font-weight: 700;
   font-size: 22px;
-  padding-top: 1%;  
-  font-family: 'Handlee';
+  padding-top: 1%;
+  font-family: "Delius", cursive;
 }
-.scrollText {
-  font-family: Overlock;
-  padding: 30px;
-  margin: 30px;
-  font-size: 42px;
+/******************************************/
+.coming-soon h1 {
   color: maroon;
-  background-color: transparent;
+  text-align: center;
+  font-size: 3em;
+  display: block;
+  font-family: "Delius";  
+  padding-top: 75px;
 }
- /*****************Cellphone sizing****/
- @media only screen and (min-device-width : 414px) and (max-device-width : 736px) {
-    .introText {
-      line-height: 1;
-    }
-    .compass {
-      height: 100px;
-      width: 100px;
-    }
-    .mapTitle, postTitlee {
-      font-family: 'Dancing Script', cursive;
-      font-size: 52px;
-      font-weight: 700;         
-      }
-      .mapTitle {
-        text-align: left;
-      }
-    .mapNum { 
-      font-size: large;
-      font-weight: 900;
-      text-transform: uppercase;
-      text-align: center;
-      font-family: 'Noto Sans TC', sans-serif;      
-    }
-    .mapImg {
-      height: 230px;
-      width: 300px;
-    }
-    mat-icon, mat-tree-node{
-      font-size: x-large;
-      color: #003366;
-      font-weight: 700;
+.coming-soon {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+.coming-soon::after {
+  background-image: url(../../../assets/pics/map.png);
+  background-size: contain;
+  background-repeat: repeat;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.animatedclass {
+  z-index: 2;
+  opacity: 0;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  -webkit-animation: letter 5s infinite cubic-bezier(0, 0, 0.1, 1);
+  animation: letter 5s infinite cubic-bezier(0, 0, 0.1, 1);
+}
+@-webkit-keyframes letter {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+  30%, 80% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes letter {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+  30%, 80% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+.animatedclass:nth-of-type(1) {
+  -webkit-animation-delay: 0.05s;
+  animation-delay: 0.05s;
+}
+.animatedclass:nth-of-type(2) {
+  -webkit-animation-delay: 0.15s;
+  animation-delay: 0.15s;
+}
+.animatedclass:nth-of-type(3) {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+.animatedclass:nth-of-type(4) {
+  -webkit-animation-delay: 0.25s;
+  animation-delay: 0.25s;
+}
+.animatedclass:nth-of-type(5) {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+.animatedclass:nth-of-type(6) {
+  -webkit-animation-delay: 0.35s;
+  animation-delay: 0.35s;
+}
+
+/*****************Cellphone sizing****/
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) {
+  .introText {
+    line-height: 1;
+  }
+  .compass {
+    height: 100px;
+    width: 100px;
+  }
+  .mapTitle,
+  postTitlee {
+    font-family: "Dancing Script", cursive;
+    font-size: 52px;
+    font-weight: 700;
+  }
+  .mapTitle {
+    text-align: left;
+  }
+  .mapNum {
+    font-size: large;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: "Noto Sans TC", sans-serif;
+  }
+  .mapImg {
+    height: 230px;
+    width: 300px;
+  }
+  mat-icon,
+  mat-tree-node {
+    font-size: x-large;
+    color: #003366;
+    font-weight: 700;
   }
   .postBox {
     border-bottom: 5px inset #003366;
-     border-right:none;
+    border-right: none;
   }
   .footerText {
     padding-top: 0;
   }
-  }
-  /* Desktops and laptops ----------- 
+}
+/* Desktops and laptops ----------- 
 @media only screen  and (min-width : 1224px) {
   /* Styles 
   }

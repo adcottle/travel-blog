@@ -89,6 +89,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   Metadata: any = [];
   Images: any = [];
+  tripDate: any = [];
   Trips: any = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -144,8 +145,6 @@ hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
 ngOnInit(): void {
   // this.circleText();
-  // this.getLatestImages();
-  // this.getLatestTrips();
   this.getMerged();
 }
 
@@ -154,14 +153,14 @@ getMerged(){
   let trip;
   var image: any = [];
   this.crudService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (tripData: any =[]) => {   
+    trip = tripData;
+    // console.log(trip);
     this.imageService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (imageData: any =[]) => {      
-      trip = tripData;
-      // console.log(trip);
+      
       image = imageData.files;
       // console.log(image);
       this.Metadata = this.mergeArrayObjects(trip,image);
-      console.log(this.Metadata)
-    });    
+    });
   });    
 };
 
@@ -173,29 +172,6 @@ mergeArrayObjects(arr1,arr2){
      };
   });
 };
-
-
-getLatestImages() {
-  return this.imageService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
-    // console.log(data);
-    this.Images = data.files;
-    console.log(this.Images);    
-    
-    console.log(data.files.metadata)
-  }, err => {
-    console.log(err);
-  }
-)};
-
-getLatestTrips() {
-  return this.crudService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
-    console.log(data);
-    this.Trips = data;
-    // console.log(this.Metadata);    
-  }, err => {
-    console.log(err);
-  }
-)};
 
 openAlbum(id) {
   console.log(id);
