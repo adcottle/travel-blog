@@ -1,68 +1,37 @@
-<!-- News jumbotron -->
-<div class="jumbotron text-center hoverable p-4">
+<div class="pageView">
+<main class="wrapper">
+  <section class="hero" [ngStyle]="{'background-image': 'url('+ Cover+')'}">
+    <h1 class="boxborder"><small>Fullscreen</small> {{Post.album_title}} <small>{{Post.album_desc}}</small></h1>
 
-  <!-- Grid row -->
-  <div class="row">
+  </section>
+</main>
 
-    <!-- Grid column -->
-    <div class="col-md-4 offset-md-1 mx-3 my-3">
-
-      <!-- Featured image -->
-      <div class="view overlay waves-light" mdbWavesEffect>
-        <img [src]="('http://localhost:4000/images/file/' +Cover) | safe: 'url'" class="img-fluid"
-          alt="Sample image for first version of blog listing">
-        <a>
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-md-7 text-md-left ml-3 mt-3"> 
-
-      <h2 class="h3-responsive">{{Post.album_title}}</h2>
-
-      <p class="font-weight-normal">{{Post.album_desc}}</p>
-      
-
-      <a mdbBtn color="success" mdbWavesEffect>Read more</a>
-
-    </div>
-    <!-- Grid column -->
-
-  </div>
-  <!-- Grid row -->
-
+<div class="row mb-3">
+  <ng-container *ngFor="let a of albumImage">
+     <div class="col-12 col-md-4 postBox">
+        <mat-card>
+           <img mat-card-image [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
+              alt="a.metadata.caption">
+              <mat-card-title>{{a.metadata.caption}}</mat-card-title>     
+           <mat-card-content>
+              
+              <p class="trip-date">{{a.trip_date | date: 'MMMM/dd/yyyy'}}</p>
+              <br>
+              <p>{{a.metadata.city}}, {{a.metadata.state}}</p>
+              <p><strong>Tags:</strong>{{a.tags}}</p>
+           </mat-card-content>
+           <mat-card-actions>
+            <p>TODO: add scripting to permit images to be favorited</p>
+            <button mat-button>
+              <mdb-icon far icon="heart"></mdb-icon>
+            </button>
+            <button mat-button>
+              <mdb-icon fas icon="heart"></mdb-icon>
+            </button>
+          </mat-card-actions>        
+        </mat-card>
+     </div>
+  </ng-container>
 </div>
-<!-- News jumbotron -->
 
-<div class="row">
-  <div class="col-12 col-md-4" *ngFor="let a of albumImage">
-    <mat-card style="max-width: 450px;">
-      <div class="gallery-item">
-        <img class="gallery-image" [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
-          alt="a.metadata.caption">
-        <br>
-        <br>
-        <mat-card-title>Title</mat-card-title>
-        <mat-card-subtitle>{{a.tags}}</mat-card-subtitle>
-        <mat-card-content>
-          <figcaption>{{a.metadata.caption}}</figcaption>
-          <p>{{a.metadata.city}}, {{a.metadata.state}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <p>TODO: add scripting to permit images to be favorited</p>
-          <button mat-button>
-            <mdb-icon far icon="heart"></mdb-icon>
-          </button>
-          <button mat-button>
-            <mdb-icon fas icon="heart"></mdb-icon>
-          </button>
-        </mat-card-actions>
-      </div>
-    </mat-card>
-  </div>
-
-</div>
+</div><!--pageView-->

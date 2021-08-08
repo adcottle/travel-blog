@@ -16,6 +16,8 @@ export class AlbumViewComponent implements OnInit {
   albumImage: any = []; 
   Post: any = [];
   Cover: any;
+  kburns: any;
+
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -54,7 +56,12 @@ export class AlbumViewComponent implements OnInit {
     this.imageService.GetCover(id).pipe(takeUntil(this.destroy$)).subscribe( coverImage => {
       // console.log(coverImage);
       var ci = coverImage.files
-      this.Cover = ci[0].filename;     
+      var uri = 'http://localhost:4000/images/file/'
+      var CIuri = ci[0].filename;  
+      this.Cover = uri + CIuri;
+      // console.log(this.Cover);
+      this.kburns - CIuri;
+      // console.log(CIuri)
     }
   )};
 

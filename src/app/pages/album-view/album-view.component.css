@@ -1,174 +1,69 @@
-/*
-
-All grid code is placed in a 'supports' rule (feature query) at the bottom of the CSS (Line 77). 
-        
-The 'supports' rule will only run if your browser supports CSS grid.
-
-Flexbox is used as a fallback so that browsers which don't support grid will still recieve an identical layout.
-
-*/
-
-@import url(https://fonts.googleapis.com/css?family=Montserrat:500);
-
-:root {
-	/* Base font size */
-	font-size: 10px;
+.pageView {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color:#f7f7f7;  
 }
 
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
-
-body {
-	min-height: 100vh;
-	background-color: #fafafa;
-}
-
-.container {
-	max-width: 100rem;
-	margin: 0 auto;
-	padding: 0 2rem 2rem;
-}
-
-.heading {
-	font-family: "Montserrat", Arial, sans-serif;
-	font-size: 4rem;
-	font-weight: 500;
-	line-height: 1.5;
-	text-align: center;
-	padding: 3.5rem 0;
-	color: #1a1a1a;
-}
-
-.heading span {
-	display: block;
-}
-
-.gallery {
-	display: flex;
-	flex-wrap: wrap;
-	/* Compensate for excess margin on outer gallery flex items */
-	margin: -1rem -1rem;
-}
-
-.gallery-item {
-	/* Minimum width of 24rem and grow to fit available space */
-	flex: 1 0 24rem;
-	/* Margin value should be half of grid-gap value as margins on flex items don't collapse */
-	margin: 1rem;
-	box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
-	overflow: hidden;
-}
-
-.gallery-image {
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	transition: transform 400ms ease-out;
-}
-
-.gallery-image:hover {
-	transform: scale(1.15);
-}
-
-/*
-
-The following rule will only run if your browser supports CSS grid.
-
-Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling. 
-
-*/
-
-@supports (display: grid) {
-	.gallery {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
-		grid-gap: 2rem;
-	}
-
-	.gallery,
-	.gallery-item {
-		margin: 0;
-	}
-}
-figcaption {
-    color: cornflowerblue;
-    font-style: italic;
-    font-weight: 700;
-    font-size: 22px;
-    padding-top: 1%;  
-    font-family: 'Handlee';
-  }
-
-  /****************************************/
-  .wall {
-	background: url(https://cdn.pixabay.com/photo/2014/04/05/11/39/knotty-pine-316546_960_720.jpg) repeat;
-  }
+/*************TOP Banner*************/
   
-  .polaroid-gallery {
-	text-align: center;
-  }
-  
-  .polaroid-gallery-title {
-	font-size: 32px;
-	font-weight: 400;
-	color: #333;
-  }
-  
-  .polaroid-card {
-	display: inline-block;
-	background-color: #eee6d8;
-	padding: 10px;
-	box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.7); 
-  }
-  
-  .polaroid-card-caption {
-	text-align: center;
-	font-family: 'Rock Salt', cursive;
-	font-size: 12px;
-	margin-top: 6px;
-	letter-spacing: 2px;
-  }
-  
-  .polaroid-card:nth-of-type(even) {
-	transform: rotate(12deg);
-  }
-  
-  .polaroid-card:nth-of-type(odd) {
-	transform: rotate(-12deg);
-  }
-  /*Tape corners*/
-  .polaroid-card:nth-of-type(even)::before {
-	content: '';
-	display: block;
-	background-color: rgba(222, 220, 200, 0.66);
-	width: 100px;
-	height: 25px;
-	transform: rotate(-24deg) translate(-30px, -25px);
-  }
-  
-  .polaroid-card:nth-of-type(odd)::before {
-	content: '';
-	display: block;
-	background-color: rgba(222, 220, 200, 0.66);
-	width: 150px;
-	height: 25px;
-	transform: translate(140px, -5px) rotate(25deg);
-  }
-  
-  /*Photo transition*/
-  .polaroid-card:nth-of-type(1), .polaroid-card:nth-of-type(2), .polaroid-card:nth-of-type(3), 
-  .polaroid-card:nth-of-type(4), .polaroid-card:nth-of-type(5) {
-	transition: transform 0.75s;
-  }
-  
-  .polaroid-card:nth-of-type(1):hover, .polaroid-card:nth-of-type(2):hover, 
-  .polaroid-card:nth-of-type(3):hover, .polaroid-card:nth-of-type(4):hover,
-  .polaroid-card:nth-of-type(5):hover{
-	transform: scale(1.5);
-  }
-  
- 
+
+.hero {
+  background: center;
+  background-size: cover;
+  padding: 4rem 2rem;
+  height: 450px;
+  /* grid styles */
+  margin-bottom: 50px;
+  -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, .25) ;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px rgba(0, 0, 0, .25) ;  /* Firefox 3.5 - 3.6 */
+  box-shadow:        3px 3px 5px 6px rgba(0, 0, 0, .25);
+}
+
+.hero > * {
+  color: white;
+}
+
+
+.boxborder {
+  position: absolute;
+  font-size: 3rem;
+  top: 30%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 99;
+  text-align: center;
+  font-family: Raleway, sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, .55);
+  box-shadow: 0 1em 2em -1em rgba(255, 255, 255, .5);
+  padding: 1em 2em;
+  line-height: 1.5;
+}
+.boxborder small {
+  display: block;
+  text-transform: lowercase;
+  font-size: 0.7em;
+}
+.boxborder small:first-child {
+  border-bottom: 1px solid rgba(255, 255, 255, .25);
+  padding-bottom: 0.5em;
+}
+.boxborder small:last-child {
+  border-top: 1px solid rgba(255, 255, 255, .25);
+  padding-top: 0.5em;
+}
+
+mat-card > img {
+  min-height: 400px;
+  max-height: 400px;
+  min-width: 100%;
+  cursor: pointer;
+}
+mat-card {
+  -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, .25) !important;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px rgba(0, 0, 0, .25) !important;  /* Firefox 3.5 - 3.6 */
+  box-shadow:        3px 3px 5px 6px rgba(0, 0, 0, .25)!important;
+}
+mat-card-title {
+  color: mediumseagreen;
+}
