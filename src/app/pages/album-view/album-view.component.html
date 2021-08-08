@@ -1,0 +1,37 @@
+<div class="pageView">
+<main class="wrapper">
+  <section class="hero" [ngStyle]="{'background-image': 'url('+ Cover+')'}">
+    <h1 class="boxborder"><small>Fullscreen</small> {{Post.album_title}} <small>{{Post.album_desc}}</small></h1>
+
+  </section>
+</main>
+
+<div class="row mb-3">
+  <ng-container *ngFor="let a of albumImage">
+     <div class="col-12 col-md-4 postBox">
+        <mat-card>
+           <img mat-card-image [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
+              alt="a.metadata.caption">
+              <mat-card-title>{{a.metadata.caption}}</mat-card-title>     
+           <mat-card-content>
+              
+              <p class="trip-date">{{a.trip_date | date: 'MMMM/dd/yyyy'}}</p>
+              <br>
+              <p>{{a.metadata.city}}, {{a.metadata.state}}</p>
+              <p><strong>Tags:</strong>{{a.tags}}</p>
+           </mat-card-content>
+           <mat-card-actions>
+            <p>TODO: add scripting to permit images to be favorited</p>
+            <button mat-button>
+              <mdb-icon far icon="heart"></mdb-icon>
+            </button>
+            <button mat-button>
+              <mdb-icon fas icon="heart"></mdb-icon>
+            </button>
+          </mat-card-actions>        
+        </mat-card>
+     </div>
+  </ng-container>
+</div>
+
+</div><!--pageView-->

@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { takeUntil } from 'rxjs/operators';
 import { CrudService } from '../../service/crud/crud.service';
-import { MetadataService } from '../../service/metadata/metadata.service';
 import { ImagesService } from '../../service/images/images.service';
 import { Subject } from 'rxjs';
 
@@ -18,17 +17,17 @@ export class AddMediaComponent implements OnInit , OnDestroy{
   submitted = false;
   destroy$: Subject<boolean> = new Subject<boolean>();
   List: any = [];
-  uploadForm: FormGroup;
+  
    
   constructor(public fb: FormBuilder, public tripService: CrudService,
-              public metaService: MetadataService) {  }
+              ) {  }
 
   ngOnInit(): void {
 
     // this.getTripList();
-    this.getAllMetadata();
+    
 
-    const currentDate = new Date().toISOString().substring(0, 10);
+    // const currentDate = new Date().toISOString().substring(0, 10);
     
       this.addMediaForm = this.fb.group({
         album_title: ['', [Validators.required, Validators.minLength(3)]],
@@ -39,23 +38,14 @@ export class AddMediaComponent implements OnInit , OnDestroy{
         state: ['', [Validators.required]],
         city: ['', [Validators.required]],
         category: ['', [Validators.required]],
-        upload_date: [currentDate]    
+        upload_date: [],
+        // upload_date: [currentDate]    
       });
-      this.uploadForm = this.fb.group({
-        caption: [''],
-        photo_id: [''],               
-        country: [''],
-        state: [''],
-        city: [''],
-        photo_date: [''],           
-      });
+     
     
   }
 
-  get f() { return this.addMediaForm.controls; }
-  get u() { return this.uploadForm.controls; }
-
-  
+  get f() { return this.addMediaForm.controls; }  
 
   addMedia() { 
     // var dv = this.addMediaForm.get('trip_date').value
@@ -68,11 +58,13 @@ export class AddMediaComponent implements OnInit , OnDestroy{
    
     this.addMediaForm.get('tags').setValue(tagArray);   
     console.log(tagArray)
-
+    this.addMediaForm.get('upload_date').setValue(new Date())
     this.tripService.AddTrip(this.addMediaForm.value).subscribe((res) =>{     
       console.log(res.result._id);
-      var album_id = res.result._id
+      var album_id = res.result._id;
+      var album_title = res.result.album_title;
       document.getElementById("album_id").innerHTML = album_id;
+      document.getElementById("album_title").innerHTML = album_title;
       this.addMediaForm.reset();
     });    
   }
@@ -89,15 +81,6 @@ export class AddMediaComponent implements OnInit , OnDestroy{
     }
   )};
 
-  getAllMetadata(){
-    return this.metaService.GetMeta().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
-      console.log(data);
-      // this.List=data
-      // console.log(this.Metadata);    
-    }, err => {
-      console.log(err);
-    }
-  )};
   
   
   ngOnDestroy() {

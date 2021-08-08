@@ -26,6 +26,7 @@ export class IdeasComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+      
   }
 
 }

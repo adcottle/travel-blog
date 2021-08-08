@@ -1,12 +1,11 @@
 const upload = require("../middlewares/gridfs");
 const express = require("express");
 const router = express.Router();
-const fs  = require('fs');
+const fs = require('fs');
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const chalk = require('chalk');
 Grid.mongo = mongoose.mongo;
-const { check, validationResult } = require('express-validator');
 
 
 const conn = mongoose.createConnection(process.env.DB, {
@@ -38,155 +37,230 @@ conn.once("open", () => {
 
 
 //root path 
-router.get('/',(req,res)=>{
+router.get('/', (req, res) => {
   res.writeHead(200, {
-      'Content-Type': 'text/html'
+    'Content-Type': 'text/html'
   });
   fs.readFile('./home.html', null, function (error, data) {
-      if (error) {
-          res.writeHead(404);
-          res.write('Oops! Unable to load main page.');
-      } else {
-          res.write(data);
-      }
-      res.end();
+    if (error) {
+      res.writeHead(404);
+      res.write('Oops! Unable to load main page.');
+    } else {
+      res.write(data);
+    }
+    res.end();
   });
 });
 
-
-
 // //post file
-
-// //post file
-router.post('/upload', upload.single('file'), (req, res) =>{
+router.post('/upload', upload.single('file'), (req, res) => {
   // console.log(req.file)
-res.json({ "file": req.file.originalname });
+  res.json({ "file": req.file.originalname });
 });
 
 
-
-// search files by original name
-  router.get('/file/:filename', (req,res) =>{
-    gfs.files.findOne({filename: req.params.filename}, (err, file) =>{
-        if(!file || file.length === 0) {
-            return res.status(404).json({
-           err: 'No file exist'
-            });
-        }
-          else{
-            const readstream = gfs.createReadStream(file.filename);
-            readstream.pipe(res);
-          }
-    });
+// search files by filename
+router.get('/file/:filename', (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exist'
+      });
+    }
+    else {
+      const readstream = gfs.createReadStream(file.filename);
+      readstream.pipe(res);
+    }
+  });
 });
 
-/*
-GET: Fetches all the files in the the collection as JSON
-*/
+//GET: Fetches all the files in the the collection as JSON
 router.route('/files')
-.get((req, res, next) => {
+  .get((req, res, next) => {
     gfs.files.find().toArray((err, files) => {
-        if (!files || files.length === 0) {
-            return res.status(400).json({
-                success: false,
-                message: 'No files available'
-            });
-        }
-        
-        files.map(file => {
-            if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
-                file.isImage = true;
-                // console.log(files)
-            } else {
-                file.isImage = false;
-            }
+      if (!files || files.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: 'No files available'
         });
+      }
 
-        res.status(200).json({
-            success: true,
-            files,
-        });
+      files.map(file => {
+        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
+          file.isImage = true;
+          // console.log(files)
+        } else {
+          file.isImage = false;
+        }
+      });
+
+      res.status(200).json({
+        success: true,
+        files,
+      });
     });
-});
+  });
 
 //Get single file json
 router.get('/image/:filename', (req, res) => {
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-      //check if files exist
-      if (!file || file.length == 0) {
-          return res.status(404).json({
-              err: "No files exist"
-          })
-      }
-      //file exist
-      return res.json(file)
+    //check if files exist
+    if (!file || file.length == 0) {
+      return res.status(404).json({
+        err: "No files exist"
+      })
+    }
+    //file exist
+    return res.json(file)
   })
 })
 
-
-router.get('/array', (req, res) => {
-    gfs.files.find().toArray((err, files) => { 
-    //   Check if files
+//Get album's cover photo
+router.route('/cover/:album_id')
+  .get((req, res, next) => {
+    gfs.files.find({ "metadata.cover_photo": "on", "metadata.album_id": req.params.album_id }).limit(1).toArray((err, files) => {
       if (!files || files.length === 0) {
-        res.render('array', { files: false });
-      } else {
-        files.map(file => {
-          if (
-            file.contentType === 'image/jpeg' ||
-            file.contentType === 'image/png'
-          ) {
-            file.isImage = true;
-          } else {
-            file.isImage = false;
-          }
+        return res.status(400).json({
+          success: false,
+          message: 'No files available'
         });
-        res.render('array', { files: files });
       }
+
+      files.map(file => {
+        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
+          file.isImage = true;
+          // console.log(files)
+        } else {
+          file.isImage = false;
+        }
+      });
+
+      res.status(200).json({
+        success: true,
+        files,
+      });
     });
   });
 
+//Delete a file
+router.delete('delete/file/:id', (req, res) => {
+  gfs.remove({ _id: req.params.id, root: 'fs' }, (err, gridStore) => {
+    if (err) {
+      return res.status(404).json({ err: err });
+    }
+    res.redirect('/array');
+  });
+});
 
-///Query parameters
-router.get('/query', (req, res) => {
-    gfs.files.find({ tripID: 3 }).toArray((err, files) => { 
-      if (err) {
-        return res.status(404).json({ err: err });
-      }
-    //   Check if files
+//GET: Fetches all the lastest as JSON
+router.route('/latest-posts')
+  .get((req, res, next) => {
+    gfs.files.find({ "metadata.cover_photo": "on" }).sort('uploadDate', -1).limit(3).toArray((err, files) => {
       if (!files || files.length === 0) {
-        // res.render('array', { files: false });
-      } else {
-        files.map(file => {
-          if (
-            file.contentType === 'image/jpeg' ||
-            file.contentType === 'image/png'
-          ) {
-            file.isImage = true;
-          } else {
-            file.isImage = false;
-          }
+        return res.status(400).json({
+          success: false,
+          message: 'No files available'
         });
-        res.render('array', { files: files });
       }
+
+      files.map(file => {
+        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
+          file.isImage = true;
+          // console.log(files)
+        } else {
+          file.isImage = false;
+        }
+      });
+
+      res.status(200).json({
+        success: true,
+        files,
+      });
     });
   });
 
-
-
-  //Delete a file
-  router.delete('delete/file/:id', (req, res) => {
-    gfs.remove({ _id: req.params.id, root: 'fs' }, (err, gridStore) => {
-      if (err) {
-        return res.status(404).json({ err: err });
+/*
+GET: Fetches all images of specified album as JSON
+*/
+router.route('/view-album/:id')
+  .get((req, res, next) => {
+    gfs.files.find({ "metadata.album_id": req.params.id }).sort('uploadDate', -1).toArray((err, files) => {
+      if (!files || files.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: 'No files available'
+        });
       }
-  
-      res.redirect('/array');
+
+      files.map(file => {
+        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
+          file.isImage = true;
+          // console.log(files)
+        } else {
+          file.isImage = false;
+        }
+      });
+
+      res.status(200).json({
+        success: true,
+        files,
+      });
     });
   });
-
-//   
 
 
 
 
 module.exports = router;
+
+//GETS ACTUAL IMAGES -- NO LONGER NECESSARY SINCE JUST GETTING METADATA
+
+// router.get('/array', (req, res) => {
+//   gfs.files.find().toArray((err, files) => { 
+//   //   Check if files
+//     if (!files || files.length === 0) {
+//       res.render('array', { files: false });
+//     } else {
+//       files.map(file => {
+//         if (
+//           file.contentType === 'image/jpeg' ||
+//           file.contentType === 'image/png'
+//         ) {
+//           file.isImage = true;
+//         } else {
+//           file.isImage = false;
+//         }
+//       });
+//       res.render('array', { files: files });
+//     }
+//   });
+// });
+
+
+// ///Query to get 3 latest images
+// router.get('/query', (req, res) => {
+//   gfs.files.find({"metadata.cover_photo": "on"}).sort('upload_date', -1).limit(3).toArray((err, files) => { 
+//     if (err) {
+//       return res.status(404).json({ err: err });
+//     }
+//   //   Check if files
+//     if (!files || files.length === 0) {
+//       // res.render('array', { files: false });
+//     } else {
+//       files.map(file => {
+//         if (
+//           file.contentType === 'image/jpeg' ||
+//           file.contentType === 'image/png'
+//         ) {
+//           file.isImage = true;
+//         } else {
+//           file.isImage = false;
+//         }
+//       });
+//       res.render('array', { files: files });
+//     }
+
+//   });
+// });
+
+

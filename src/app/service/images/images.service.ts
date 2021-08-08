@@ -22,14 +22,27 @@ export class ImagesService {
     return this.httpClient.get(`${this.REST_API}/files`);
   }
   
-  GetImages() {
-    return this.httpClient.get(`${this.REST_API}/query`);
+  GetLatest() {
+    return this.httpClient.get(`${this.REST_API}/latest-posts`);
   }
 
-  GetPic(_id:any) {
-    let API_URL = `${this.REST_API}/file/${_id}`;
-    console.log(API_URL);
-    return this.httpClient.get(API_URL, { responseType: 'blob' })      
+  
+  //Get Cover photo
+  GetCover(album_id:any): Observable<any>  {
+    let API_URL = `${this.REST_API}/cover/${album_id}`;
+    // console.log(API_URL);
+    return this.httpClient.get(API_URL, { headers: this.httpHeaders })      
+  }
+
+  // Get single trip
+  GetAlbum(id: any): Observable<any> {
+    let API_URL = `${this.REST_API}/view-album/${id}`;
+    return this.httpClient.get(API_URL, { headers: this.httpHeaders })
+      .pipe(map((res: any) => {
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
   }
 
    

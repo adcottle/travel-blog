@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-
+import { Router } from '@angular/router';
 import { ImagesService } from '../../service/images/images.service';
-import {  takeUntil } from 'rxjs/operators';
+import { CrudService } from '../../service/crud/crud.service';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
-
 
 
 
@@ -89,8 +88,9 @@ interface ExampleFlatNode {
 export class HomeComponent implements OnInit, OnDestroy {
 
   Metadata: any = [];
-  // Lists: any = [];
-  Pics: any = [];
+  Images: any = [];
+  tripDate: any = [];
+  Trips: any = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
 
     private _transformer = (node: FoodNode, level: number) => {
@@ -135,7 +135,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     title: 'Goblin Valley'
 }];
 
-constructor(private imageService: ImagesService) { 
+constructor(private imageService: ImagesService, private crudService: CrudService, public router: Router) { 
 
     this.dataSource.data = TREE_DATA;
 }
@@ -145,20 +145,38 @@ hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
 ngOnInit(): void {
   // this.circleText();
-  this.getList();
+  this.getMerged();
 }
 
 
+getMerged(){
+  let trip;
+  var image: any = [];
+  this.crudService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (tripData: any =[]) => {   
+    trip = tripData;
+    // console.log(trip);
+    this.imageService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (imageData: any =[]) => {      
+      
+      image = imageData.files;
+      // console.log(image);
+      this.Metadata = this.mergeArrayObjects(trip,image);
+    });
+  });    
+};
 
-getList() {
-  return this.imageService.GetImagesList().pipe(takeUntil(this.destroy$)).subscribe( (data: any =[]) => {
-    // console.log(data);
-    this.Metadata = data.files;
-    // console.log(this.Metadata);    
-  }, err => {
-    console.log(err);
-  }
-)};
+mergeArrayObjects(arr1,arr2){
+  return arr1.map((item,i)=>{
+     if(item._id === arr2[i].metadata.album_id){
+         //merging two objects
+       return Object.assign({},item,arr2[i])
+     };
+  });
+};
+
+openAlbum(id) {
+  console.log(id);
+  this.router.navigate(['album-view/' + id]);
+}
 
 ngOnDestroy() {
   this.destroy$.next(true);
