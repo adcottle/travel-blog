@@ -142,6 +142,8 @@ router.route('/cover/:album_id')
     });
   });
 
+
+
 //Delete a file
 router.delete('delete/file/:id', (req, res) => {
   gfs.remove({ _id: req.params.id, root: 'fs' }, (err, gridStore) => {
