@@ -25,6 +25,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AddMediaComponent } from './pages/add-media/add-media.component';
 import { AlbumViewComponent } from './pages/album-view/album-view.component';
 
+//Modal Component
+  import { ImageModalComponent } from './pages/album-view/image-modal/image-modal.component'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +38,8 @@ import { AlbumViewComponent } from './pages/album-view/album-view.component';
     NotFoundComponent,
     ProfileComponent,
     AddMediaComponent,
-    AlbumViewComponent
+    AlbumViewComponent,
+    ImageModalComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,7 @@ import { AlbumViewComponent } from './pages/album-view/album-view.component';
       multi: true
     }
   ],
+  entryComponents: [ImageModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

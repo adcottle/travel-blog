@@ -20,6 +20,10 @@
     src: local('Overlock'), url(./assets/fonts/Overlock/Overlock-Black.ttf) format("truetype");
 }
 @font-face {
+    font-family: "Delius";
+    src: local('Delius'), url(./assets/fonts/Delius/Delius-Regular.ttf) format("truetype");
+}
+@font-face {
     font-family: 'Noto Sans TC';
     src: local('Noto Sans TC'), url(./assets/fonts/Noto_Sans_TC/NotoSansTC-Regular.otf) format("opentype");
 }

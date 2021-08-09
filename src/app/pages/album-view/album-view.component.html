@@ -1,22 +1,23 @@
+
+
 <div class="pageView">
 <main class="wrapper">
   <section class="hero" [ngStyle]="{'background-image': 'url('+ Cover+')'}">
-    <h1 class="boxborder"><small>Fullscreen</small> {{Post.album_title}} <small>{{Post.album_desc}}</small></h1>
+    <h1 class="boxborder"><small> </small> {{Post.album_title}} <small>{{Post.album_desc}}</small></h1>
 
   </section>
 </main>
 
-<div class="row mb-3">
+<div class="row ">
   <ng-container *ngFor="let a of albumImage">
-     <div class="col-12 col-md-4 postBox">
-        <mat-card>
+     <div class="col-12 col-md-4">
+        <mat-card class="mb-3">
            <img mat-card-image [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
-              alt="a.metadata.caption">
+              alt={{a.metadata.caption}} (click)="openModal(a.filename)">
               <mat-card-title>{{a.metadata.caption}}</mat-card-title>     
-           <mat-card-content>
-              
-              <p class="trip-date">{{a.trip_date | date: 'MMMM/dd/yyyy'}}</p>
-              <br>
+           <mat-card-content> 
+             <br>             
+              <p class="trip-date">{{a.trip_date | date: 'MMMM/dd/yyyy'}}</p>              
               <p>{{a.metadata.city}}, {{a.metadata.state}}</p>
               <p><strong>Tags:</strong>{{a.tags}}</p>
            </mat-card-content>

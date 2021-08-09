@@ -1,6 +1,5 @@
 .pageView {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color:#f7f7f7;  
+   background-color:#f7f7f7;   
 }
 
 /*************TOP Banner*************/
@@ -19,7 +18,7 @@
 }
 
 .hero > * {
-  color: white;
+  color: white;  
 }
 
 
@@ -31,7 +30,7 @@
   transform: translate3d(-50%, -50%, 0);
   z-index: 99;
   text-align: center;
-  font-family: Raleway, sans-serif;
+  font-family: "Delius" ;
   font-weight: 300;
   text-transform: uppercase;
   background-color: rgba(0, 0, 0, .55);
@@ -51,6 +50,7 @@
 .boxborder small:last-child {
   border-top: 1px solid rgba(255, 255, 255, .25);
   padding-top: 0.5em;
+  font-family: "Handlee" ;
 }
 
 mat-card > img {
@@ -66,4 +66,14 @@ mat-card {
 }
 mat-card-title {
   color: mediumseagreen;
+  
+  font-family: "Delius" ;
+  font-weight: bold;
+  font-size: 24px;
 }
+
+mat-card-content {
+  font-family: "Handlee" ;
+  font-size: 20px;
+}
+

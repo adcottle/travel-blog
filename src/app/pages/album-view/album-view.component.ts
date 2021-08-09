@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../../service/images/images.service';
 import { CrudService } from '../../service/crud/crud.service';
 import { takeUntil } from 'rxjs/operators';
-import { pipe, Subject } from 'rxjs';
+import {  Subject } from 'rxjs';
+
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ImageModalComponent } from './image-modal/image-modal.component';
 
 @Component({
   selector: 'app-album-view',
@@ -16,12 +19,14 @@ export class AlbumViewComponent implements OnInit {
   albumImage: any = []; 
   Post: any = [];
   Cover: any;
-  kburns: any;
 
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private actRoute: ActivatedRoute, private imageService: ImagesService, private crudService: CrudService) {
+  constructor(private actRoute: ActivatedRoute, 
+    private imageService: ImagesService, 
+    private crudService: CrudService,
+    public dialog: MatDialog,) {
     this.id = this.actRoute.snapshot.paramMap.get('id');
    }
 
@@ -45,7 +50,7 @@ export class AlbumViewComponent implements OnInit {
           const mergedObj = { ...element, ...trip };
           // console.log(mergedObj);
           this.albumImage.push(mergedObj);
-          // console.log(this.albumImage)
+          console.log(this.albumImage)
         });
        
       });    
@@ -59,12 +64,23 @@ export class AlbumViewComponent implements OnInit {
       var uri = 'http://localhost:4000/images/file/'
       var CIuri = ci[0].filename;  
       this.Cover = uri + CIuri;
-      // console.log(this.Cover);
-      this.kburns - CIuri;
-      // console.log(CIuri)
+      // console.log(this.Cover); 
     }
   )};
 
+
+  openModal(filename) {
+    this.imageService.OpenImage(filename).pipe(takeUntil(this.destroy$)).subscribe (img => {      
+      this.dialog.open(ImageModalComponent,{
+        height: '100%',
+        width: '100%',
+        data:{        
+          imageData: img
+        }
+      }); 
+    });    
+  };
+ 
 
   ngOnDestroy() {
     this.destroy$.next(true);
