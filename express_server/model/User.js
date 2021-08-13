@@ -17,7 +17,10 @@ let userSchema = new Schema({
     },
     password: {
         type: String
-    }
+    },
+    favorites:[{
+        _id : String
+         }]
 }, {
     collection: 'users'
 })

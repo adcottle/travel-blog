@@ -4,4 +4,5 @@ export class User {
     lasName: String;
     email: String;
     password: String;
+    favorites: Array<any>;
 }

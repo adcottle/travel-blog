@@ -15,7 +15,8 @@ app.use(cors());
 
 //Express APIs
 const trips = require('./routes/trip.routes');
-const users = require('./routes/auth.routes');
+const auth = require('./routes/auth.routes');
+const users = require('./routes/user.routes');
 const images = require('./routes/image.route');
 
 //MongoDB conection
@@ -38,8 +39,9 @@ app.set('view engine','ejs');
 
 //Define Routes
 app.use('/trips', trips)
-app.use('/users', users)
+app.use('/auth', auth)
 app.use('/images', images)
+app.use('/users', users)
 
 // Define PORT
 const port = process.env.PORT || 4000;

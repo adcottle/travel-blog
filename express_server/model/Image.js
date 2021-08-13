@@ -1,18 +1,21 @@
 var mongoose = require('mongoose');
 
 var imageSchema = new mongoose.Schema({
-    filename: String,
-    photo_id: String,
-    caption: String,
-    photo_date: Date,
-    state: String,
-    city: String,
-    country: String,
-    favorites: Array,
-    img:
-    {
-        data: Buffer,
-        contentType: String
+    _id: String,
+    filename: String,    
+    metadata:
+    {       
+        caption: String,       
+        city: String,
+        state: String,        
+        country: String,
+        photo_date: Date,
+        cover_photo: String,
+        album_id: String,
+        
+    },
+    favorites: {
+        user_id: String
     }
 });
 

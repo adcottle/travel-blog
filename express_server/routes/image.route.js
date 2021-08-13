@@ -7,6 +7,7 @@ const Grid = require('gridfs-stream');
 const chalk = require('chalk');
 Grid.mongo = mongoose.mongo;
 
+let Image = require('../model/Image');
 
 const conn = mongoose.createConnection(process.env.DB, {
   useNewUrlParser: true,
@@ -74,6 +75,20 @@ router.get('/file/:filename', (req, res) => {
   });
 });
 
+//Get single file json
+router.get('/image/:filename', (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    //check if files exist
+    if (!file || file.length == 0) {
+      return res.status(404).json({
+        err: "No files exist"
+      })
+    }
+    //file exist
+    return res.json(file)
+  })
+})
+
 //GET: Fetches all the files in the the collection as JSON
 router.route('/files')
   .get((req, res, next) => {
@@ -101,19 +116,7 @@ router.route('/files')
     });
   });
 
-//Get single file json
-router.get('/image/:filename', (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    //check if files exist
-    if (!file || file.length == 0) {
-      return res.status(404).json({
-        err: "No files exist"
-      })
-    }
-    //file exist
-    return res.json(file)
-  })
-})
+
 
 //Get album's cover photo
 router.route('/cover/:album_id')
@@ -209,8 +212,6 @@ router.route('/view-album/:id')
       });
     });
   });
-
-
 
 
 module.exports = router;

@@ -56,8 +56,6 @@ export class ImagesService {
       )
   }
 
- 
-
    
   // Error 
   handleError(error: HttpErrorResponse) {

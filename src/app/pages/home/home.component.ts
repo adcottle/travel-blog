@@ -174,7 +174,7 @@ mergeArrayObjects(arr1,arr2){
 };
 
 openAlbum(id) {
-  console.log(id);
+  // console.log(id);
   this.router.navigate(['album-view/' + id]);
 }
 

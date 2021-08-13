@@ -216,7 +216,7 @@ figcaption {
   animation-delay: 0.05s;
 }
 .animatedclass:nth-of-type(2) {
-  -webkit-animation-delay: 0.15s;
+  -webkit-animation-delay: 0.10s;
   animation-delay: 0.15s;
 }
 .animatedclass:nth-of-type(3) {
@@ -224,7 +224,7 @@ figcaption {
   animation-delay: 0.2s;
 }
 .animatedclass:nth-of-type(4) {
-  -webkit-animation-delay: 0.25s;
+  -webkit-animation-delay: 0.15s;
   animation-delay: 0.25s;
 }
 .animatedclass:nth-of-type(5) {
@@ -232,7 +232,7 @@ figcaption {
   animation-delay: 0.3s;
 }
 .animatedclass:nth-of-type(6) {
-  -webkit-animation-delay: 0.35s;
+  -webkit-animation-delay: 0.20s;
   animation-delay: 0.35s;
 }
 
@@ -272,7 +272,7 @@ figcaption {
     font-weight: 700;
   }
   .postBox {
-    border-bottom: 5px inset #003366;
+    border-bottom: none;
     border-right: none;
   }
   .footerText {
