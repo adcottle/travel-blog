@@ -21,7 +21,10 @@
             </mat-tab>
             <mat-tab value="accent" label="My Favorites">
                 <div class="example-large-box mat-elevation-z4">
-                    just an ngfor with pictures
+                    <ul>
+                        <li *ngFor="let f of favorites">{{ f.filename}}</li>
+                      </ul>
+                      
                 </div>
             </mat-tab>
         </mat-tab-group>

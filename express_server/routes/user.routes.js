@@ -76,9 +76,7 @@ router.route('/my-favorites/:id').get((req, res, next) => {
         if (error) {
             return next(error);
         } else {
-            res.status(200).json({
-                msg: data
-            })
+            res.json(data)
         }
     })
 })

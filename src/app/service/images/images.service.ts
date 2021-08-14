@@ -55,6 +55,16 @@ export class ImagesService {
         catchError(this.handleError)
       )
   }
+  // Get single image for favorites
+  GetFavorite(id: any): Observable<any> {
+    let API_URL = `${this.REST_API}/favorite-image/${id}`;
+    return this.httpClient.get(API_URL, { headers: this.httpHeaders })
+      .pipe(map((res: any) => {
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
 
    
   // Error 

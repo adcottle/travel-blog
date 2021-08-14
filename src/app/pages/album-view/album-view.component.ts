@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../../service/images/images.service';
 import { CrudService } from '../../service/crud/crud.service';
@@ -54,14 +54,14 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
        var t = new Array(tripData)
         // console.log(trip);
          image = imageData.files
-         id = imageData.files._id
+        //  id = imageData.files._id
         // console.log(image);         
         image.forEach(element => { 
           // console.log(element)         
           const mergedObj = { ...t, ...element };
           // console.log(mergedObj);
           this.albumImage.push(mergedObj);
-          // console.log(this.albumImage)
+          console.log(this.albumImage)
         });
       });    
     });    

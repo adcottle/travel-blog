@@ -82,12 +82,30 @@ router.get('/image/:filename', (req, res) => {
     if (!file || file.length == 0) {
       return res.status(404).json({
         err: "No files exist"
-      })
-    }
+      });
+    };
     //file exist
     return res.json(file)
-  })
-})
+  });
+});
+
+
+
+//Get single file json from _id
+router.get('/favorite-image/:id', (req, res) => {
+  const ObjectId = require('mongodb').ObjectId;
+  const id = ObjectId(req.params.id); // convert to ObjectId
+  gfs.files.findOne({ _id: id }, (err, file) => {
+    //check if files exist
+    if (!file || file.length == 0) {
+      return res.status(404).json({
+        err: "No files exist"
+      });
+    };
+    //file exist
+    return res.json(file)
+  });
+});
 
 //GET: Fetches all the files in the the collection as JSON
 router.route('/files')
