@@ -27,7 +27,7 @@
                     <div class="row">
                         <ng-container class="thumbgal" *ngFor="let f of thumbnailName; let i = index">
                             <div class="col-6 col-md-3">
-                                <img class="thumbimg img-thumbnail z-depth-1"
+                                <img class="thumbimg img-thumbnail z-depth-1" (click)="openModal(f)"
                                     [src]="('http://localhost:4000/images/file/' + f) | safe: 'url'" alt="thumbnail">
                                 <figcaption *ngFor="let c of thumbnailCaption[i];">{{c}}</figcaption>
                             </div>
