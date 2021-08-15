@@ -1,7 +1,4 @@
-.example-small-box, .example-large-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.example-small-box, .galHolder{
     margin: 16px;
     padding: 16px;
     border-radius: 8px;
@@ -12,7 +9,22 @@
     width: 100px;
   }
   
-  .example-large-box {
-    height: 300px;
-    width: 300px;
+  .galHolder {
+    height: auto;
+    width: 98%;
   }
+  .thumbimg{
+    min-height: 200px;
+    max-height: 200px;
+    min-width: 100%;
+  }
+
+
+ figcaption {
+  color: mediumseagreen;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 18px;
+  padding-top: 1%;
+  font-family: "Delius", cursive;
+}

@@ -16,19 +16,26 @@
         <mat-tab-group dynamicHeight>
             <mat-tab label="Activity">
                 <div class="example-small-box mat-elevation-z4">
-                    <ul>
-                        <li *ngFor="let f of thumbnailName; let in = index">{{f}}</li>
-                      </ul>
+                    SMALL BOX
                 </div>
             </mat-tab>
             <mat-tab value="accent" label="My Favorites">
-                <div class="example-large-box mat-elevation-z4">
-                   big box                      
+
+
+                <div class="galHolder  mat-elevation-z4">
+
+                    <div class="row">
+                        <ng-container class="thumbgal" *ngFor="let f of thumbnailName; let i = index">
+                            <div class="col-6 col-md-3">
+                                <img class="thumbimg img-thumbnail z-depth-1"
+                                    [src]="('http://localhost:4000/images/file/' + f) | safe: 'url'" alt="thumbnail">
+                                <figcaption *ngFor="let c of thumbnailCaption[i];">{{c}}</figcaption>
+                            </div>
+                        </ng-container>
+                    </div>
                 </div>
+                <!--./end row container-->
             </mat-tab>
         </mat-tab-group>
     </div>
 </div>
-
-<img src="https://mdbootstrap.com/img/Others/documentation/img%20(75)-mini.jpg" alt="thumbnail" class="img-thumbnail"
-  style="width: 200px">
