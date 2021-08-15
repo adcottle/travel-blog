@@ -3,6 +3,8 @@ import { Image } from '../image';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 
 @Injectable({
@@ -13,9 +15,10 @@ export class ImagesService {
     REST_API: string = 'http://localhost:4000/images';
 
     // Http Header
-    httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');   
+  
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient ) { }
 
    // Get all Images in JSON
    GetImagesList() {
