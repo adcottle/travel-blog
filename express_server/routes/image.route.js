@@ -60,7 +60,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
 });
 
 
-// search files by filename
+// Get single file image
 router.get('/file/:filename', (req, res) => {
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     if (!file || file.length === 0) {
@@ -91,21 +91,67 @@ router.get('/image/:filename', (req, res) => {
 
 
 
-//Get single file json from _id
-router.get('/favorite-image/:id', (req, res) => {
+
+
+ router.get('/favorite-image/:id', (req, res) => { 
+  // console.log(req.params.id)
   const ObjectId = require('mongodb').ObjectId;
-  const id = ObjectId(req.params.id); // convert to ObjectId
-  gfs.files.findOne({ _id: id }, (err, file) => {
+  var g = req.params.id.split(',')
+  let mid = g.map(function(el){String(el);ObjectId(el); return el});
+  console.log(mid);
+  // // console.log(Array.isArray(id))
+  // var x = id;
+  // console.log(x)
+  // var y = x.pop();
+  // console.log(y);
+  // // let mids =[];
+  // var p = id.forEach(el =>{ console.log(el); var x = []; x. })
+  // console.log(mids)
+  
+  // console.log(Array.isArray(idArray));
+  // console.log(idArray)
+  // var ids = idArray.map(function(el){ return ObjectId(el)}); 
+  // const ids = [];
+  // idArray.forEach(function (el){
+  //   JSON.stringify(el);
+  //   var mid = ObjectId(el);
+  //   ids.push(mid)
+  // });
+  // const ids = idArray.map(ObjectId);
+
+    //  console.log(Array.isArray(id));
+    
+    gfs.files.find()( 
+    { _id: { $in: mid } 
+  }, toArray((err, files) => {
     //check if files exist
-    if (!file || file.length == 0) {
+    if (!files || files.length == 0) {
       return res.status(404).json({
         err: "No files exist"
       });
     };
     //file exist
-    return res.json(file)
-  });
+    console.log(res.json(files))
+    return res.json(files)
+  }));
 });
+
+
+// //Get single file json from _id
+// router.get('/favorite-image/:id', (req, res) => {
+//   const ObjectId = require('mongodb').ObjectId;
+//   const id = ObjectId(req.params.id); // convert to ObjectId
+//   gfs.files.findOne({ _id: id }, (err, file) => {
+//     //check if files exist
+//     if (!file || file.length == 0) {
+//       return res.status(404).json({
+//         err: "No files exist"
+//       });
+//     };
+//     //file exist
+//     return res.json(file)
+//   });
+// });
 
 //GET: Fetches all the files in the the collection as JSON
 router.route('/files')
@@ -285,3 +331,18 @@ module.exports = router;
 // });
 
 
+//Get single file json from _id
+// router.get('/favorite-image/:id', (req, res) => {
+//   const ObjectId = require('mongodb').ObjectId;
+//   const id = ObjectId(req.params.id); // convert to ObjectId
+//   gfs.files.findOne({ _id: id }, (err, file) => {
+//     //check if files exist
+//     if (!file || file.length == 0) {
+//       return res.status(404).json({
+//         err: "No files exist"
+//       });
+//     };
+//     //file exist
+//     return res.json(file)
+//   });
+// });

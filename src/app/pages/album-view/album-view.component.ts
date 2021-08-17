@@ -102,8 +102,10 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
         }
     // this.authService.signIn(this.loginForm.value)
     console.log(this.commentForm.value)
-    console.log(id)
-    // this.commentForm.reset();
+    var user_id = localStorage.getItem('user');
+    console.log(user_id);
+    console.log(id);
+    this.commentForm.reset();
   }
 
   makeFavorite(id){

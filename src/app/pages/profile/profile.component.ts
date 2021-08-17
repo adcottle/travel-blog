@@ -25,7 +25,6 @@ export class ProfileComponent implements OnInit {
     let id = this.actRoute.snapshot.paramMap.get('id');
     this.authService.getUserProfile(id).subscribe((res:any) => {      
       this.currentUser = res.msg;
-      // console.log(res);
     })
   }
 
@@ -36,12 +35,13 @@ export class ProfileComponent implements OnInit {
   myFavorites() {
     var user_id = localStorage.getItem('user');
     this.userService.GetMyFavorites(user_id).pipe(takeUntil(this.destroy$)).subscribe(response => {    
-      // console.log(response.favorites);
+      // console.log(response.favorites);      
       let result = response.favorites.map(({ _id }) => _id);
+      this.displayFavorites(result);
       // console.log(result);      
-      result.forEach(element => {
-        this.displayFavorites(element);
-      });
+      // result.forEach(element => {
+      //   this.displayFavorites(element);
+      // });
     },
       error => {
         console.log(error);
@@ -49,6 +49,7 @@ export class ProfileComponent implements OnInit {
   };
  
   displayFavorites(id){
+    console.log(id)
     this.imageService.GetFavorite(id).pipe(takeUntil(this.destroy$)).subscribe( imgData => {     
       // console.log(imgData);
      var f = new Array(imgData.filename);
