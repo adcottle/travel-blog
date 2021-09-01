@@ -8,6 +8,8 @@ const chalk = require('chalk');
 Grid.mongo = mongoose.mongo;
 
 let Image = require('../model/Image');
+const { consoleTestResultHandler } = require("tslint/lib/test");
+const { RouteReuseStrategy } = require("@angular/router");
 
 const conn = mongoose.createConnection(process.env.DB, {
   useNewUrlParser: true,
@@ -90,124 +92,51 @@ router.get('/image/:filename', (req, res) => {
 });
 
 
-
-
-
- router.get('/favorite-image/:id', (req, res) => { 
-  // console.log(req.params.id)
+//Get single file json from _id
+router.get('/favorite-image/:id', (req, res) => {
   const ObjectId = require('mongodb').ObjectId;
-  var g = req.params.id.split(',')
-  let mid = g.map(function(el){String(el);ObjectId(el); return el});
-  console.log(mid);
-  // // console.log(Array.isArray(id))
-  // var x = id;
-  // console.log(x)
-  // var y = x.pop();
-  // console.log(y);
-  // // let mids =[];
-  // var p = id.forEach(el =>{ console.log(el); var x = []; x. })
-  // console.log(mids)
-  
-  // console.log(Array.isArray(idArray));
-  // console.log(idArray)
-  // var ids = idArray.map(function(el){ return ObjectId(el)}); 
-  // const ids = [];
-  // idArray.forEach(function (el){
-  //   JSON.stringify(el);
-  //   var mid = ObjectId(el);
-  //   ids.push(mid)
-  // });
-  // const ids = idArray.map(ObjectId);
-
-    //  console.log(Array.isArray(id));
-    
-    gfs.files.find()( 
-    { _id: { $in: mid } 
-  }, toArray((err, files) => {
+  const id = ObjectId(req.params.id); // convert to ObjectId
+  gfs.files.findOne({ _id: id }, (err, file) => {
     //check if files exist
-    if (!files || files.length == 0) {
+    if (!file || file.length == 0) {
       return res.status(404).json({
         err: "No files exist"
       });
     };
     //file exist
-    console.log(res.json(files))
-    return res.json(files)
-  }));
+    return res.json(file)
+  });
 });
-
-
-// //Get single file json from _id
-// router.get('/favorite-image/:id', (req, res) => {
-//   const ObjectId = require('mongodb').ObjectId;
-//   const id = ObjectId(req.params.id); // convert to ObjectId
-//   gfs.files.findOne({ _id: id }, (err, file) => {
-//     //check if files exist
-//     if (!file || file.length == 0) {
-//       return res.status(404).json({
-//         err: "No files exist"
-//       });
-//     };
-//     //file exist
-//     return res.json(file)
-//   });
-// });
 
 //GET: Fetches all the files in the the collection as JSON
 router.route('/files')
   .get((req, res, next) => {
     gfs.files.find().toArray((err, files) => {
-      if (!files || files.length === 0) {
-        return res.status(400).json({
-          success: false,
-          message: 'No files available'
+      if (!files || files.length == 0) {
+        return res.status(404).json({
+          err: "No files exist"
         });
-      }
-
-      files.map(file => {
-        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
-          file.isImage = true;
-          // console.log(files)
-        } else {
-          file.isImage = false;
-        }
-      });
-
-      res.status(200).json({
-        success: true,
-        files,
-      });
+      };
+      //file exist
+      return res.json(files)
     });
   });
-
 
 
 //Get album's cover photo
 router.route('/cover/:album_id')
   .get((req, res, next) => {
     gfs.files.find({ "metadata.cover_photo": "on", "metadata.album_id": req.params.album_id }).limit(1).toArray((err, files) => {
-      if (!files || files.length === 0) {
-        return res.status(400).json({
-          success: false,
-          message: 'No files available'
+      if (!files || files.length == 0) {
+        return res.status(404).json({
+          err: "No files exist"
         });
-      }
-
-      files.map(file => {
-        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
-          file.isImage = true;
-          // console.log(files)
-        } else {
-          file.isImage = false;
-        }
-      });
-
-      res.status(200).json({
-        success: true,
-        files,
-      });
+      };
+      //file exist
+      return res.json(files)
     });
   });
+
 
 
 
@@ -225,57 +154,46 @@ router.delete('delete/file/:id', (req, res) => {
 router.route('/latest-posts')
   .get((req, res, next) => {
     gfs.files.find({ "metadata.cover_photo": "on" }).sort('uploadDate', -1).limit(3).toArray((err, files) => {
-      if (!files || files.length === 0) {
-        return res.status(400).json({
-          success: false,
-          message: 'No files available'
+      if (!files || files.length == 0) {
+        return res.status(404).json({
+          err: "No files exist"
         });
-      }
-
-      files.map(file => {
-        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
-          file.isImage = true;
-          // console.log(files)
-        } else {
-          file.isImage = false;
-        }
-      });
-
-      res.status(200).json({
-        success: true,
-        files,
-      });
+      };
+      //file exist
+      return res.json(files)
     });
   });
 
-/*
-GET: Fetches all images of specified album as JSON
-*/
+
+//GET: Fetches all images of specified album as JSON/
 router.route('/view-album/:id')
   .get((req, res, next) => {
     gfs.files.find({ "metadata.album_id": req.params.id }).sort('uploadDate', -1).toArray((err, files) => {
-      if (!files || files.length === 0) {
-        return res.status(400).json({
-          success: false,
-          message: 'No files available'
+      if (!files || files.length == 0) {
+        return res.status(404).json({
+          err: "No files exist"
         });
-      }
-
-      files.map(file => {
-        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
-          file.isImage = true;
-          // console.log(files)
-        } else {
-          file.isImage = false;
-        }
-      });
-
-      res.status(200).json({
-        success: true,
-        files,
-      });
+      };
+      //file exist
+      return res.json(files)
     });
   });
+  
+  //comparing query
+  router.route('/compared/:id')
+  .get((req, res, next) => {
+    gfs.files.find({ "metadata.album_id": req.params.id }).sort('uploadDate', -1).toArray((err, files) => {
+      if (!files || files.length == 0) {
+        return res.status(404).json({
+          err: "No files exist"
+        });
+      };
+      //file exist
+      
+      return res.json(files)
+    });
+  });
+
 
 
 module.exports = router;
@@ -346,3 +264,46 @@ module.exports = router;
 //     return res.json(file)
 //   });
 // });
+
+
+// router.get('/favorite-image/',  (req, res) => { 
+// 	//console.log(req.params.id)
+//   const ObjectId = require('mongodb').ObjectId;
+//   var g = req.params.id.split(',');
+// 	let mid = g.map(function(el){String(el);ObjectId(el); return el});
+// 	//console.log(mid);
+//   gfs.files.find(
+     
+//      {_id: {$in: mid}}).toArray ((err, files) => { 
+// 		// check if files exist
+//     console.log('here');
+// 		if (!files || files.length == 0) {
+//       console.log('fail')
+// 		  return res.status(404).json({
+// 			err: "No files exist"
+// 		  });
+// 		};
+// 		//file exist
+// 		// console.log(res.json(files));
+//     console.log('success')
+// 		return res.json(files)
+// 	  });
+// 	});
+
+  //How to return only specific fields
+  // router.route('/album-images/:id')
+  // .get((req, res, next) => {
+  //   gfs.files.find({ "metadata.album_id": req.params.id }).toArray((err, files) => {
+  //     var fn = [];
+  //     files.forEach(element => {      
+  //       fn.push(element._id);     
+  //     });   
+  //     if (!files || files.length == 0) {
+  //       return res.status(404).json({
+  //         err: "No files exist"
+  //       });
+  //     };
+  //     //file exist
+  //     return res.json(fn)
+  //   });
+  // });

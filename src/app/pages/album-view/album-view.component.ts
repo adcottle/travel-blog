@@ -22,6 +22,8 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   Cover: any;
   commentForm: FormGroup;
   submitted = false;
+  favorite: boolean;
+  
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -40,43 +42,51 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getMerged(this.id);
-    this.getCover(this.id)
+    this.getCover(this.id);
   }
 
   getMerged(id){   
-    let trip;
     var image: any = [];
-    this.crudService.GetTrip(id).pipe(takeUntil(this.destroy$)).subscribe( (tripData: any =[]) => {   
-      // console.log(tripData)
+    this.crudService.GetTrip(id).pipe(takeUntil(this.destroy$)).subscribe( (tripData: any =[]) => {
       this.Post = tripData;
-      this.imageService.GetAlbum(id).pipe(takeUntil(this.destroy$)).subscribe( (imageData: any =[]) => {      
-       trip = tripData;
-       var t = new Array(tripData)
-        // console.log(trip);
-         image = imageData.files
-        //  id = imageData.files._id
-        // console.log(image);         
-        image.forEach(element => { 
-          // console.log(element)         
-          const mergedObj = { ...t, ...element };
-          // console.log(mergedObj);
-          this.albumImage.push(mergedObj);
-          console.log(this.albumImage)
-        });
+      this.imageService.GetAlbum(id).pipe(takeUntil(this.destroy$)).subscribe( (imageData: any =[]) => {         
+        var t = [tripData];
+        image = imageData;    
+        let imgs = image.map(function(el){return{id: el._id}});
+        var uid = localStorage.getItem('user');
+        const match = this.myFavorites(uid, imgs);         
+        image.forEach(element => {  
+          // console.log(element)  
+          
+         console.log(match);
+          const mergedObj = { ...t, ...element };        
+          this.albumImage.push(mergedObj);                     
+        });                 
       });    
     });    
-  
-}; 
-  
-  
+  }; 
+
+  myFavorites(uid, imgs) {   
+    var matchy: any =[];
+    this.userService.GetMyFavorites(uid).pipe(takeUntil(this.destroy$)).subscribe( res => {
+      // console.log(res.favorites);
+      var result = imgs.filter(function (o1) {         
+        return res.favorites.some(function (o2) { 
+          return o1.id === o2._id; // return the ones with equal id              
+        });        
+      }); 
+      Array.prototype.push.apply(matchy,result)
+    });  
+    return matchy;  
+  };
+
+
   getCover(id) {
     this.imageService.GetCover(id).pipe(takeUntil(this.destroy$)).subscribe( coverImage => {
-      // console.log(coverImage);
-      var ci = coverImage.files
+      var ci = coverImage
       var uri = 'http://localhost:4000/images/file/'
       var CIuri = ci[0].filename;  
-      this.Cover = uri + CIuri;
-      // console.log(this.Cover); 
+      this.Cover = uri + CIuri; 
     }
   )};
 

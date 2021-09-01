@@ -37,11 +37,11 @@ export class ProfileComponent implements OnInit {
     this.userService.GetMyFavorites(user_id).pipe(takeUntil(this.destroy$)).subscribe(response => {    
       // console.log(response.favorites);      
       let result = response.favorites.map(({ _id }) => _id);
-      this.displayFavorites(result);
+      // this.displayFavorites(result);
       // console.log(result);      
-      // result.forEach(element => {
-      //   this.displayFavorites(element);
-      // });
+      result.forEach(element => {
+        this.displayFavorites(element);
+      });
     },
       error => {
         console.log(error);
@@ -49,7 +49,6 @@ export class ProfileComponent implements OnInit {
   };
  
   displayFavorites(id){
-    console.log(id)
     this.imageService.GetFavorite(id).pipe(takeUntil(this.destroy$)).subscribe( imgData => {     
       // console.log(imgData);
      var f = new Array(imgData.filename);

@@ -1,118 +1,120 @@
-
-
 <div class="pageView">
-<main class="wrapper">
-  <section class="hero" [ngStyle]="{'background-image': 'url('+ Cover+')'}">
-    <h1 class="boxborder"><small> </small> {{Post.album_title}} <small>{{Post.album_desc}}</small></h1>
+  <main class="wrapper">
+    <section class="hero" [ngStyle]="{'background-image': 'url('+ Cover+')'}">
+      <h1 class="boxborder"><small> </small> {{Post.album_title}} <small>{{Post.album_desc}}</small></h1>
 
-  </section>
-</main>
-<!-- start nav-->
-<div class="sticky-nav-wrapper mat-elevation-z8 mb-4">
-  <!--Navbar-->
-  <mdb-navbar style="background-color: #003366;" SideClass="navbar navbar-expand-lg navbar-dark "
-     [containerInside]="false" ngStickyNav>
+    </section>
+  </main>
+  <!-- start nav-->
+  <div class="sticky-nav-wrapper mat-elevation-z8 mb-4">
+    <!--Navbar-->
+    <mdb-navbar style="background-color: #003366;" SideClass="navbar navbar-expand-lg navbar-dark "
+      [containerInside]="false" ngStickyNav>
 
-     <!-- Navbar brand -->
-     <mdb-navbar-brand><a class="navbar-brand" href="#">Explore With Us</a></mdb-navbar-brand>
-     <!-- Collapsible content -->
-     <links>
+      <!-- Navbar brand -->
+      <mdb-navbar-brand><a class="navbar-brand" href="#">Explore With Us</a></mdb-navbar-brand>
+      <!-- Collapsible content -->
+      <links>
         <!-- Links -->
         <ul class="navbar-nav ml-auto">
-           <li class="nav-item dropdown" dropdown>
-              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                 mdbWavesEffect>
-                 <mdb-icon fas icon="user"></mdb-icon>
-                 Family Time<span class="caret"></span>
-              </a>
-              <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                 <a class="dropdown-item waves-light" mdbWavesEffect href="#">Activities</a>
-                 <a class="dropdown-item waves-light" mdbWavesEffect href="#">Marching Band</a>
-                 <a class="dropdown-item waves-light" mdbWavesEffect href="#">Misc</a>
-              </div>
-           </li>
-           <li class="nav-item dropdown" dropdown>
-              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                 mdbWavesEffect>
-                 <mdb-icon fas icon="user"></mdb-icon>
-                 Visitors<span class="caret"></span>
-              </a>
-              <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                 <a class="dropdown-item waves-light" mdbWavesEffect href="#">Mom & Crystal</a>
-                 <a class="dropdown-item waves-light" mdbWavesEffect href="#">Donnis</a>
-                 <a class="dropdown-item waves-light" mdbWavesEffect href="#">Chrystal & Junior</a>
-              </div>
-           </li>
-           <li class="nav-item">
-              <a class="nav-link waves-light" mdbWavesEffect>
-                 <mdb-icon fas icon="cog"></mdb-icon>
-                 Favorite Album
-              </a>
-           </li>
-           <!-- Dropdown -->
-           <li class="nav-item dropdown" dropdown>
-              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                 mdbWavesEffect>
-                 <mdb-icon fas icon="user"></mdb-icon>
-                 Trips<span class="caret"></span>
-              </a>
-              <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                 <a class="dropdown-item waves-light" mdbWavesEffect href="#">Spring Break 2021</a>
-                 <a class="dropdown-item waves-light" mdbWavesEffect href="#">Disney Cruise</a>
-              </div>
-           </li>
+          <li class="nav-item dropdown" dropdown>
+            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+              <mdb-icon fas icon="user"></mdb-icon>
+              Family Time<span class="caret"></span>
+            </a>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Activities</a>
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Marching Band</a>
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Misc</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown" dropdown>
+            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+              <mdb-icon fas icon="user"></mdb-icon>
+              Visitors<span class="caret"></span>
+            </a>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Mom & Crystal</a>
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Donnis</a>
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Chrystal & Junior</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-light" mdbWavesEffect>
+              <mdb-icon fas icon="cog"></mdb-icon>
+              Favorite Album
+            </a>
+          </li>
+          <!-- Dropdown -->
+          <li class="nav-item dropdown" dropdown>
+            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+              <mdb-icon fas icon="user"></mdb-icon>
+              Trips<span class="caret"></span>
+            </a>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Spring Break 2021</a>
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Disney Cruise</a>
+            </div>
+          </li>
         </ul>
         <!-- Links -->
-     </links>
-     <!-- Collapsible content -->
-  </mdb-navbar>
-  <!--/.Navbar-->
-</div>
+      </links>
+      <!-- Collapsible content -->
+    </mdb-navbar>
+    <!--/.Navbar-->
+  </div>
 
-<div class="row ">
-  <ng-container *ngFor="let a of albumImage;let i = index">
-    <div class="col-12 col-md-4">
-      <mat-card class="mb-3">
-        <div class="cardImg">
-          <div class="favIcons">
-            <button mat-button (click)="makeFavorite(a._id)"><mat-icon>favorite_border</mat-icon></button>          
-            <button mat-button><mat-icon>favorite</mat-icon></button>
-
-          <!-- <div> 
-            <mat-icon *ngIf="favorite">favorite<mat-icon>
-            <mat-icon *ngIf="!favorite">favorite_border<mat-icon>
-          </div> -->
-        </div>
-          <img mat-card-image [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
-            alt={{a.metadata.caption}} (click)="openModal(a.filename)">
-        </div><!--/.cardImg-->
-        <mat-card-title>{{a.metadata.caption}}<p class="trip-date float-right">{{a.trip_date | date: 'MMMM/dd/yyyy'}}
-          </p>
-        </mat-card-title>
-        <mat-card-content>
-          <br>
-          <p>{{a.metadata.city}}, {{a.metadata.state}}</p>
-          <p><strong>Tags:</strong>{{a.tags}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <p>TODO: add scripting to permit images to be favorited</p>
-          <form [formGroup]="commentForm" (ngSubmit)="addComment(a._id)">
-            <div class="row my-3">
-              <div class="commentForm col-12">
-                <mat-form-field appearance="standard">
-                  <!-- <mat-label>Add A Comment</mat-label> -->
-                  <input matInput placeholder="comment" formControlName="comment">
-                  <button matSuffix type="submit">
-                    <mat-icon matSuffix class="comIcon">add_comment</mat-icon>
-                  </button>
-                </mat-form-field>
+  <div class="row ">
+    <ng-container *ngFor="let a of albumImage;let i = index">
+      <div class="col-12 col-md-4">
+        <mat-card class="mb-3">
+          <div class="cardImg">
+            <div class="favIcons">
+              <div *ngIf="favorite; else notFavorite">
+                <button mat-button>
+                  <mat-icon>favorite</mat-icon>
+                </button>
               </div>
-            </div>
-          </form>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </ng-container>
-</div>
 
-</div><!--pageView-->
+              <ng-template #notFavorite>
+                <button mat-button (click)="makeFavorite(a._id)">
+                  <mat-icon>favorite_border</mat-icon>
+                </button>
+              </ng-template>
+
+            </div>
+            <img mat-card-image [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
+              alt={{a.metadata.caption}} (click)="openModal(a.filename)">
+          </div>
+          <!--/.cardImg-->
+          <mat-card-title>{{a.metadata.caption}}<p class="trip-date float-right">{{a.trip_date | date: 'MMMM/dd/yyyy'}}
+            </p>
+          </mat-card-title>
+          <mat-card-content>
+            <br>
+            <p>{{a.metadata.city}}, {{a.metadata.state}}</p>
+            <p><strong>Tags:</strong>{{a.tags}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <p>TODO: add scripting to permit images to be favorited</p>
+            <form [formGroup]="commentForm" (ngSubmit)="addComment(a._id)">
+              <div class="row my-3">
+                <div class="commentForm col-12">
+                  <mat-form-field appearance="standard">
+                    <!-- <mat-label>Add A Comment</mat-label> -->
+                    <input matInput placeholder="comment" formControlName="comment">
+                    <button matSuffix type="submit">
+                      <mat-icon matSuffix class="comIcon">add_comment</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </ng-container>
+  </div>
+
+</div>
+<!--pageView-->

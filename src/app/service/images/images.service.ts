@@ -3,8 +3,7 @@ import { Image } from '../image';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+
 
 
 @Injectable({
@@ -61,6 +60,17 @@ export class ImagesService {
   // Get single image for favorites
   GetFavorite(id: any): Observable<any> {
     let API_URL = `${this.REST_API}/favorite-image/${id}`;
+    return this.httpClient.get(API_URL, { headers: this.httpHeaders })
+      .pipe(map((res: any) => {
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
+
+  //Get list of picture IDs in an album
+  GetAlbumList(id: any): Observable<any> {
+    let API_URL = `${this.REST_API}/album-images/${id}`;
     return this.httpClient.get(API_URL, { headers: this.httpHeaders })
       .pipe(map((res: any) => {
         return res || {}
