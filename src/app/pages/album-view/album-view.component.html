@@ -68,21 +68,23 @@
     <ng-container *ngFor="let a of albumImage;let i = index">
       <div class="col-12 col-md-4">
         <mat-card class="mb-3">
-          <div class="cardImg">
+          <div class="cardImg">   
             <div class="favIcons">
-              <div *ngIf="favorite; else notFavorite">
-                <button mat-button>
-                  <mat-icon>favorite</mat-icon>
-                </button>
-              </div>
+                <div *ngIf="Favorites[i]?.favorite; else elseTemplate">
+                  <button mat-button>
+                    <mat-icon>favorite</mat-icon>
+                  </button>
+               </div>               
+               <ng-template #elseTemplate>
+                  <div>
+                    <button mat-button (click)="makeFavorite(a._id)">
+                      <mat-icon>favorite_border</mat-icon>
+                    </button>
+                  </div>
+               </ng-template>  
+              </div> 
 
-              <ng-template #notFavorite>
-                <button mat-button (click)="makeFavorite(a._id)">
-                  <mat-icon>favorite_border</mat-icon>
-                </button>
-              </ng-template>
-
-            </div>
+           
             <img mat-card-image [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
               alt={{a.metadata.caption}} (click)="openModal(a.filename)">
           </div>

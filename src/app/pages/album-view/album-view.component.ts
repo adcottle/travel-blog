@@ -4,10 +4,11 @@ import { ImagesService } from '../../service/images/images.service';
 import { CrudService } from '../../service/crud/crud.service';
 import { UserService } from '../../service/user/user.service';
 import { takeUntil } from 'rxjs/operators';
-import {  Subject } from 'rxjs';
+import {  merge, Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {MatDialog} from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
+import { HIGH_CONTRAST_MODE_ACTIVE_CSS_CLASS } from '@angular/cdk/a11y/high-contrast-mode/high-contrast-mode-detector';
 
 @Component({
   selector: 'app-album-view',
@@ -22,8 +23,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   Cover: any;
   commentForm: FormGroup;
   submitted = false;
-  favorite: boolean;
-  
+  Favorites: any = [];
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -46,20 +46,17 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   }
 
   getMerged(id){   
-    var image: any = [];
+    var image: any = [];    
     this.crudService.GetTrip(id).pipe(takeUntil(this.destroy$)).subscribe( (tripData: any =[]) => {
       this.Post = tripData;
       this.imageService.GetAlbum(id).pipe(takeUntil(this.destroy$)).subscribe( (imageData: any =[]) => {         
         var t = [tripData];
-        image = imageData;    
-        let imgs = image.map(function(el){return{id: el._id}});
+        image = imageData;  
+        // let imgs = image.map(function(el){return{id: el._id}});
         var uid = localStorage.getItem('user');
-        const match = this.myFavorites(uid, imgs);         
+        this.myFavorites(uid, image); 
         image.forEach(element => {  
-          // console.log(element)  
-          
-         console.log(match);
-          const mergedObj = { ...t, ...element };        
+          const mergedObj = { ...t, ...element };   
           this.albumImage.push(mergedObj);                     
         });                 
       });    
@@ -67,19 +64,27 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   }; 
 
   myFavorites(uid, imgs) {   
-    var matchy: any =[];
     this.userService.GetMyFavorites(uid).pipe(takeUntil(this.destroy$)).subscribe( res => {
-      // console.log(res.favorites);
-      var result = imgs.filter(function (o1) {         
-        return res.favorites.some(function (o2) { 
-          return o1.id === o2._id; // return the ones with equal id              
-        });        
-      }); 
-      Array.prototype.push.apply(matchy,result)
+      var pip = res.favorites;
+      const haveIds = new Set(pip.map(({ _id }) => _id));
+      var result = imgs.map(({ _id }) => ({ _id, favorite: haveIds.has(_id) }));
+      this.Favorites = result;
+      // console.log(this.Favorites);
     });  
-    return matchy;  
   };
 
+  // myFavorites(uid, imgs) {   
+  //   this.userService.GetMyFavorites(uid).pipe(takeUntil(this.destroy$)).subscribe( res => {
+  //     // console.log(res.favorites);
+  //     var pip = res.favorites;
+  //     var match = pip.map(function(el){return{id: el._id}});
+  //     const haveIds = new Set(match.map(({ id }) => id));
+  //     // console.log(haveIds);
+  //     const result = imgs.map(({ id }) => ({ id, favorite: haveIds.has(id) }));
+  //     this.Favorites = result;
+  //   });  
+    
+  // };
 
   getCover(id) {
     this.imageService.GetCover(id).pipe(takeUntil(this.destroy$)).subscribe( coverImage => {
