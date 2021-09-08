@@ -18,6 +18,7 @@ import { HIGH_CONTRAST_MODE_ACTIVE_CSS_CLASS } from '@angular/cdk/a11y/high-cont
 export class AlbumViewComponent implements OnInit, OnDestroy {
 
   id:  any;
+  user_id:  any;
   albumImage: any = []; 
   Post: any = [];
   Cover: any;
@@ -32,10 +33,11 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     private crudService: CrudService,
     private userService: UserService,
     public dialog: MatDialog, public fb: FormBuilder) {
-    this.id = this.actRoute.snapshot.paramMap.get('id');
-    this.commentForm = this.fb.group({
-      comment: ['', [Validators.required]]      
-    })
+      this.user_id = localStorage.getItem('user');
+      this.id = this.actRoute.snapshot.paramMap.get('id');
+      this.commentForm = this.fb.group({
+        comment: ['', [Validators.required]]      
+      })
 
    }
    get f() { return this.commentForm.controls; }
@@ -53,11 +55,12 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
         var t = [tripData];
         image = imageData;  
         // let imgs = image.map(function(el){return{id: el._id}});
-        var uid = localStorage.getItem('user');
-        this.myFavorites(uid, image); 
+        // var uid = localStorage.getItem('user');
+        this.myFavorites(this.user_id, image); 
         image.forEach(element => {  
           const mergedObj = { ...t, ...element };   
-          this.albumImage.push(mergedObj);                     
+          this.albumImage.push(mergedObj);          
+          console.log(this.albumImage);
         });                 
       });    
     });    
@@ -65,26 +68,16 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
 
   myFavorites(uid, imgs) {   
     this.userService.GetMyFavorites(uid).pipe(takeUntil(this.destroy$)).subscribe( res => {
+      // console.log(res)      
       var pip = res.favorites;
       const haveIds = new Set(pip.map(({ _id }) => _id));
       var result = imgs.map(({ _id }) => ({ _id, favorite: haveIds.has(_id) }));
       this.Favorites = result;
       // console.log(this.Favorites);
+      
     });  
   };
-
-  // myFavorites(uid, imgs) {   
-  //   this.userService.GetMyFavorites(uid).pipe(takeUntil(this.destroy$)).subscribe( res => {
-  //     // console.log(res.favorites);
-  //     var pip = res.favorites;
-  //     var match = pip.map(function(el){return{id: el._id}});
-  //     const haveIds = new Set(match.map(({ id }) => id));
-  //     // console.log(haveIds);
-  //     const result = imgs.map(({ id }) => ({ id, favorite: haveIds.has(id) }));
-  //     this.Favorites = result;
-  //   });  
-    
-  // };
+ 
 
   getCover(id) {
     this.imageService.GetCover(id).pipe(takeUntil(this.destroy$)).subscribe( coverImage => {
@@ -121,17 +114,33 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     console.log(user_id);
     console.log(id);
     this.commentForm.reset();
+    Object.keys(this.commentForm.controls).forEach(key =>{
+      this.commentForm.controls[key].setErrors(null)
+   });
   }
 
   makeFavorite(id){
-    var user_id = localStorage.getItem('user');
-    this.userService.AddFavorite(user_id, id).pipe(takeUntil(this.destroy$)).subscribe( response => {                   
+        this.userService.AddFavorite(this.user_id, id).pipe(takeUntil(this.destroy$)).subscribe( response => {                   
           // console.log(response);
+          
+          
         },
         error => {
           console.log(error);        
         });
   }
+
+  removeFavorite(id) {
+    console.log('made it to function')
+    if (window.confirm('Remove this image from your favorites?')) {
+      this.userService.deleteFavorite(id).subscribe((data) => {
+        console.log(data);
+
+      }
+      )
+    }
+  }
+  
  
   ngOnDestroy() {
     this.destroy$.next(true);

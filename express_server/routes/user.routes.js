@@ -81,5 +81,14 @@ router.route('/my-favorites/:id').get((req, res, next) => {
     })
 })
 
+router.route('/delete-favorite/:id/:img_id').delete((req,res,next) => {
+    // Find only one document matching the
+    console.log('made it to route')
+    userSchema.findOneAndUpdate({_id: req.params.id}, {$pull: 
+        {favorites: {_id: req.params.img_id}}});
+    res.end();
+});
+
+
 
 module.exports = router;

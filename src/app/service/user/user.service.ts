@@ -45,13 +45,14 @@ export class UserService {
   }
 
 
-  // Delete
-  // deleteTrip(_id:any): Observable<any> {
-  //   let API_URL = `${this.endpoint}/delete-trip/${_id}`;
-  //   return this.http.delete(API_URL, { headers: this.httpHeaders}).pipe(
-  //       catchError(this.handleError)
-  //     )
-  // }
+  //Remove a favorite
+  deleteFavorite(id:any): Observable<any> {
+    console.log('made it to serve' + '     ' + id)
+    let  API_URL = `${this.endpoint}/delete-favorite/${id}`;
+    return this.http.delete( API_URL, { headers: this.httpHeaders }).pipe(
+      catchError(this.handleError)
+    )
+  }
 
 
   // Error 

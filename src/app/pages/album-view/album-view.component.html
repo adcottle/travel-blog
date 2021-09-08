@@ -71,7 +71,7 @@
           <div class="cardImg">   
             <div class="favIcons">
                 <div *ngIf="Favorites[i]?.favorite; else elseTemplate">
-                  <button mat-button>
+                  <button mat-button (click)="removeFavorite(a._id)">
                     <mat-icon>favorite</mat-icon>
                   </button>
                </div>               
@@ -98,7 +98,7 @@
             <p><strong>Tags:</strong>{{a.tags}}</p>
           </mat-card-content>
           <mat-card-actions>
-            <p>TODO: add scripting to permit images to be favorited</p>
+            
             <form [formGroup]="commentForm" (ngSubmit)="addComment(a._id)">
               <div class="row my-3">
                 <div class="commentForm col-12">
