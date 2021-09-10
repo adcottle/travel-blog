@@ -46,9 +46,9 @@ export class UserService {
 
 
   //Remove a favorite
-  deleteFavorite(id:any): Observable<any> {
-    console.log('made it to serve' + '     ' + id)
-    let  API_URL = `${this.endpoint}/delete-favorite/${id}`;
+  deleteFavorite(id:any, img_id: any): Observable<any> {
+    // console.log('made it to service' + '     ' + id  + '     ' + img_id)
+    let  API_URL = `${this.endpoint}/delete-favorite/${id}/${img_id}`;
     return this.http.delete( API_URL, { headers: this.httpHeaders }).pipe(
       catchError(this.handleError)
     )

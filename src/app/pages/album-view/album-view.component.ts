@@ -4,11 +4,10 @@ import { ImagesService } from '../../service/images/images.service';
 import { CrudService } from '../../service/crud/crud.service';
 import { UserService } from '../../service/user/user.service';
 import { takeUntil } from 'rxjs/operators';
-import {  merge, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
-import { HIGH_CONTRAST_MODE_ACTIVE_CSS_CLASS } from '@angular/cdk/a11y/high-contrast-mode/high-contrast-mode-detector';
 
 @Component({
   selector: 'app-album-view',
@@ -25,6 +24,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   commentForm: FormGroup;
   submitted = false;
   Favorites: any = [];
+  icon: any = [];
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -60,7 +60,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
         image.forEach(element => {  
           const mergedObj = { ...t, ...element };   
           this.albumImage.push(mergedObj);          
-          console.log(this.albumImage);
+          // console.log(this.albumImage);
         });                 
       });    
     });    
@@ -74,7 +74,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
       var result = imgs.map(({ _id }) => ({ _id, favorite: haveIds.has(_id) }));
       this.Favorites = result;
       // console.log(this.Favorites);
-      
+    
     });  
   };
  
@@ -103,11 +103,10 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
 
   addComment(id) {    
     this.submitted = true;
-
-        // stop here if form is invalid
-        if (this.commentForm.invalid) {
-            return;
-        }
+      // stop here if form is invalid
+      if (this.commentForm.invalid) {
+          return;
+      }
     // this.authService.signIn(this.loginForm.value)
     console.log(this.commentForm.value)
     var user_id = localStorage.getItem('user');
@@ -122,24 +121,22 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   makeFavorite(id){
         this.userService.AddFavorite(this.user_id, id).pipe(takeUntil(this.destroy$)).subscribe( response => {                   
           // console.log(response);
-          
-          
+          this.getMerged(this.id);
         },
         error => {
           console.log(error);        
         });
   }
 
-  removeFavorite(id) {
-    console.log('made it to function')
+  removeFavorite(img_id) {
     if (window.confirm('Remove this image from your favorites?')) {
-      this.userService.deleteFavorite(id).subscribe((data) => {
-        console.log(data);
-
-      }
-      )
-    }
-  }
+      this.userService.deleteFavorite(this.user_id, img_id).subscribe((data) => {
+         console.log(data);
+         this.getMerged(this.id);
+       
+      });
+    };
+  };
   
  
   ngOnDestroy() {

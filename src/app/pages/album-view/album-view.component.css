@@ -23,9 +23,9 @@
 
 
 .boxborder {
-    position: absolute;
+    position:relative;
     font-size: 3rem;
-    top: 30%;
+    top: 35%;
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
     z-index: 99;

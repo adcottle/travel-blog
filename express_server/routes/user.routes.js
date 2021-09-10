@@ -42,14 +42,9 @@ router.route('/update-user/:id').put((req, res, next) => {
     })
 })
 
-
-
-
 // Add User Favorites
-router.route('/add-favorites/:id/:img_id').put((req, res, next) => {
-   
+router.route('/add-favorites/:id/:img_id').put((req, res, next) => {   
     console.log(res.params);
-
     userSchema.findByIdAndUpdate(req.params.id, {
         $addToSet: {
             favorites : [ {
@@ -83,10 +78,13 @@ router.route('/my-favorites/:id').get((req, res, next) => {
 
 router.route('/delete-favorite/:id/:img_id').delete((req,res,next) => {
     // Find only one document matching the
-    console.log('made it to route')
-    userSchema.findOneAndUpdate({_id: req.params.id}, {$pull: 
-        {favorites: {_id: req.params.img_id}}});
-    res.end();
+    userSchema.findOneAndUpdate({_id: req.params.id}, 
+        { $pull: { favorites: { _id: req.params.img_id } } },
+        //{ new: true }
+    )
+    // .then(f => {console.log(f); res.json(f)})
+    .then()
+    .catch(err => console.log(err));
 });
 
 
