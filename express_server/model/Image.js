@@ -1,24 +1,28 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var imageSchema = new mongoose.Schema({
-    _id: String,
-    filename: String,    
-    metadata:
-    {       
-        caption: String,       
-        city: String,
-        state: String,        
-        country: String,
-        photo_date: Date,
-        cover_photo: String,
-        album_id: String,
-        
-    },
-    favorites: {
-        user_id: String
-    }
-});
 
-//Image is a model which has a schema imageSchema
+let imageSchema = new Schema({
+    __id: mongoose.Schema.Types.ObjectId, 
+    filename: { type: String },  
+    uploadDate: {type: Date },
+    metadata:[{
+        caption: {type: String},
+        city: {type: String},    
+        state: {type: String},
+        country: {type: String},
+        cover_photo: {type: Boolean},
+        tags: {type: Array,},
+        photo_date: {type: Date },
+        album_id: {type: String}
+    }],    
+    comment: [{
+        user: {type: String},
+        comment: {type: String},
+    }] 
+  
+  }, {
+    collection: 'fs.files'
+  })
 
 module.exports = new mongoose.model('Image', imageSchema);

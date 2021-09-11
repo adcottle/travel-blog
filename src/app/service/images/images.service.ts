@@ -12,12 +12,14 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 export class ImagesService {
     // Node/Express API
     REST_API: string = 'http://localhost:4000/images';
+    
+    
 
     // Http Header
     httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');   
   
 
-  constructor(private httpClient: HttpClient ) { }
+  constructor(private httpClient: HttpClient ) {}
 
    // Get all Images in JSON
    GetImagesList() {
@@ -77,6 +79,16 @@ export class ImagesService {
       }),
         catchError(this.handleError)
       )
+  }
+  
+  //Add Comment to Image
+  AddComment(id: any, body:any): Observable<any> {
+    let API_URL = `${this.REST_API}/add-comment/${id}`;
+    // console.log(id);
+    // console.log(body);
+    return this.httpClient.put(API_URL, body, { headers: this.httpHeaders }).pipe(
+      catchError(this.handleError)
+    )
   }
 
    

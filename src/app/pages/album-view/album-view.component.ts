@@ -36,7 +36,8 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
       this.user_id = localStorage.getItem('user');
       this.id = this.actRoute.snapshot.paramMap.get('id');
       this.commentForm = this.fb.group({
-        comment: ['', [Validators.required]]      
+        comment: ['', [Validators.required]],
+        user: []     
       })
 
    }
@@ -101,21 +102,19 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     });    
   };
 
-  addComment(id) {    
+  addComment(id) {
     this.submitted = true;
-      // stop here if form is invalid
-      if (this.commentForm.invalid) {
-          return;
-      }
-    // this.authService.signIn(this.loginForm.value)
-    console.log(this.commentForm.value)
-    var user_id = localStorage.getItem('user');
-    console.log(user_id);
-    console.log(id);
+    // stop here if form is invalid
+    if (this.commentForm.invalid) {
+      return;
+    }
+    this.commentForm.get('user').setValue(localStorage.getItem('user'));
+    // console.log(this.commentForm.value);
+    this.imageService.AddComment(id, this.commentForm.value)
     this.commentForm.reset();
-    Object.keys(this.commentForm.controls).forEach(key =>{
+    Object.keys(this.commentForm.controls).forEach(key => {
       this.commentForm.controls[key].setErrors(null)
-   });
+    });
   }
 
   makeFavorite(id){

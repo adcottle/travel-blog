@@ -7,9 +7,7 @@ const Grid = require('gridfs-stream');
 const chalk = require('chalk');
 Grid.mongo = mongoose.mongo;
 
-let Image = require('../model/Image');
-const { consoleTestResultHandler } = require("tslint/lib/test");
-const { RouteReuseStrategy } = require("@angular/router");
+const Image = require('../model/Image');
 
 const conn = mongoose.createConnection(process.env.DB, {
   useNewUrlParser: true,
@@ -180,19 +178,70 @@ router.route('/view-album/:id')
   });
   
   //comparing query
-  router.route('/compared/:id')
-  .get((req, res, next) => {
-    gfs.files.find({ "metadata.album_id": req.params.id }).sort('uploadDate', -1).toArray((err, files) => {
-      if (!files || files.length == 0) {
-        return res.status(404).json({
-          err: "No files exist"
-        });
-      };
-      //file exist
+  // router.route('/compared/:id')
+  // .get((req, res, next) => {
+  //   gfs.files.find({ "metadata.album_id": req.params.id }).sort('uploadDate', -1).toArray((err, files) => {
+  //     if (!files || files.length == 0) {
+  //       return res.status(404).json({
+  //         err: "No files exist"
+  //       });
+  //     };
+  //     //file exist
       
-      return res.json(files)
-    });
-  });
+  //     return res.json(files)
+  //   });
+  // });
+
+ 
+
+  // Add Comments to image
+router.route('/add-comment/:id').put((req, res, next) => {  
+  console.log('made it to route') 
+    console.log(chalk.green(req.params.id));
+    console.log(chalk.magentaBright(req.body.user));
+    console.log(chalk.cyanBright(req.body.comment));
+    // Image.findByIdAndUpdate(req.params.id, {
+    //     $addToSet: {
+    //         comments : [ {
+    //                   user: req.body.user,
+    //                   comment:req.body.comment
+    //                 }
+    //              ]//'inserted Array containing the list of object'
+    //     }
+    // }, (error, data) => {
+    //     if (error) {
+    //       console.log(error);
+    //       return next(error);          
+    //     } else {            
+    //         console.log(req.params.id);
+    //       res.json(data)
+    //       console.log('Comment added to image')
+    //     }
+    //   })
+    })
+
+  // Image.findOneAndUpdate({ _id: req.params.id },
+  //   {
+  //     $set: {
+  //       comments: [{
+  //         user: req.body.user,
+  //         comment: req.body.comment
+  //       }]
+  //     }
+  //   },
+  //   { upsert: true, new: true },
+  //   (error, data) => {
+  //     if (error) {
+  //       console.log(error);
+  //       return next(error);
+  //     } else {
+  //       console.log(req.params.id);
+  //       res.json(data)
+  //       console.log('Comment added')
+  //     }
+  //   });
+// });
+
 
 
 
