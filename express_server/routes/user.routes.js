@@ -33,18 +33,18 @@ router.route('/update-user/:id').put((req, res, next) => {
         $set: req.body
     }, (error, data) => {
         if (error) {
+            console.log(error);
             return next(error);
-            console.log(error)
+            
         } else {
-            res.json(data)
-            console.log('User successfully updated!')
+            res.json(data)            
         }
     })
 })
 
 // Add User Favorites
 router.route('/add-favorites/:id/:img_id').put((req, res, next) => {   
-    console.log(req.params);
+   
     userSchema.findByIdAndUpdate(req.params.id, {
         $addToSet: {
             favorites : [ {
@@ -52,14 +52,12 @@ router.route('/add-favorites/:id/:img_id').put((req, res, next) => {
                     }
                  ]//'inserted Array containing the list of object'
         }
-    }, (error, data) => {
+    }, { upsert: true, new: true },(error, data) => {
         if (error) {
           console.log(error);
           return next(error);          
-        } else {            
-            console.log(req.params.id);
+        } else {    
           res.json(data)
-          console.log('Image added to favorites')
         }
       })
     })
@@ -67,7 +65,7 @@ router.route('/add-favorites/:id/:img_id').put((req, res, next) => {
 // Get Single User's Favorites
 
 router.route('/my-favorites/:id').get((req, res, next) => {
-    userSchema.findById(req.params.id, 'favorites', (error, data) => {
+    userSchema.findById(req.params.id, 'favorites',  (error, data) => {
         if (error) {
             return next(error);
         } else {
@@ -80,10 +78,12 @@ router.route('/delete-favorite/:id/:img_id').delete((req,res,next) => {
     // Find only one document matching the
     userSchema.findOneAndUpdate({_id: req.params.id}, 
         { $pull: { favorites: { _id: req.params.img_id } } },
-        //{ new: true }
+        { new: true }
     )
-    // .then(f => {console.log(f); res.json(f)})
-    .then()
+    .then(f => {
+        //console.log(f);
+         res.json(f)})
+    
     .catch(err => console.log(err));
 });
 

@@ -6,7 +6,7 @@ import { UserService } from '../../service/user/user.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
 
 @Component({
@@ -16,9 +16,9 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
 })
 export class AlbumViewComponent implements OnInit, OnDestroy {
 
-  id:  any;
-  user_id:  any;
-  albumImage: any = []; 
+  id: any;
+  user_id: any;
+  albumImage: any = [];
   Post: any = [];
   Cover: any;
   commentForm: FormGroup;
@@ -28,78 +28,99 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private actRoute: ActivatedRoute, 
-    private imageService: ImagesService, 
+  constructor(private actRoute: ActivatedRoute,
+    private imageService: ImagesService,
     private crudService: CrudService,
     private userService: UserService,
     public dialog: MatDialog, public fb: FormBuilder) {
-      this.user_id = localStorage.getItem('user');
-      this.id = this.actRoute.snapshot.paramMap.get('id');
-      this.commentForm = this.fb.group({
-        comment: ['', [Validators.required]],
-        user: []     
-      })
+    this.user_id = localStorage.getItem('user');
+    this.id = this.actRoute.snapshot.paramMap.get('id');
+    this.commentForm = this.fb.group({
+      comment: ['', [Validators.required]],
+      user: []
+    })
 
-   }
-   get f() { return this.commentForm.controls; }
+  }
+  get f() { return this.commentForm.controls; }
 
   ngOnInit() {
     this.getMerged(this.id);
     this.getCover(this.id);
   }
 
-  getMerged(id){   
-    var image: any = [];    
-    this.crudService.GetTrip(id).pipe(takeUntil(this.destroy$)).subscribe( (tripData: any =[]) => {
+  getMerged(id) {
+    var image: any = [];
+    this.crudService.GetTrip(id).pipe(takeUntil(this.destroy$)).subscribe((tripData: any = []) => {
       this.Post = tripData;
-      this.imageService.GetAlbum(id).pipe(takeUntil(this.destroy$)).subscribe( (imageData: any =[]) => {         
+      this.imageService.GetAlbum(id).pipe(takeUntil(this.destroy$)).subscribe((imageData: any = []) => {
         var t = [tripData];
-        image = imageData;  
-        // let imgs = image.map(function(el){return{id: el._id}});
-        // var uid = localStorage.getItem('user');
-        this.myFavorites(this.user_id, image); 
-        image.forEach(element => {  
-          const mergedObj = { ...t, ...element };   
-          this.albumImage.push(mergedObj);          
+        image = imageData;
+        this.myFavorites(this.user_id, image);
+        image.forEach(element => {
+          const mergedObj = { ...t, ...element };
+          this.albumImage.push(mergedObj);
           // console.log(this.albumImage);
-        });                 
-      });    
-    });    
-  }; 
+        });
+      });
+    });
+  };
 
-  myFavorites(uid, imgs) {   
-    this.userService.GetMyFavorites(uid).pipe(takeUntil(this.destroy$)).subscribe( res => {
+  myFavorites(uid, imgs) {
+    this.userService.GetMyFavorites(uid).pipe(takeUntil(this.destroy$)).subscribe(res => {
       // console.log(res)      
-      var pip = res.favorites;
-      const haveIds = new Set(pip.map(({ _id }) => _id));
+      var my_favs = res.favorites;
+      const haveIds = new Set(my_favs.map(({ _id }) => _id));
       var result = imgs.map(({ _id }) => ({ _id, favorite: haveIds.has(_id) }));
       this.Favorites = result;
-      // console.log(this.Favorites);
-    
-    });  
+    });
   };
- 
+
+  makeFavorite(id) {
+    this.userService.AddFavorite(this.user_id, id).pipe(takeUntil(this.destroy$)).subscribe(response => {
+      var my_favs = response.favorites;
+      const haveIds = new Set(my_favs.map(({ _id }) => _id));
+      var y = this.Favorites.map(({ _id }) => ({ _id, favorite: haveIds.has(_id) }));
+      this.Favorites = y;
+    },
+      error => {
+        console.log(error);
+      });
+  }
+
+  removeFavorite(img_id) {
+    if (window.confirm('Remove this image from your favorites?')) {
+      this.userService.deleteFavorite(this.user_id, img_id).subscribe((response) => {
+        //  console.log(response);     
+        var my_favs = response.favorites;
+        const haveIds = new Set(my_favs.map(({ _id }) => _id));
+        var y = this.Favorites.map(({ _id }) => ({ _id, favorite: haveIds.has(_id) }));
+        this.Favorites = y;
+      });
+    };
+  };
+
 
   getCover(id) {
-    this.imageService.GetCover(id).pipe(takeUntil(this.destroy$)).subscribe( coverImage => {
+    this.imageService.GetCover(id).pipe(takeUntil(this.destroy$)).subscribe(coverImage => {
       var ci = coverImage
       var uri = 'http://localhost:4000/images/file/'
-      var CIuri = ci[0].filename;  
-      this.Cover = uri + CIuri; 
+      var CIuri = ci[0].filename;
+      this.Cover = uri + CIuri;
     }
-  )};
+    )
+  };
 
 
   openModal(filename) {
-    this.imageService.OpenImage(filename).pipe(takeUntil(this.destroy$)).subscribe (img => {      
-      this.dialog.open(ImageModalComponent,{
+    this.imageService.OpenImage(filename).pipe(takeUntil(this.destroy$)).subscribe(img => {
+      this.dialog.open(ImageModalComponent, {
         height: '100%',
         width: '100%',
-        data:{        
+        data: {
           imageData: img
         }
-      }); 
-    });    
+      });
+    });
   };
 
   addComment(id) {
@@ -117,27 +138,6 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     });
   }
 
-  makeFavorite(id){
-    this.userService.AddFavorite(this.user_id, id).pipe(takeUntil(this.destroy$)).subscribe( response => {                   
-      // console.log(response);
-      this.getMerged(this.id);
-    },
-    error => {
-      console.log(error);        
-    });
-}
-
-removeFavorite(img_id) {
-if (window.confirm('Remove this image from your favorites?')) {
-  this.userService.deleteFavorite(this.user_id, img_id).subscribe((data) => {
-     console.log(data);
-     this.getMerged(this.id);
-   
-  });
-};
-};
-  
- 
   ngOnDestroy() {
     this.destroy$.next(true);
     // Unsubscribe from the subject
