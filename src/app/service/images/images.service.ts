@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Image } from '../image';
-import { catchError, map } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
@@ -81,15 +81,14 @@ export class ImagesService {
       )
   }
   
-  //Add Comment to Image
-  AddComment(id: any, body:any): Observable<any> {
+  //AddComment to Image
+  AddComment(id: any, data: any) {
     let API_URL = `${this.REST_API}/add-comment/${id}`;
-    // console.log(id);
-    // console.log(body);
-    return this.httpClient.put(API_URL, body, { headers: this.httpHeaders }).pipe(
-      catchError(this.handleError)
-    )
+    return this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
+    .subscribe(data => {
+    });
   }
+
 
    
   // Error 

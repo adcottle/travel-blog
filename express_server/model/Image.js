@@ -16,7 +16,7 @@ let imageSchema = new Schema({
         photo_date: {type: Date },
         album_id: {type: String}
     }],    
-    comment: [{
+    comments: [{
         user: {type: String},
         comment: {type: String},
     }] 

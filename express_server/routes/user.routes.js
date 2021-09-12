@@ -44,7 +44,7 @@ router.route('/update-user/:id').put((req, res, next) => {
 
 // Add User Favorites
 router.route('/add-favorites/:id/:img_id').put((req, res, next) => {   
-    console.log(res.params);
+    console.log(req.params);
     userSchema.findByIdAndUpdate(req.params.id, {
         $addToSet: {
             favorites : [ {
@@ -65,6 +65,7 @@ router.route('/add-favorites/:id/:img_id').put((req, res, next) => {
     })
 
 // Get Single User's Favorites
+
 router.route('/my-favorites/:id').get((req, res, next) => {
     userSchema.findById(req.params.id, 'favorites', (error, data) => {
         if (error) {

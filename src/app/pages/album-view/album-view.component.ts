@@ -118,24 +118,24 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   }
 
   makeFavorite(id){
-        this.userService.AddFavorite(this.user_id, id).pipe(takeUntil(this.destroy$)).subscribe( response => {                   
-          // console.log(response);
-          this.getMerged(this.id);
-        },
-        error => {
-          console.log(error);        
-        });
-  }
+    this.userService.AddFavorite(this.user_id, id).pipe(takeUntil(this.destroy$)).subscribe( response => {                   
+      // console.log(response);
+      this.getMerged(this.id);
+    },
+    error => {
+      console.log(error);        
+    });
+}
 
-  removeFavorite(img_id) {
-    if (window.confirm('Remove this image from your favorites?')) {
-      this.userService.deleteFavorite(this.user_id, img_id).subscribe((data) => {
-         console.log(data);
-         this.getMerged(this.id);
-       
-      });
-    };
-  };
+removeFavorite(img_id) {
+if (window.confirm('Remove this image from your favorites?')) {
+  this.userService.deleteFavorite(this.user_id, img_id).subscribe((data) => {
+     console.log(data);
+     this.getMerged(this.id);
+   
+  });
+};
+};
   
  
   ngOnDestroy() {

@@ -20,7 +20,7 @@ conn.on("error", () => {
   console.log(chalk.red("[-] Error occurred from the database"));
 });
 
-let gfs, gridFSBucket;
+let gfs;
 
 conn.once("open", () => {
   gridFSBucket = new mongoose.mongo.GridFSBucket(conn.db, {
@@ -107,8 +107,7 @@ router.get('/favorite-image/:id', (req, res) => {
 });
 
 //GET: Fetches all the files in the the collection as JSON
-router.route('/files')
-  .get((req, res, next) => {
+router.route('/files').get((req, res, next) => {
     gfs.files.find().toArray((err, files) => {
       if (!files || files.length == 0) {
         return res.status(404).json({
@@ -122,8 +121,7 @@ router.route('/files')
 
 
 //Get album's cover photo
-router.route('/cover/:album_id')
-  .get((req, res, next) => {
+router.route('/cover/:album_id').get((req, res, next) => {
     gfs.files.find({ "metadata.cover_photo": "on", "metadata.album_id": req.params.album_id }).limit(1).toArray((err, files) => {
       if (!files || files.length == 0) {
         return res.status(404).json({
@@ -134,8 +132,6 @@ router.route('/cover/:album_id')
       return res.json(files)
     });
   });
-
-
 
 
 //Delete a file
@@ -176,74 +172,47 @@ router.route('/view-album/:id')
       return res.json(files)
     });
   });
-  
-  //comparing query
-  // router.route('/compared/:id')
-  // .get((req, res, next) => {
-  //   gfs.files.find({ "metadata.album_id": req.params.id }).sort('uploadDate', -1).toArray((err, files) => {
-  //     if (!files || files.length == 0) {
-  //       return res.status(404).json({
-  //         err: "No files exist"
-  //       });
-  //     };
-  //     //file exist
-      
-  //     return res.json(files)
-  //   });
-  // });
-
  
 
-  // Add Comments to image
-router.route('/add-comment/:id').put((req, res, next) => {  
-  console.log('made it to route') 
-    console.log(chalk.green(req.params.id));
-    console.log(chalk.magentaBright(req.body.user));
-    console.log(chalk.cyanBright(req.body.comment));
-    // Image.findByIdAndUpdate(req.params.id, {
-    //     $addToSet: {
-    //         comments : [ {
-    //                   user: req.body.user,
-    //                   comment:req.body.comment
-    //                 }
-    //              ]//'inserted Array containing the list of object'
-    //     }
-    // }, (error, data) => {
-    //     if (error) {
-    //       console.log(error);
-    //       return next(error);          
-    //     } else {            
-    //         console.log(req.params.id);
-    //       res.json(data)
-    //       console.log('Comment added to image')
-    //     }
-    //   })
-    })
-
-  // Image.findOneAndUpdate({ _id: req.params.id },
-  //   {
-  //     $set: {
-  //       comments: [{
-  //         user: req.body.user,
-  //         comment: req.body.comment
-  //       }]
-  //     }
-  //   },
-  //   { upsert: true, new: true },
-  //   (error, data) => {
-  //     if (error) {
-  //       console.log(error);
-  //       return next(error);
-  //     } else {
-  //       console.log(req.params.id);
-  //       res.json(data)
-  //       console.log('Comment added')
-  //     }
-  //   });
-// });
+//GET: Fetches all the lastest as JSON
+router.route('/add-comment')
+  .get((req, res, next) => {
+    gfs.files.find({ "metadata.cover_photo": "on" }).sort('uploadDate', -1).limit(3).toArray((err, files) => {
+      if (!files || files.length == 0) {
+        return res.status(404).json({
+          err: "No files exist"
+        });
+      };
+      //file exist
+      console.log('connecting');
+      return res.json(files)
+    });
+  });
 
 
-
+// Add Comments to image
+router.route('/add-comment/:id').put((req, res, next) => {
+  // console.log(chalk.greenBright(req.params.id));
+  // console.log(chalk.yellowBright(req.body.user));
+  // console.log(chalk.blueBright(req.body.comment));
+  Image.findByIdAndUpdate(req.params.id, {
+    $addToSet: {
+      comments: [{
+        user: req.body.user,
+        comment: req.body.comment
+      }
+      ]//'inserted Array containing the list of object'
+    }
+  }, { upsert: true, new: true }, (error, data) => {
+    if (error) {
+      console.log(error);
+      return next(error);
+    } else {
+      res.json(data)
+      // console.log(chalk.cyanBright('Data updated successfully'));
+    }
+  })
+})
 
 module.exports = router;
 
