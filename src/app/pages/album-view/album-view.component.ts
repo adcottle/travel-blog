@@ -19,12 +19,13 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   id: any;
   user_id: any;
   albumImage: any = [];
+  imageData: any = [];
   Post: any = [];
   Cover: any;
   commentForm: FormGroup;
   submitted = false;
   Favorites: any = [];
-  icon: any = [];
+  Comments: any = [];
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -49,17 +50,18 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   }
 
   getMerged(id) {
-    var image: any = [];
+    
     this.crudService.GetTrip(id).pipe(takeUntil(this.destroy$)).subscribe((tripData: any = []) => {
       this.Post = tripData;
       this.imageService.GetAlbum(id).pipe(takeUntil(this.destroy$)).subscribe((imageData: any = []) => {
         var t = [tripData];
-        image = imageData;
-        this.myFavorites(this.user_id, image);
-        image.forEach(element => {
+        this.imageData = imageData;
+        this.myFavorites(this.user_id, this.imageData);
+        this.imageData.forEach(element => {
           const mergedObj = { ...t, ...element };
           this.albumImage.push(mergedObj);
-          // console.log(this.albumImage);
+          this.Comments.push(mergedObj.comments);
+          // console.log(this.Comments);
         });
       });
     });
@@ -89,7 +91,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
 
   removeFavorite(img_id) {
     if (window.confirm('Remove this image from your favorites?')) {
-      this.userService.deleteFavorite(this.user_id, img_id).subscribe((response) => {
+      this.userService.deleteFavorite(this.user_id, img_id).pipe(takeUntil(this.destroy$)).subscribe((response) => {
         //  console.log(response);     
         var my_favs = response.favorites;
         const haveIds = new Set(my_favs.map(({ _id }) => _id));
@@ -123,6 +125,14 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     });
   };
 
+  GetImageComments(album_id){
+    console.log(this.imageData)
+    this.imageService.GetAlbumComments(album_id).pipe(takeUntil(this.destroy$)).subscribe(response => {
+      console.log(response);
+      
+    });
+  };
+
   addComment(id) {
     this.submitted = true;
     // stop here if form is invalid
@@ -136,7 +146,22 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     Object.keys(this.commentForm.controls).forEach(key => {
       this.commentForm.controls[key].setErrors(null)
     });
-  }
+  };
+
+  deleteComment (img_id, c_id, alb_id) {
+    // console.log(c_id);
+    // console.log(img_id);
+    if (window.confirm('Delete your comment?')) {
+      this.imageService.deleteComment(img_id, c_id).pipe(takeUntil(this.destroy$)).subscribe((response) => {
+        console.log(response); 
+        let p = response;
+        let hi = p.comments;
+        console.log(hi)
+        // this.GetImageComments(alb_id);
+        this.Comments = response.comment
+      });
+    };
+  };
 
   ngOnDestroy() {
     this.destroy$.next(true);

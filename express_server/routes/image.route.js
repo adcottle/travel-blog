@@ -30,8 +30,8 @@ conn.once("open", () => {
   gfs = Grid(conn.db);
   gfs.collection("fs");
   console.log(
-    chalk.yellow(
-      "[!] The database connection opened successfully in GridFS service"
+    chalk.blueBright(
+      "[!]GridFS stream opened successfully"
     )
   );
 });
@@ -159,7 +159,7 @@ router.route('/latest-posts')
   });
 
 
-//GET: Fetches all images of specified album as JSON/
+//GET: Fetches all images of specified album as JSON
 router.route('/view-album/:id')
   .get((req, res, next) => {
     gfs.files.find({ "metadata.album_id": req.params.id }).sort('uploadDate', -1).toArray((err, files) => {
@@ -173,21 +173,19 @@ router.route('/view-album/:id')
     });
   });
  
+  // Get specific album comments
+router.route('/album-comments/:id').get((req, res, next) => {
+  Image.find({ "metadata.album_id": req.params.id }).then(f => {
+    var fn = [];
+    f.forEach(el => {      
+      // console.log(el.comments)  
+      fn.push(el.comments);   
+      }); 
+      res.json(fn)
+      })  
+  .catch(err => console.log(err));
+})
 
-//GET: Fetches all the lastest as JSON
-router.route('/add-comment')
-  .get((req, res, next) => {
-    gfs.files.find({ "metadata.cover_photo": "on" }).sort('uploadDate', -1).limit(3).toArray((err, files) => {
-      if (!files || files.length == 0) {
-        return res.status(404).json({
-          err: "No files exist"
-        });
-      };
-      //file exist
-      console.log('connecting');
-      return res.json(files)
-    });
-  });
 
 
 // Add Comments to image
@@ -210,118 +208,30 @@ router.route('/add-comment/:id').put((req, res, next) => {
     } else {
       res.json(data)
       // console.log(chalk.cyanBright('Data updated successfully'));
-    }
+    };
+  });
+});
+
+//Let only user who made comment delete
+router.route('/delete-comment/:img_id/:com_id').delete((req, res, next) => {
+  // Find only one document matching the id
+  Image.findOneAndUpdate({ _id: req.params.img_id },
+    { $pull: { comments: { _id: req.params.com_id } } },
+    { new: true }
+  )
+  .then(f => {
+    let comArray = [f]
+    var fn = [];
+    comArray.forEach(el => {
+      fn.push(el.comments);
+    });
+    //console.log(f);
+    res.json(fn)
   })
-})
+  .catch(err => console.log(err));
+});
+
+
 
 module.exports = router;
 
-//GETS ACTUAL IMAGES -- NO LONGER NECESSARY SINCE JUST GETTING METADATA
-
-// router.get('/array', (req, res) => {
-//   gfs.files.find().toArray((err, files) => { 
-//   //   Check if files
-//     if (!files || files.length === 0) {
-//       res.render('array', { files: false });
-//     } else {
-//       files.map(file => {
-//         if (
-//           file.contentType === 'image/jpeg' ||
-//           file.contentType === 'image/png'
-//         ) {
-//           file.isImage = true;
-//         } else {
-//           file.isImage = false;
-//         }
-//       });
-//       res.render('array', { files: files });
-//     }
-//   });
-// });
-
-
-// ///Query to get 3 latest images
-// router.get('/query', (req, res) => {
-//   gfs.files.find({"metadata.cover_photo": "on"}).sort('upload_date', -1).limit(3).toArray((err, files) => { 
-//     if (err) {
-//       return res.status(404).json({ err: err });
-//     }
-//   //   Check if files
-//     if (!files || files.length === 0) {
-//       // res.render('array', { files: false });
-//     } else {
-//       files.map(file => {
-//         if (
-//           file.contentType === 'image/jpeg' ||
-//           file.contentType === 'image/png'
-//         ) {
-//           file.isImage = true;
-//         } else {
-//           file.isImage = false;
-//         }
-//       });
-//       res.render('array', { files: files });
-//     }
-
-//   });
-// });
-
-
-//Get single file json from _id
-// router.get('/favorite-image/:id', (req, res) => {
-//   const ObjectId = require('mongodb').ObjectId;
-//   const id = ObjectId(req.params.id); // convert to ObjectId
-//   gfs.files.findOne({ _id: id }, (err, file) => {
-//     //check if files exist
-//     if (!file || file.length == 0) {
-//       return res.status(404).json({
-//         err: "No files exist"
-//       });
-//     };
-//     //file exist
-//     return res.json(file)
-//   });
-// });
-
-
-// router.get('/favorite-image/',  (req, res) => { 
-// 	//console.log(req.params.id)
-//   const ObjectId = require('mongodb').ObjectId;
-//   var g = req.params.id.split(',');
-// 	let mid = g.map(function(el){String(el);ObjectId(el); return el});
-// 	//console.log(mid);
-//   gfs.files.find(
-     
-//      {_id: {$in: mid}}).toArray ((err, files) => { 
-// 		// check if files exist
-//     console.log('here');
-// 		if (!files || files.length == 0) {
-//       console.log('fail')
-// 		  return res.status(404).json({
-// 			err: "No files exist"
-// 		  });
-// 		};
-// 		//file exist
-// 		// console.log(res.json(files));
-//     console.log('success')
-// 		return res.json(files)
-// 	  });
-// 	});
-
-  //How to return only specific fields
-  // router.route('/album-images/:id')
-  // .get((req, res, next) => {
-  //   gfs.files.find({ "metadata.album_id": req.params.id }).toArray((err, files) => {
-  //     var fn = [];
-  //     files.forEach(element => {      
-  //       fn.push(element._id);     
-  //     });   
-  //     if (!files || files.length == 0) {
-  //       return res.status(404).json({
-  //         err: "No files exist"
-  //       });
-  //     };
-  //     //file exist
-  //     return res.json(fn)
-  //   });
-  // });

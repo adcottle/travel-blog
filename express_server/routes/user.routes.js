@@ -43,8 +43,7 @@ router.route('/update-user/:id').put((req, res, next) => {
 })
 
 // Add User Favorites
-router.route('/add-favorites/:id/:img_id').put((req, res, next) => {   
-   
+router.route('/add-favorites/:id/:img_id').put((req, res, next) => {      
     userSchema.findByIdAndUpdate(req.params.id, {
         $addToSet: {
             favorites : [ {

@@ -25,10 +25,10 @@ mongoose.connect(process.env.DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
-    console.log(chalk.cyan('Database connected'));
+    console.log(chalk.blueBright('Database connected'));
 },
     error => {
-        console.log("Database can't be connected: " + error)
+        console.log(chalk.redBright("Database can't be connected: " + error));
     }
 )
 
@@ -48,5 +48,5 @@ const port = process.env.PORT || 4000;
 app.listen(port, err => {
     if (err)
         throw err
-    console.log('Server listening on port', port)
+    console.log(chalk.yellowBright('Server listening on port', port));
 })

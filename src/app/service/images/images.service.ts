@@ -80,6 +80,17 @@ export class ImagesService {
         catchError(this.handleError)
       )
   }
+
+   //Get Album Comments
+  GetAlbumComments(id: any): Observable<any> {
+    let API_URL = `${this.REST_API}/album-comments/${id}`;
+    return this.httpClient.get(API_URL, { headers: this.httpHeaders })
+      .pipe(map((res: any) => {
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
   
   //AddComment to Image
   AddComment(id: any, data: any) {
@@ -89,7 +100,14 @@ export class ImagesService {
     });
   }
 
-
+  //Remove a comment
+  deleteComment(img_id:any, c_id: any): Observable<any> {
+    // console.log('made it to service' + '     ' + img_id  + '     ' + c_id)
+    let  API_URL = `${this.REST_API}/delete-comment/${img_id}/${c_id}`;
+    return this.httpClient.delete( API_URL, { headers: this.httpHeaders }).pipe(
+      catchError(this.handleError)
+    )
+  }
    
   // Error 
   handleError(error: HttpErrorResponse) {
