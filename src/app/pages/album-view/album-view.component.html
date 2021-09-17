@@ -113,16 +113,12 @@
               </div>
             </form>
           </mat-card-actions>
-
-          <div class="comments" *ngFor="let c of Comments[i]">
-            <p>             
-              <button mat-button (click)="deleteComment(a._id, c._id, a.metadata.album_id)">
-                <mat-icon>delete_outline</mat-icon>
-              </button>
-              <bold>{{c.comment}}</bold>
-            </p>
-          </div>
-          
+          <div class="comments" *ngFor="let c of Comments[i]?.comments">
+            <button mat-button (click)="deleteComment(a._id, c._id, a.metadata.album_id)">
+              <mat-icon>delete_outline</mat-icon>
+            </button>          
+            {{c.comment}}
+          </div>          
         </mat-card>
       </div>
     </ng-container>
@@ -130,3 +126,4 @@
 
 </div>
 <!--pageView-->
+

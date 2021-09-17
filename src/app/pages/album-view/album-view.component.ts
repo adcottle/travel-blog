@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../../service/images/images.service';
 import { CrudService } from '../../service/crud/crud.service';
 import { UserService } from '../../service/user/user.service';
-import { takeUntil } from 'rxjs/operators';
+import { skip, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-album-view',
@@ -26,6 +27,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   submitted = false;
   Favorites: any = [];
   Comments: any = [];
+  
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -60,7 +62,8 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
         this.imageData.forEach(element => {
           const mergedObj = { ...t, ...element };
           this.albumImage.push(mergedObj);
-          this.Comments.push(mergedObj.comments);
+          this.GetImageComments(id);
+          // this.Comments = mergedObj.comments;
           // console.log(this.Comments);
         });
       });
@@ -125,13 +128,19 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     });
   };
 
-  GetImageComments(album_id){
-    console.log(this.imageData)
-    this.imageService.GetAlbumComments(album_id).pipe(takeUntil(this.destroy$)).subscribe(response => {
-      console.log(response);
-      
+  GetImageComments(album_id) {
+    this.imageService.GetAlbumComments(album_id).pipe(takeUntil(this.destroy$))
+    .subscribe(res=>{   
+      this.Comments = res;  
+      // var cx = res;
+      //  cx.map(t1 => ({...t1, ...this.albumImage.find(t2 => t2._id === t1._id)}));      
     });
   };
+
+  trackByFn(index: any, item: any) {
+    return index;
+  }
+ 
 
   addComment(id) {
     this.submitted = true;
@@ -146,19 +155,15 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     Object.keys(this.commentForm.controls).forEach(key => {
       this.commentForm.controls[key].setErrors(null)
     });
+    this.GetImageComments(this.id);
   };
 
   deleteComment (img_id, c_id, alb_id) {
-    // console.log(c_id);
-    // console.log(img_id);
     if (window.confirm('Delete your comment?')) {
       this.imageService.deleteComment(img_id, c_id).pipe(takeUntil(this.destroy$)).subscribe((response) => {
-        console.log(response); 
-        let p = response;
-        let hi = p.comments;
-        console.log(hi)
-        // this.GetImageComments(alb_id);
-        this.Comments = response.comment
+        // console.log(response);         
+        this.GetImageComments(alb_id);
+        // this.Comments = response.comment        
       });
     };
   };

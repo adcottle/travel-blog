@@ -175,15 +175,18 @@ router.route('/view-album/:id')
  
   // Get specific album comments
 router.route('/album-comments/:id').get((req, res, next) => {
-  Image.find({ "metadata.album_id": req.params.id }).then(f => {
+  Image.find({ "metadata.album_id": req.params.id }).sort('-uploadDate').then(f => {
+    // console.log(f);
     var fn = [];
-    f.forEach(el => {      
-      // console.log(el.comments)  
-      fn.push(el.comments);   
-      }); 
-      res.json(fn)
-      })  
-  .catch(err => console.log(err));
+    f.forEach(el => {
+      let img_com = Object.create({});
+      img_com._id = el._id;
+      img_com.comments = el.comments
+      fn.push(img_com)
+    });
+    res.json(fn)
+  })
+    .catch(err => console.log(err));
 })
 
 
@@ -214,6 +217,8 @@ router.route('/add-comment/:id').put((req, res, next) => {
 
 //Let only user who made comment delete
 router.route('/delete-comment/:img_id/:com_id').delete((req, res, next) => {
+  // console.log(req.params.img_id);
+  // console.log(req.params.com_id)
   // Find only one document matching the id
   Image.findOneAndUpdate({ _id: req.params.img_id },
     { $pull: { comments: { _id: req.params.com_id } } },
@@ -225,7 +230,7 @@ router.route('/delete-comment/:img_id/:com_id').delete((req, res, next) => {
     comArray.forEach(el => {
       fn.push(el.comments);
     });
-    //console.log(f);
+    // console.log(f);
     res.json(fn)
   })
   .catch(err => console.log(err));
