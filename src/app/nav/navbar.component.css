@@ -1,0 +1,11 @@
+/* sticky navbar */
+mdb-navbar {
+    z-index: 999;
+    width: 100%;
+    font-family: "Amaranth";
+  }
+  .sticky-nav-wrapper {
+    min-height: 40px;
+    margin-top: 15px;
+    background-color: #003366;
+  }

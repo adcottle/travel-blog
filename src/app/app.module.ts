@@ -15,6 +15,9 @@ import { StickyNavModule } from 'ng2-sticky-nav';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgImageSliderModule } from 'ng-image-slider';
 
+/*NAVBAR module*/
+import { NavbarComponent } from './nav/navbar.component'
+
 /*App Pages*/
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -25,8 +28,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AddMediaComponent } from './pages/add-media/add-media.component';
 import { AlbumViewComponent } from './pages/album-view/album-view.component';
 
-//Modal Component
-  import { ImageModalComponent } from './pages/album-view/image-modal/image-modal.component'
+//Modal Components
+  import { ImageModalComponent } from './pages/album-view/image-modal/image-modal.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import { AlbumViewComponent } from './pages/album-view/album-view.component';
     ProfileComponent,
     AddMediaComponent,
     AlbumViewComponent,
-    ImageModalComponent
+    ImageModalComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

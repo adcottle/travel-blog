@@ -6,63 +6,7 @@
     </section>
   </main>
   <!-- start nav-->
-  <div class="sticky-nav-wrapper mat-elevation-z8 mb-4">
-    <!--Navbar-->
-    <mdb-navbar style="background-color: #003366;" SideClass="navbar navbar-expand-lg navbar-dark "
-      [containerInside]="false" ngStickyNav>
-
-      <!-- Navbar brand -->
-      <mdb-navbar-brand><a class="navbar-brand" href="#">Explore With Us</a></mdb-navbar-brand>
-      <!-- Collapsible content -->
-      <links>
-        <!-- Links -->
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown" dropdown>
-            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-              <mdb-icon fas icon="user"></mdb-icon>
-              Family Time<span class="caret"></span>
-            </a>
-            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Activities</a>
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Marching Band</a>
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Misc</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown" dropdown>
-            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-              <mdb-icon fas icon="user"></mdb-icon>
-              Visitors<span class="caret"></span>
-            </a>
-            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Mom & Crystal</a>
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Donnis</a>
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Chrystal & Junior</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-light" mdbWavesEffect>
-              <mdb-icon fas icon="cog"></mdb-icon>
-              Favorite Album
-            </a>
-          </li>
-          <!-- Dropdown -->
-          <li class="nav-item dropdown" dropdown>
-            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-              <mdb-icon fas icon="user"></mdb-icon>
-              Trips<span class="caret"></span>
-            </a>
-            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Spring Break 2021</a>
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Disney Cruise</a>
-            </div>
-          </li>
-        </ul>
-        <!-- Links -->
-      </links>
-      <!-- Collapsible content -->
-    </mdb-navbar>
-    <!--/.Navbar-->
-  </div>
+  <app-navbar></app-navbar>
 
   <div class="row ">
     <ng-container *ngFor="let a of albumImage;let i = index">

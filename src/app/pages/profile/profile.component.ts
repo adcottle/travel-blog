@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
     this.imageService.OpenImage(filename).pipe(takeUntil(this.destroy$)).subscribe (img => {      
       this.dialog.open(ImageModalComponent,{
         height: '100%',
-        width: '100%',
+        width: 'auto',
         data:{        
           imageData: img
         }
