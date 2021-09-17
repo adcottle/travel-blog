@@ -17,12 +17,12 @@ import { NgImageSliderModule } from 'ng-image-slider';
 
 /*NAVBAR module*/
 import { NavbarComponent } from './nav/navbar.component'
+import { FooterComponent } from './nav/footer/footer.component';
 
 /*App Pages*/
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AboutComponent } from './pages/about/about.component';
-import { IdeasComponent } from './pages/ideas/ideas.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AddMediaComponent } from './pages/add-media/add-media.component';
@@ -31,20 +31,19 @@ import { AlbumViewComponent } from './pages/album-view/album-view.component';
 //Modal Components
   import { ImageModalComponent } from './pages/album-view/image-modal/image-modal.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
     AboutComponent,
-    IdeasComponent,
     NotFoundComponent,
     ProfileComponent,
     AddMediaComponent,
     AlbumViewComponent,
     ImageModalComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

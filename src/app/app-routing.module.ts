@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { LoginComponent } from './pages/login/login.component';
-import { IdeasComponent } from './pages/ideas/ideas.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AddMediaComponent } from './pages/add-media/add-media.component';
@@ -19,7 +18,6 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'add-media', component: AddMediaComponent },
   { path: 'user-profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'ideas', component: IdeasComponent, canActivate: [AuthGuard]},
   { path: '404', component: NotFoundComponent},
   
 

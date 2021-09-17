@@ -41,7 +41,7 @@ router.route('/update-user/:id').put((req, res, next) => {
         }
     })
 })
-
+ 
 // Add User Favorites
 router.route('/add-favorites/:id/:img_id').put((req, res, next) => {      
     userSchema.findByIdAndUpdate(req.params.id, {
@@ -86,6 +86,18 @@ router.route('/delete-favorite/:id/:img_id').delete((req,res,next) => {
     .catch(err => console.log(err));
 });
 
+// Delete User
+router.route('/delete-user/:id').delete((req, res, next) => {
+    userSchema.findByIdAndRemove(req.params.id, (error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.status(200).json({
+                msg: data
+            })
+        }
+    })
+})
 
 
 module.exports = router;
