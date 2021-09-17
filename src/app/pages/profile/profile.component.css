@@ -1,18 +1,28 @@
-.example-small-box, .example-large-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.galHolder{
     margin: 16px;
     padding: 16px;
     border-radius: 8px;
-  }
-  
-  .example-small-box {
-    height: 100px;
-    width: 100px;
-  }
-  
-  .example-large-box {
-    height: 300px;
-    width: 300px;
-  }
+    height: auto;
+    width: 98%;
+}
+
+.thumbimg{
+  min-height: 200px;
+  max-height: 200px;
+  min-width: 100%;
+  cursor: pointer;
+}
+
+
+figcaption {
+color: mediumseagreen;
+font-style: italic;
+font-weight: 700;
+font-size: 18px;
+padding-top: 1%;
+font-family: "Delius", cursive;
+}
+.coming-soon {
+font-size: 24px;
+color: goldenrod;
+}

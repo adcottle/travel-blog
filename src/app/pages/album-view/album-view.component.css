@@ -1,79 +1,126 @@
 .pageView {
-   background-color:#f7f7f7;   
+    background-color: #f7f7f7;
 }
 
 /*************TOP Banner*************/
-  
+
 
 .hero {
-  background: center;
-  background-size: cover;
-  padding: 4rem 2rem;
-  height: 450px;
-  /* grid styles */
-  margin-bottom: 50px;
-  -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, .25) ;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    3px 3px 5px 6px rgba(0, 0, 0, .25) ;  /* Firefox 3.5 - 3.6 */
-  box-shadow:        3px 3px 5px 6px rgba(0, 0, 0, .25);
+    background: center;
+    background-size: cover;
+    padding: 4rem 2rem;
+    height: 450px;
+    /* grid styles */
+    margin-bottom: 20px;
+    -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25); /* Firefox 3.5 - 3.6 */
+    box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25);
 }
 
 .hero > * {
-  color: white;  
+    color: white;
 }
 
 
 .boxborder {
-  position: absolute;
-  font-size: 3rem;
-  top: 30%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  z-index: 99;
-  text-align: center;
-  font-family: "Delius" ;
-  font-weight: 300;
-  text-transform: uppercase;
-  background-color: rgba(0, 0, 0, .55);
-  box-shadow: 0 1em 2em -1em rgba(255, 255, 255, .5);
-  padding: 1em 2em;
-  line-height: 1.5;
+    position:relative;
+    font-size: 3rem;
+    top: 35%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    z-index: 99;
+    text-align: center;
+    font-family: "Delius";
+    font-weight: 300;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0.55);
+    box-shadow: 0 1em 2em -1em rgba(255, 255, 255, 0.5);
+    padding: 1em 2em;
+    line-height: 1.5;
 }
 .boxborder small {
-  display: block;
-  text-transform: lowercase;
-  font-size: 0.7em;
+    display: block;
+    text-transform: lowercase;
+    font-size: 0.7em;
 }
 .boxborder small:first-child {
-  border-bottom: 1px solid rgba(255, 255, 255, .25);
-  padding-bottom: 0.5em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    padding-bottom: 0.5em;
 }
 .boxborder small:last-child {
-  border-top: 1px solid rgba(255, 255, 255, .25);
-  padding-top: 0.5em;
-  font-family: "Handlee" ;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    padding-top: 0.5em;
+    font-family: "Handlee";
+}
+/*****************STICKY NAV**/
+/* sticky navbar */
+mdb-navbar {
+    z-index: 999;
+    width: 100%;
+    font-family: "Delius";
+}
+.sticky-nav-wrapper {
+    min-height: 40px;
+    /* margin-top: 15px; */
+    background-color: #003366;
 }
 
+/*****ALBUM PICS****/
+
 mat-card > img {
-  min-height: 400px;
-  max-height: 400px;
-  min-width: 100%;
-  cursor: pointer;
+    min-height: 400px;
+    max-height: 400px;
+    min-width: 100%;
+    cursor: pointer;
 }
 mat-card {
-  -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, .25) !important;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    3px 3px 5px 6px rgba(0, 0, 0, .25) !important;  /* Firefox 3.5 - 3.6 */
-  box-shadow:        3px 3px 5px 6px rgba(0, 0, 0, .25)!important;
+    -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important; /* Firefox 3.5 - 3.6 */
+    box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;
 }
 mat-card-title {
-  color: mediumseagreen;
-  
-  font-family: "Delius" ;
-  font-weight: bold;
-  font-size: 24px;
+    color: mediumseagreen;
+
+    font-family: "Delius";
+    font-weight: bold;
+    font-size: 20px;
 }
 
 mat-card-content {
-  font-family: "Handlee" ;
-  font-size: 20px;
+    font-family: "Handlee";
+    font-size: 20px;
+}
+.mat-form-field {
+    width: 100%;
 }
 
+.comIcon {
+    color: mediumseagreen;
+}
+button {
+    background-color: transparent !important;
+    border: transparent !important;
+}
+mat-icon {
+    background-color: transparent !important;
+    border: transparent !important;
+}
+
+.cardImg {
+    position: relative;
+
+}
+.cardImg img {
+    display: block;
+    margin-top: -15px;
+    min-height: 400px;
+    max-height: 400px;
+    min-width: 100%;
+    cursor: pointer;
+}
+.favIcons {
+    position: absolute;
+    top: 0;
+    right: -15px;
+    color: red;
+}

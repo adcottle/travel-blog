@@ -156,8 +156,8 @@ getMerged(){
     trip = tripData;
     // console.log(trip);
     this.imageService.GetLatest().pipe(takeUntil(this.destroy$)).subscribe( (imageData: any =[]) => {      
-      
-      image = imageData.files;
+      // console.log(imageData)
+      image = imageData;
       // console.log(image);
       this.Metadata = this.mergeArrayObjects(trip,image);
     });
@@ -174,7 +174,7 @@ mergeArrayObjects(arr1,arr2){
 };
 
 openAlbum(id) {
-  console.log(id);
+  // console.log(id);
   this.router.navigate(['album-view/' + id]);
 }
 

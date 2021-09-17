@@ -15,7 +15,8 @@ app.use(cors());
 
 //Express APIs
 const trips = require('./routes/trip.routes');
-const users = require('./routes/auth.routes');
+const auth = require('./routes/auth.routes');
+const users = require('./routes/user.routes');
 const images = require('./routes/image.route');
 
 //MongoDB conection
@@ -24,10 +25,10 @@ mongoose.connect(process.env.DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
-    console.log(chalk.cyan('Database connected'));
+    console.log(chalk.blueBright('Database connected'));
 },
     error => {
-        console.log("Database can't be connected: " + error)
+        console.log(chalk.redBright("Database can't be connected: " + error));
     }
 )
 
@@ -38,13 +39,14 @@ app.set('view engine','ejs');
 
 //Define Routes
 app.use('/trips', trips)
-app.use('/users', users)
+app.use('/auth', auth)
 app.use('/images', images)
+app.use('/users', users)
 
 // Define PORT
 const port = process.env.PORT || 4000;
 app.listen(port, err => {
     if (err)
         throw err
-    console.log('Server listening on port', port)
+    console.log(chalk.yellowBright('Server listening on port', port));
 })

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Image } from '../image';
-import { catchError, map } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+
 
 
 @Injectable({
@@ -11,11 +12,14 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 export class ImagesService {
     // Node/Express API
     REST_API: string = 'http://localhost:4000/images';
+    
+    
 
     // Http Header
-    httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');   
+  
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient ) {}
 
    // Get all Images in JSON
    GetImagesList() {
@@ -55,9 +59,55 @@ export class ImagesService {
         catchError(this.handleError)
       )
   }
+  // Get single image for favorites
+  GetFavorite(id: any): Observable<any> {
+    let API_URL = `${this.REST_API}/favorite-image/${id}`;
+    return this.httpClient.get(API_URL, { headers: this.httpHeaders })
+      .pipe(map((res: any) => {
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
 
- 
+  //Get list of picture IDs in an album
+  GetAlbumList(id: any): Observable<any> {
+    let API_URL = `${this.REST_API}/album-images/${id}`;
+    return this.httpClient.get(API_URL, { headers: this.httpHeaders })
+      .pipe(map((res: any) => {
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
 
+   //Get Album Comments
+  GetAlbumComments(id: any): Observable<any> {
+    let API_URL = `${this.REST_API}/album-comments/${id}`;
+    return this.httpClient.get(API_URL, { headers: this.httpHeaders })
+      .pipe(map((res: any) => {
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
+  
+  //AddComment to Image
+  AddComment(id: any, data: any) {
+    let API_URL = `${this.REST_API}/add-comment/${id}`;
+    return this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
+    .subscribe(data => {
+    });
+  }
+
+  //Remove a comment
+  deleteComment(img_id:any, c_id: any): Observable<any> {
+    // console.log('made it to service' + '     ' + img_id  + '     ' + c_id)
+    let  API_URL = `${this.REST_API}/delete-comment/${img_id}/${c_id}`;
+    return this.httpClient.delete( API_URL, { headers: this.httpHeaders }).pipe(
+      catchError(this.handleError)
+    )
+  }
    
   // Error 
   handleError(error: HttpErrorResponse) {
