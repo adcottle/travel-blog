@@ -8,6 +8,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AddMediaComponent } from './pages/add-media/add-media.component';
 import { AlbumViewComponent } from './pages/album-view/album-view.component';
+import { ListAllComponent } from './pages/list-all/list-all.component';
 
 import { AuthGuard } from './service/auth/auth.guard'
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'album-view/:id', component: AlbumViewComponent },
   { path: 'about', component: AboutComponent },
   { path: 'add-media', component: AddMediaComponent },
+  { path: 'list-all', component: ListAllComponent },
   { path: 'user-profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '404', component: NotFoundComponent},
   

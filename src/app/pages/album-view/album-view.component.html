@@ -58,11 +58,12 @@
             </form>
           </mat-card-actions>
           <div class="comments" *ngFor="let c of Comments[i]?.comments">
-            <button mat-button (click)="deleteComment(a._id, c._id, a.metadata.album_id)">
+            <button mat-button (click)="deleteComment(a._id, c._id, a.metadata.album_id)" *ngIf="user_id === c.user ">
               <mat-icon>delete_outline</mat-icon>
             </button>          
-            {{c.comment}}
-          </div>          
+            {{c.comment}} 
+          </div>         
+          
         </mat-card>
       </div>
     </ng-container>
