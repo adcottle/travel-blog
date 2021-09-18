@@ -9,8 +9,22 @@ mdb-navbar {
     margin-top: 15px;
     background-color: #003366;
 }
-.homelogo{
+.homelogo {
     color: white;
     margin-right: 10px;
     font-size: larger;
 }
+
+
+/*************Cellphone sizing****/
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) {
+    ul li a {
+        background-color: #e5eaef;
+        color: #003366 !important;
+    }
+    .homelogo {
+        color:white;
+        margin-right: 10px;
+        font-size: larger;
+    } 
+  }
