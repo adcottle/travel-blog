@@ -57,7 +57,6 @@
               </div>
             </form>
           </mat-card-actions>
-<<<<<<< HEAD
           <!-- <div class="comments" *ngFor="let c of Comments[i]?.comments"> -->
             <div class="comments" *ngFor="let c of Comments[i]">
             <div class="user-comments" >
@@ -69,13 +68,6 @@
               <p>{{c.firstName}}  {{c.lastName}} </p>
             </div>
             
-=======
-          <div class="comments" *ngFor="let c of Comments[i]?.comments">
-            <button mat-button (click)="deleteComment(a._id, c._id, a.metadata.album_id)" *ngIf="user_id === c.user ">
-              <mat-icon>delete_outline</mat-icon>
-            </button>          
-            {{c.comment}} 
->>>>>>> 7eef99126f733e147e3922803569be3ddea5a932
           </div>         
           
         </mat-card>
