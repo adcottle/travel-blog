@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
+
 @Component({
   selector: 'app-album-view',
   templateUrl: './album-view.component.html',
@@ -27,7 +28,11 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   submitted = false;
   Favorites: any = [];
   Comments: any = [];
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 7eef99126f733e147e3922803569be3ddea5a932
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -128,6 +133,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     this.imageService.GetAlbumComments(album_id).pipe(takeUntil(this.destroy$))
       .subscribe(res => {
         this.Comments = res;
+<<<<<<< HEAD
         
         //  cx.map(t1 => ({...t1, ...this.albumImage.find(t2 => t2._id === t1._id)})); 
         var vpid = [];
@@ -170,6 +176,11 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     return ident;
   };
 
+=======
+        //  cx.map(t1 => ({...t1, ...this.albumImage.find(t2 => t2._id === t1._id)}));      
+      });
+  }; 
+>>>>>>> 7eef99126f733e147e3922803569be3ddea5a932
 
   addComment(id) {
     this.submitted = true;
