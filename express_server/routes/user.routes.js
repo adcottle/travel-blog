@@ -10,22 +10,21 @@ router.route('/').get((req, res) => {
             return next(error)
         } else {
             res.status(200).json(response)
-        }
-    })
-})
+        };
+    });
+});
 
-// Get Single User
-router.route('/user-profile/:id').get((req, res, next) => {
-    userSchema.findById(req.params.id, (error, data) => {
+// Get User name
+router.route('/user-name/:id').get((req, res, next) => {
+    userSchema.findById(req.params.id, 'firstName lastName', (error, data) => {
         if (error) {
             return next(error);
         } else {
-            res.status(200).json({
-                msg: data
-            })
-        }
-    })
-})
+            res.status(200).json(data);
+        };
+    });
+});
+
 
 // Update User
 router.route('/update-user/:id').put((req, res, next) => {
@@ -38,9 +37,9 @@ router.route('/update-user/:id').put((req, res, next) => {
             
         } else {
             res.json(data)            
-        }
-    })
-})
+        };
+    });
+});
  
 // Add User Favorites
 router.route('/add-favorites/:id/:img_id').put((req, res, next) => {      

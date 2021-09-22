@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../../service/images/images.service';
 import { CrudService } from '../../service/crud/crud.service';
 import { UserService } from '../../service/user/user.service';
-import { skip, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
@@ -18,7 +18,7 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 export class AlbumViewComponent implements OnInit, OnDestroy {
 
   id: any;
-  user_id: any;
+  user_id: any = [];
   albumImage: any = [];
   imageData: any = [];
   Post: any = [];
@@ -27,7 +27,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   submitted = false;
   Favorites: any = [];
   Comments: any = [];
-  
+
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -52,7 +52,6 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   }
 
   getMerged(id) {
-    
     this.crudService.GetTrip(id).pipe(takeUntil(this.destroy$)).subscribe((tripData: any = []) => {
       this.Post = tripData;
       this.imageService.GetAlbum(id).pipe(takeUntil(this.destroy$)).subscribe((imageData: any = []) => {
@@ -63,8 +62,6 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
           const mergedObj = { ...t, ...element };
           this.albumImage.push(mergedObj);
           this.GetImageComments(id);
-          // this.Comments = mergedObj.comments;
-          // console.log(this.Comments);
         });
       });
     });
@@ -111,8 +108,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
       var uri = 'http://localhost:4000/images/file/'
       var CIuri = ci[0].filename;
       this.Cover = uri + CIuri;
-    }
-    )
+    });
   };
 
 
@@ -130,17 +126,50 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
 
   GetImageComments(album_id) {
     this.imageService.GetAlbumComments(album_id).pipe(takeUntil(this.destroy$))
-    .subscribe(res=>{   
-      this.Comments = res;  
-      // var cx = res;
-      //  cx.map(t1 => ({...t1, ...this.albumImage.find(t2 => t2._id === t1._id)}));      
-    });
+      .subscribe(res => {
+        this.Comments = res;
+        
+        //  cx.map(t1 => ({...t1, ...this.albumImage.find(t2 => t2._id === t1._id)})); 
+        var vpid = [];
+        var result = this.Comments.forEach(el => {
+          var x = el.comments.forEach(itm => {
+            vpid.push(itm.user);
+          });
+        });
+        var fpid = vpid.filter(function (item, pos) {
+          return vpid.indexOf(item) == pos;
+        });       
+        this.Comments = this.getUserProfiles(fpid, res);
+        console.log(this.Comments)
+        //console.log(uid)  
+        //this.testProfile(res);
+      });
   };
 
-  trackByFn(index: any, item: any) {
-    return index;
-  }
- 
+
+  getUserProfiles(profile_id, cxdata) {
+    //console.log(profile_id);
+    // console.log(cxdata);
+    let ident = [];
+    profile_id.forEach(pid => {
+      this.userService.getUserProfile(pid).pipe(takeUntil(this.destroy$))
+        .subscribe(res => {
+          var resArr = []
+          resArr.push(res)//user name response
+          //console.log(resArr);
+            cxdata.forEach(item => {
+              var cx = [item.comments];
+              cx.forEach(el => {
+                // console.log(el);
+                const a3 = el.map(t1 => ({...t1, ...resArr.find(t2 => t2._id === t1.user)}));
+                ident.push(a3)
+              })
+            });
+        });
+    });
+    return ident;
+  };
+
 
   addComment(id) {
     this.submitted = true;
@@ -158,7 +187,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     this.GetImageComments(this.id);
   };
 
-  deleteComment (img_id, c_id, alb_id) {
+  deleteComment(img_id, c_id, alb_id) {
     if (window.confirm('Delete your comment?')) {
       this.imageService.deleteComment(img_id, c_id).pipe(takeUntil(this.destroy$)).subscribe((response) => {
         // console.log(response);         

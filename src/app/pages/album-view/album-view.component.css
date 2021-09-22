@@ -115,3 +115,6 @@ mat-icon {
 .comments {
     font-family: "Delius";
 }
+.user-comments {
+    border:1px solid orange; 
+}

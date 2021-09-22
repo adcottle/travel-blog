@@ -6,8 +6,11 @@ const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const chalk = require('chalk');
 Grid.mongo = mongoose.mongo;
+ObjectID = require('mongodb').ObjectID
 
 const Image = require('../model/Image');
+const users = require('../model/User');
+const { ObjectId } = require("mongodb");
 
 const conn = mongoose.createConnection(process.env.DB, {
   useNewUrlParser: true,
@@ -175,16 +178,11 @@ router.route('/view-album/:id')
  
   // Get specific album comments
 router.route('/album-comments/:id').get((req, res, next) => {
-  Image.find({ "metadata.album_id": req.params.id }).sort('-uploadDate').then(f => {
-    // console.log(f);
-    var fn = [];
-    f.forEach(el => {
-      let img_com = Object.create({});
-      img_com._id = el._id;
-      img_com.comments = el.comments
-      fn.push(img_com)
-    });
-    res.json(fn)
+  Image.find({ "metadata.album_id": req.params.id })
+  .sort('-uploadDate')
+  .select('comments')
+  .then(data => {
+    res.json(data)
   })
     .catch(err => console.log(err));
 })
@@ -217,25 +215,18 @@ router.route('/add-comment/:id').put((req, res, next) => {
 
 //Let only user who made comment delete
 router.route('/delete-comment/:img_id/:com_id').delete((req, res, next) => {
-  // console.log(req.params.img_id);
-  // console.log(req.params.com_id)
+
   // Find only one document matching the id
   Image.findOneAndUpdate({ _id: req.params.img_id },
     { $pull: { comments: { _id: req.params.com_id } } },
     { new: true }
   )
-  .then(f => {
-    let comArray = [f]
-    var fn = [];
-    comArray.forEach(el => {
-      fn.push(el.comments);
-    });
-    // console.log(f);
-    res.json(fn)
+  .select('comments')
+  .then(data => {
+    res.json(data)
   })
   .catch(err => console.log(err));
 });
-
 
 
 module.exports = router;

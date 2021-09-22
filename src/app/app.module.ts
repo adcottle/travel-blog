@@ -30,6 +30,7 @@ import { AlbumViewComponent } from './pages/album-view/album-view.component';
 
 //Modal Components
   import { ImageModalComponent } from './pages/album-view/image-modal/image-modal.component';
+import { ListAllComponent } from './pages/list-all/list-all.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AlbumViewComponent } from './pages/album-view/album-view.component';
     AlbumViewComponent,
     ImageModalComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ListAllComponent
   ],
   imports: [
     BrowserModule,
