@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Image } from '../image';
-import { tap, catchError, map } from 'rxjs/operators';
+
+import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-
 
 
 @Injectable({
@@ -43,6 +42,7 @@ export class ImagesService {
     let API_URL = `${this.REST_API}/view-album/${id}`;
     return this.httpClient.get(API_URL, { headers: this.httpHeaders })
       .pipe(map((res: any) => {
+       
         return res || {}
       }),
         catchError(this.handleError)
@@ -79,13 +79,13 @@ export class ImagesService {
       }),
         catchError(this.handleError)
       )
-  }
-
-   //Get Album Comments
-  GetAlbumComments(id: any): Observable<any> {
+  };
+  //  //Get Album Comments
+   GetAlbumComments(id: any): Observable<any> {
+    //  console.log(id)     
     let API_URL = `${this.REST_API}/album-comments/${id}`;
     return this.httpClient.get(API_URL, { headers: this.httpHeaders })
-      .pipe(map((res: any) => {
+      .pipe(map(res => {
         return res || {}
       }),
         catchError(this.handleError)

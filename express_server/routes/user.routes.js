@@ -20,7 +20,7 @@ router.route('/user-name/:id').get((req, res, next) => {
         if (error) {
             return next(error);
         } else {
-            res.status(200).json(data);
+            res.status(200).json(data); 
         };
     });
 });

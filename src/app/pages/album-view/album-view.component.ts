@@ -8,8 +8,6 @@ import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-
 
 @Component({
   selector: 'app-album-view',
@@ -28,6 +26,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   submitted = false;
   Favorites: any = [];
   Comments: any = [];
+
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -60,9 +59,10 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
         this.myFavorites(this.user_id, this.imageData);
         this.imageData.forEach(element => {
           const mergedObj = { ...t, ...element };
+          // console.log(mergedObj);
           this.albumImage.push(mergedObj);
-          this.GetImageComments(id);
         });
+        this.GetImageComments(id);
       });
     });
   };
@@ -126,50 +126,13 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
 
   GetImageComments(album_id) {
     this.imageService.GetAlbumComments(album_id).pipe(takeUntil(this.destroy$))
-      .subscribe(res => {
-        this.Comments = res;
-        
-        //  cx.map(t1 => ({...t1, ...this.albumImage.find(t2 => t2._id === t1._id)})); 
-        var vpid = [];
-        var result = this.Comments.forEach(el => {
-          var x = el.comments.forEach(itm => {
-            vpid.push(itm.user);
-          });
-        });
-        var fpid = vpid.filter(function (item, pos) {
-          return vpid.indexOf(item) == pos;
-        });       
-        this.Comments = this.getUserProfiles(fpid, res);
-        console.log(this.Comments)
-        //console.log(uid)  
-        //this.testProfile(res);
+    .subscribe(com =>  {
+      com.forEach(itm => {
+        this.Comments.push(itm)
       });
+    });    //endsubscribe
+    console.log(this.Comments)
   };
-
-
-  getUserProfiles(profile_id, cxdata) {
-    //console.log(profile_id);
-    // console.log(cxdata);
-    let ident = [];
-    profile_id.forEach(pid => {
-      this.userService.getUserProfile(pid).pipe(takeUntil(this.destroy$))
-        .subscribe(res => {
-          var resArr = []
-          resArr.push(res)//user name response
-          //console.log(resArr);
-            cxdata.forEach(item => {
-              var cx = [item.comments];
-              cx.forEach(el => {
-                // console.log(el);
-                const a3 = el.map(t1 => ({...t1, ...resArr.find(t2 => t2._id === t1.user)}));
-                ident.push(a3)
-              })
-            });
-        });
-    });
-    return ident;
-  };
-
 
   addComment(id) {
     this.submitted = true;
