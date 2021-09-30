@@ -15,10 +15,10 @@ import { AuthGuard } from './service/auth/auth.guard'
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'album-view/:id', component: AlbumViewComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'add-media', component: AddMediaComponent },
-  { path: 'list-all', component: ListAllComponent },
+  { path: 'album-view/:id', component: AlbumViewComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
+  { path: 'add-media', component: AddMediaComponent, canActivate: [AuthGuard] },
+  { path: 'list-all', component: ListAllComponent, canActivate: [AuthGuard] },
   { path: 'user-profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '404', component: NotFoundComponent},
   
