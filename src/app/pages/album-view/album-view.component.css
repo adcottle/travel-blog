@@ -65,8 +65,9 @@ mat-card > img {
 mat-card {
     -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important; /* Firefox 3.5 - 3.6 */
-    box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;
+    box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;    
 }
+
 mat-card-title {
     color: mediumseagreen;
     font-family: "Thasadith";
@@ -114,6 +115,9 @@ mat-icon {
 }
 .comments {
     font-family: "Delius";
+    min-height: 200px;
+    max-height: 200px;
+    overflow-y:auto;
 }
 .comments li {
     border-top: none;
