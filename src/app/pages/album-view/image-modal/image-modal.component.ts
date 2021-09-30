@@ -20,7 +20,6 @@ export class ImageModalComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.imageData)
     this.filename = this.imageData.imageData.filename
   }
 

@@ -20,16 +20,13 @@ export class UserService {
   constructor(private http: HttpClient,
     public router: Router) { }
 
-     // Get single trip
-  // GetTrip(_id:any): Observable<any> {
-  //   let API_URL = `${this.endpoint}/trip/${_id}`;
-  //   return this.http.get(API_URL, { headers: this.httpHeaders })
-  //     .pipe(map((res: any) => {
-  //         return res || {}
-  //       }),
-  //       catchError(this.handleError)
-  //     )
-  // }
+  // Get User Names
+  getUserProfile(id): Observable<any> {
+    let API_URL = `${this.endpoint}/user-name/${id}`;
+    return this.http.get(API_URL, { headers: this.httpHeaders }).pipe(      
+      catchError(this.handleError)
+    )
+  }
 
   //Get a list favorites
   GetMyFavorites(id: any): Observable<any> {

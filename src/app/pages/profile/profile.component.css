@@ -1,3 +1,7 @@
+.pageView {
+  height: 100%;
+}
+
 .galHolder{
     margin: 16px;
     padding: 16px;
@@ -20,7 +24,7 @@ font-style: italic;
 font-weight: 700;
 font-size: 18px;
 padding-top: 1%;
-font-family: "Delius", cursive;
+font-family: "Thasadith";
 }
 .coming-soon {
 font-size: 24px;

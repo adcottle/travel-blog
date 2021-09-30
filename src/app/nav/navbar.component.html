@@ -1,0 +1,56 @@
+<!-- start nav-->
+<div class="sticky-nav-wrapper mat-elevation-z8 mb-4">
+    <!--Navbar-->
+    <mdb-navbar style="background-color: #003366;" SideClass="navbar navbar-expand-lg navbar-dark "
+       [containerInside]="false" ngStickyNav>
+  
+       <!-- Navbar brand -->
+       <mdb-navbar-brand><a class="navbar-brand" href="home"><mdb-icon class="homelogo" fas icon="compass"></mdb-icon> Explore With Us</a></mdb-navbar-brand>
+       
+       <!-- Collapsible content -->
+       <links>
+          <!-- Links -->
+          <ul class="navbar-nav ml-auto">
+             <!-- <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                   mdbWavesEffect>
+                   <mdb-icon fas icon="user"></mdb-icon>
+                   Family Time<span class="caret"></span>
+                </a>
+                <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                   <a class="dropdown-item waves-light" mdbWavesEffect href="#">Activities</a>
+                   <a class="dropdown-item waves-light" mdbWavesEffect href="#">Marching Band</a>
+                   <a class="dropdown-item waves-light" mdbWavesEffect href="#">Misc</a>
+                </div>
+             </li>
+             <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                   mdbWavesEffect>
+                   <mdb-icon fas icon="user"></mdb-icon>
+                   Visitors<span class="caret"></span>
+                </a>
+                <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                   <a class="dropdown-item waves-light" mdbWavesEffect href="#">Mom & Crystal</a>
+                   <a class="dropdown-item waves-light" mdbWavesEffect href="#">Donnis</a>
+                   <a class="dropdown-item waves-light" mdbWavesEffect href="#">Chrystal & Junior</a>
+                </div>
+             </li> -->
+             <li class="nav-item">
+                <a class="nav-link waves-light" mdbWavesEffect href="list-all">
+                   <mdb-icon fas icon="list"></mdb-icon>
+                   Album List
+                </a>
+             </li>
+             <!-- Dropdown -->
+             <li class="nav-item">
+               <a class="nav-link waves-light" mdbWavesEffect href="{{'http://localhost:4200/user-profile/' + user_id}}">
+                  <mdb-icon fas icon="user"></mdb-icon>Profile                 
+               </a>
+            </li>
+          </ul>
+          <!-- Links -->
+       </links>
+       <!-- Collapsible content -->
+    </mdb-navbar>
+    <!--/.Navbar-->
+  </div>

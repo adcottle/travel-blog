@@ -6,8 +6,11 @@ const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const chalk = require('chalk');
 Grid.mongo = mongoose.mongo;
+ObjectID = require('mongodb').ObjectID
 
 const Image = require('../model/Image');
+const Users = require('../model/User');
+const { ObjectId } = require("mongodb");
 
 const conn = mongoose.createConnection(process.env.DB, {
   useNewUrlParser: true,
@@ -132,6 +135,7 @@ router.route('/cover/:album_id').get((req, res, next) => {
       return res.json(files)
     });
   });
+ 
 
 
 //Delete a file
@@ -172,26 +176,70 @@ router.route('/view-album/:id')
       return res.json(files)
     });
   });
- 
-  // Get specific album comments
-router.route('/album-comments/:id').get((req, res, next) => {
-  Image.find({ "metadata.album_id": req.params.id }).sort('-uploadDate').then(f => {
-    // console.log(f);
-    var fn = [];
-    f.forEach(el => {
-      let img_com = Object.create({});
-      img_com._id = el._id;
-      img_com.comments = el.comments
-      fn.push(img_com)
-    });
-    res.json(fn)
-  })
-    .catch(err => console.log(err));
-})
+
+  
+ //Get specific album comments
+ router.route('/album-comments/:id').get((req, res) => {
+  Image.find({ "metadata.album_id": req.params.id })
+  .sort('-uploadDate')
+  .select('comments').lean().exec( (err, collection) => {    
+    if (err) {
+      console.log(err);
+    } else {
+      var findIDs = [];
+      var commObj = [];
+      for (let i = 0; i < collection.length; i++) {
+        var no = collection[i].comments;
+        commObj.push(collection[i].comments)
+        for (let j = 0; j < no.length; j++) {
+          //console.log(no[j].user)
+          findIDs.push(no[j].user)
+        }        
+      }
+      Users.find({"_id": findIDs}, '_id firstName lastName', (err, collection2) => {        
+        var newObj =[];  
+        if (err) {
+          console.log('in err');
+          console.log(err);
+        } else {
+          var mobj = {};          
+          commObj.forEach(el => {    
+            for (let x = 0; x < el.length; x++) {
+              // console.log(chalk.greenBright(el[x].user));              
+              // console.log(chalk.yellowBright(el[x].comment));                
+              for (let y = 0; y < collection2.length; y++) {
+                if (el[x].user == collection2[y]._id) {
+                  // console.log(collection2[y].firstName, collection2[y].lastName, el[x].comment);
+                  mobj = {cid: el[x]._id, uid: el[x].user, firstName: collection2[y].firstName, lastName: collection2[y].lastName, comment:el[x].comment};
+                  newObj.push(mobj)
+                }
+              }
+            }            
+          });//end commObj.foreach          
+          const updatedCollection1 = collection.map(col1 => { 
+            const updatedComments = col1.comments.map((col1_comment => {
+              const matched_comment = newObj.find(el => el.cid === col1_comment._id);
+              //console.log(matched_comment);
+              return matched_comment
+            }))
+            
+          return {...col1, comments: updatedComments};          
+          })          
+          return res.json(updatedCollection1)
+        }
+      });
+    }
+  });
+});
+
+
+
+
 
 
 
 // Add Comments to image
+
 router.route('/add-comment/:id').put((req, res, next) => {
   // console.log(chalk.greenBright(req.params.id));
   // console.log(chalk.yellowBright(req.body.user));
@@ -217,21 +265,15 @@ router.route('/add-comment/:id').put((req, res, next) => {
 
 //Let only user who made comment delete
 router.route('/delete-comment/:img_id/:com_id').delete((req, res, next) => {
-  // console.log(req.params.img_id);
-  // console.log(req.params.com_id)
+
   // Find only one document matching the id
   Image.findOneAndUpdate({ _id: req.params.img_id },
     { $pull: { comments: { _id: req.params.com_id } } },
     { new: true }
   )
-  .then(f => {
-    let comArray = [f]
-    var fn = [];
-    comArray.forEach(el => {
-      fn.push(el.comments);
-    });
-    // console.log(f);
-    res.json(fn)
+  .select('comments')
+  .then(data => {
+    res.json(data)
   })
   .catch(err => console.log(err));
 });

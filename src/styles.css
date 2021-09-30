@@ -3,32 +3,95 @@
 @import '~material-icons/iconfont/material-icons.css';
 @font-face {
     font-family: "Handlee";
-    src: local("Handlee"), url(./assets/fonts/Handlee/Handlee-Regular.ttf) format("truetype");
+    src: local("Handlee"), url('./assets/fonts/Handlee/Handlee-Regular.ttf') format("truetype");
 }
 @font-face {
     font-family: "Dancing Script";
-    src: local("Dancing Script"), url(./assets/fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf) format("truetype")
-}
-
-@font-face {
-    font-family: "Marmelad";
-    src: local('Marmelad'), url(./assets/fonts/Marmelad/Marmelad-Regular.ttf) format("truetype");
-}
-
-@font-face {
-    font-family: "Overlock";
-    src: local('Overlock'), url(./assets/fonts/Overlock/Overlock-Black.ttf) format("truetype");
+    src: local("Dancing Script"), url('./assets/fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf') format("truetype")
 }
 @font-face {
     font-family: "Delius";
-    src: local('Delius'), url(./assets/fonts/Delius/Delius-Regular.ttf) format("truetype");
+    src: local('Delius'), url('./assets/fonts/Delius/Delius-Regular.ttf') format("truetype");
 }
 @font-face {
-    font-family: 'Noto Sans TC';
-    src: local('Noto Sans TC'), url(./assets/fonts/Noto_Sans_TC/NotoSansTC-Regular.otf) format("opentype");
+    font-family: "Amaranth";
+    src: local('Amaranth'), url('./assets/fonts/Amaranth/Amaranth-Bold.ttf') format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Amaranth";
+    src: local('Amaranth'), url('./assets/fonts/Amaranth/Amaranth-BoldItalic.ttf') format("truetype");
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Amaranth";
+    src: local('Amaranth'), url('./assets/fonts/Amaranth/Amaranth-Italic.ttf') format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Amaranth";
+    src: local('Amaranth'), url('./assets/fonts/Amaranth/Amaranth-Regular.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
 
-html, body { height: 100%; }
-body { margin: 15px; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@font-face {
+    font-family: "Arsenal";
+    src: local('Arsenal'), url('./assets/fonts/Arsenal/Arsenal-Bold.ttf') format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Arsenal";
+    src: local('Arsenal'), url('./assets/fonts/Arsenal/Arsenal-BoldItalic.ttf') format("truetype");
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Arsenal";
+    src: local('Arsenal'), url('./assets/fonts/Arsenal/Arsenal-Italic.ttf') format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Arsenal";
+    src: local('Arsenal'), url('./assets/fonts/Arsenal/Arsenal-Regular.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
 
-
+@font-face {
+    font-family: "Thasadith";
+    src: local('Thasadith'), url('./assets/fonts/Thasadith/Thasadith-Bold.ttf') format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Thasadith";
+    src: local('Thasadith'), url('./assets/fonts/Thasadith/Thasadith-BoldItalic.ttf') format("truetype");
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Thasadith";
+    src: local('Thasadith'), url('./assets/fonts/Thasadith/Thasadith-Italic.ttf') format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Thasadith";
+    src: local('Thasadith'), url('./assets/fonts/Thasadith/Thasadith-Regular.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 25px;
+    font-family: Thasadith, sans-serif;
+}

@@ -40,7 +40,7 @@ export class AuthService {
           this.currentUser = res;       
           var user = res.msg._id
           localStorage.setItem('user', user)
-          this.router.navigate(['user-profile/' + res.msg._id]);
+          this.router.navigate(['home']);
         })
       })
   }

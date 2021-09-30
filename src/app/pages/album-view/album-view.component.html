@@ -1,68 +1,12 @@
 <div class="pageView">
-  <main class="wrapper">
+<main class="wrapper">
     <section class="hero" [ngStyle]="{'background-image': 'url('+ Cover+')'}">
       <h1 class="boxborder"><small> </small> {{Post.album_title}} <small>{{Post.album_desc}}</small></h1>
 
     </section>
   </main>
   <!-- start nav-->
-  <div class="sticky-nav-wrapper mat-elevation-z8 mb-4">
-    <!--Navbar-->
-    <mdb-navbar style="background-color: #003366;" SideClass="navbar navbar-expand-lg navbar-dark "
-      [containerInside]="false" ngStickyNav>
-
-      <!-- Navbar brand -->
-      <mdb-navbar-brand><a class="navbar-brand" href="#">Explore With Us</a></mdb-navbar-brand>
-      <!-- Collapsible content -->
-      <links>
-        <!-- Links -->
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown" dropdown>
-            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-              <mdb-icon fas icon="user"></mdb-icon>
-              Family Time<span class="caret"></span>
-            </a>
-            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Activities</a>
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Marching Band</a>
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Misc</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown" dropdown>
-            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-              <mdb-icon fas icon="user"></mdb-icon>
-              Visitors<span class="caret"></span>
-            </a>
-            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Mom & Crystal</a>
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Donnis</a>
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Chrystal & Junior</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-light" mdbWavesEffect>
-              <mdb-icon fas icon="cog"></mdb-icon>
-              Favorite Album
-            </a>
-          </li>
-          <!-- Dropdown -->
-          <li class="nav-item dropdown" dropdown>
-            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-              <mdb-icon fas icon="user"></mdb-icon>
-              Trips<span class="caret"></span>
-            </a>
-            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Spring Break 2021</a>
-              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Disney Cruise</a>
-            </div>
-          </li>
-        </ul>
-        <!-- Links -->
-      </links>
-      <!-- Collapsible content -->
-    </mdb-navbar>
-    <!--/.Navbar-->
-  </div>
+  <app-navbar></app-navbar>
 
   <div class="row ">
     <ng-container *ngFor="let a of albumImage;let i = index">
@@ -113,12 +57,35 @@
               </div>
             </form>
           </mat-card-actions>
-          <div class="comments" *ngFor="let c of Comments[i]?.comments">
-            <button mat-button (click)="deleteComment(a._id, c._id, a.metadata.album_id)">
+          <div class="comments" > 
+            <!-- <div class="comments" *ngFor="let c of Comments[i]">  -->
+             <!-- <div class="user-comments" >
+              
+               <button mat-button (click)="deleteComment(a._id, c._id, a.metadata.album_id)" *ngIf="user_id === c.user ">
               <mat-icon>delete_outline</mat-icon>
-            </button>          
-            {{c.comment}}
-          </div>          
+            </button>  
+              <p><strong>{{c.firstName}} {{c.lastName}} </strong>: {{c.comment}}<button style="text-align: right;" mat-button (click)="deleteComment(a._id, c._id, a.metadata.album_id)" *ngIf="user_id === c.user ">
+                delete
+              </button></p>             
+                           
+            </div> -->
+            <div class="comments">
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let c of Comments[i]?.comments">
+                  <span style="float:left; color:blue">{{c.firstName}} {{c.lastName}} : &nbsp;</span>   
+                 {{c.comment}}
+                 <span style="float:right; color:red">
+                    <button mat-button (click)="deleteComment(a._id, c.cid, a.metadata.album_id)" *ngIf="user_id === c.uid ">
+                      <i class="far fa-trash-alt"></i>
+                  </button>
+                </span>
+                  
+                </li>
+                
+              </ul>
+            </div>
+         </div>         
+          
         </mat-card>
       </div>
     </ng-container>
@@ -127,3 +94,4 @@
 </div>
 <!--pageView-->
 
+<app-footer></app-footer>

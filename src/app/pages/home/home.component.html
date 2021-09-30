@@ -16,75 +16,11 @@
       </div>
    </div>
 </div>
-
-<!-- start nav-->
-<div class="sticky-nav-wrapper mat-elevation-z8 mb-4">
-   <!--Navbar-->
-   <mdb-navbar style="background-color: #003366;" SideClass="navbar navbar-expand-lg navbar-dark "
-      [containerInside]="false" ngStickyNav>
-
-      <!-- Navbar brand -->
-      <mdb-navbar-brand><a class="navbar-brand" href="#">Explore With Us</a></mdb-navbar-brand>
-      <!-- Collapsible content -->
-      <links>
-         <!-- Links -->
-         <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown" dropdown>
-               <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                  mdbWavesEffect>
-                  <mdb-icon fas icon="user"></mdb-icon>
-                  Family Time<span class="caret"></span>
-               </a>
-               <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Activities</a>
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Marching Band</a>
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Misc</a>
-               </div>
-            </li>
-            <li class="nav-item dropdown" dropdown>
-               <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                  mdbWavesEffect>
-                  <mdb-icon fas icon="user"></mdb-icon>
-                  Visitors<span class="caret"></span>
-               </a>
-               <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Mom & Crystal</a>
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Donnis</a>
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Chrystal & Junior</a>
-               </div>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link waves-light" mdbWavesEffect>
-                  <mdb-icon fas icon="cog"></mdb-icon>
-                  Favorite Album
-               </a>
-            </li>
-            <!-- Dropdown -->
-            <li class="nav-item dropdown" dropdown>
-               <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                  mdbWavesEffect>
-                  <mdb-icon fas icon="user"></mdb-icon>
-                  Trips<span class="caret"></span>
-               </a>
-               <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Spring Break 2021</a>
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Disney Cruise</a>
-               </div>
-            </li>
-         </ul>
-         <!-- Links -->
-      </links>
-      <!-- Collapsible content -->
-   </mdb-navbar>
-   <!--/.Navbar-->
-</div>
-
-
+<app-navbar></app-navbar>
 <div class="row">
    <div class="col-sm-5"><img class="plane" src="../../../assets/pics/plane2.gif"></div>
    <div class="col-sm-7 mapTitle my-2">Where we've Been</div>
 </div>
-
 
 <div class="coming-soon">
    <h1 class="animatedclass"> Coming Soon!</h1>
@@ -99,7 +35,7 @@
    </ng-marquee>
 </div> -->
 
-<!--<div class="row mt-4 gap-3">
+<!-- <div class="row mt-4 gap-3">
    <div class="col-lg-8"><div class="row">
       <div class="col-lg-12">
          <div class="row col-md-12">
@@ -108,10 +44,10 @@
       <div class="col-sm-4 mapNum">1 Natural Wonder</div>
    
    </div>
-   </div>
+   </div>  
 
 
-   <div class="col-lg-2 mx-auto mt-4"></div>
+  <div class="col-lg-2 mx-auto mt-4"></div>
       <div class="col-lg-8 mx-auto mt-4"><img class="mapImg mx-auto" src="../../../assets/pics/map.png"></div>
       <div class="col-lg-2 mx-auto mt-4"></div>
     </div></div>
@@ -141,12 +77,7 @@
  </div> -->
 <hr>
 
-
-
 <div class="postTitle my-5">Latest Posts</div>
-
-
-
 <div class="row">
    <ng-container *ngFor="let m of Metadata">
       <div class="col-12 col-md-4 postBox">
@@ -156,7 +87,8 @@
                   <mat-card-title style="float: left;">{{m.album_title}}</mat-card-title>
                </div>
                <div class="col-2">
-                  <button style="float: right;" class="albumBtn" mat-button matTooltip="Open Album" (click)="openAlbum(m.metadata.album_id)">
+                  <button style="float: right;" class="albumBtn" mat-button matTooltip="Open Album"
+                     (click)="openAlbum(m.metadata.album_id)">
                      <mat-icon style="float: right;" class="albumBtn">collections</mat-icon>
                   </button>
                </div>
@@ -167,20 +99,14 @@
                <figcaption>{{m.metadata.caption}}</figcaption>
                <p class="trip-date">{{m.trip_date | date: 'MMMM/dd/yyyy'}}</p>
                <br>
-               
+
             </mat-card-content>
-            <mat-card-actions>                              
+            <mat-card-actions>
             </mat-card-actions>
          </mat-card>
       </div>
    </ng-container>
 </div>
-
-
-
-
 <br>
 <br>
-<footer>
-   <p class="footerText"><i class="fa fa-camera-retro"></i> Copyright 2021: Cottle Family Adventures &copy;</p>
-</footer>
+<app-footer></app-footer>

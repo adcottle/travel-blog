@@ -3,12 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ImagesService } from '../../service/images/images.service';
 import { CrudService } from '../../service/crud/crud.service';
 import { UserService } from '../../service/user/user.service';
-import { skip, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-album-view',
@@ -18,7 +17,7 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 export class AlbumViewComponent implements OnInit, OnDestroy {
 
   id: any;
-  user_id: any;
+  user_id: any = [];
   albumImage: any = [];
   imageData: any = [];
   Post: any = [];
@@ -27,7 +26,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   submitted = false;
   Favorites: any = [];
   Comments: any = [];
-  
+
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -52,7 +51,6 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   }
 
   getMerged(id) {
-    
     this.crudService.GetTrip(id).pipe(takeUntil(this.destroy$)).subscribe((tripData: any = []) => {
       this.Post = tripData;
       this.imageService.GetAlbum(id).pipe(takeUntil(this.destroy$)).subscribe((imageData: any = []) => {
@@ -61,11 +59,10 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
         this.myFavorites(this.user_id, this.imageData);
         this.imageData.forEach(element => {
           const mergedObj = { ...t, ...element };
+          // console.log(mergedObj);
           this.albumImage.push(mergedObj);
-          this.GetImageComments(id);
-          // this.Comments = mergedObj.comments;
-          // console.log(this.Comments);
         });
+        this.GetImageComments(id);
       });
     });
   };
@@ -111,8 +108,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
       var uri = 'http://localhost:4000/images/file/'
       var CIuri = ci[0].filename;
       this.Cover = uri + CIuri;
-    }
-    )
+    });
   };
 
 
@@ -120,7 +116,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     this.imageService.OpenImage(filename).pipe(takeUntil(this.destroy$)).subscribe(img => {
       this.dialog.open(ImageModalComponent, {
         height: '100%',
-        width: '100%',
+        width: 'auto',
         data: {
           imageData: img
         }
@@ -130,17 +126,10 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
 
   GetImageComments(album_id) {
     this.imageService.GetAlbumComments(album_id).pipe(takeUntil(this.destroy$))
-    .subscribe(res=>{   
-      this.Comments = res;  
-      // var cx = res;
-      //  cx.map(t1 => ({...t1, ...this.albumImage.find(t2 => t2._id === t1._id)}));      
-    });
+    .subscribe(com =>  { 
+      this.Comments = com;
+    });   
   };
-
-  trackByFn(index: any, item: any) {
-    return index;
-  }
- 
 
   addComment(id) {
     this.submitted = true;
@@ -155,18 +144,20 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     Object.keys(this.commentForm.controls).forEach(key => {
       this.commentForm.controls[key].setErrors(null)
     });
-    this.GetImageComments(this.id);
+    this.GetImageComments(this.id); 
+      
   };
 
-  deleteComment (img_id, c_id, alb_id) {
+  deleteComment(img_id, c_id, alb_id) {
     if (window.confirm('Delete your comment?')) {
       this.imageService.deleteComment(img_id, c_id).pipe(takeUntil(this.destroy$)).subscribe((response) => {
         // console.log(response);         
-        this.GetImageComments(alb_id);
-        // this.Comments = response.comment        
+        this.GetImageComments(alb_id);  
+        
       });
     };
   };
+  
 
   ngOnDestroy() {
     this.destroy$.next(true);
