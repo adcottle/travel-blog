@@ -23,7 +23,7 @@
 
 
 .boxborder {
-    position:relative;
+    position: relative;
     font-size: 3rem;
     top: 35%;
     left: 50%;
@@ -115,6 +115,10 @@ mat-icon {
 .comments {
     font-family: "Delius";
 }
-.user-comments {
-    border:1px solid orange; 
+.comments li {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    /*   border-style: none; */
+    border-bottom-color: #bfdaf4;
 }

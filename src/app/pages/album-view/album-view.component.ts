@@ -126,12 +126,9 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
 
   GetImageComments(album_id) {
     this.imageService.GetAlbumComments(album_id).pipe(takeUntil(this.destroy$))
-    .subscribe(com =>  {
-      com.forEach(itm => {
-        this.Comments.push(itm)
-      });
-    });    //endsubscribe
-    console.log(this.Comments)
+    .subscribe(com =>  { 
+      this.Comments = com;
+    });   
   };
 
   addComment(id) {
@@ -147,18 +144,20 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     Object.keys(this.commentForm.controls).forEach(key => {
       this.commentForm.controls[key].setErrors(null)
     });
-    this.GetImageComments(this.id);
+    this.GetImageComments(this.id); 
+      
   };
 
   deleteComment(img_id, c_id, alb_id) {
     if (window.confirm('Delete your comment?')) {
       this.imageService.deleteComment(img_id, c_id).pipe(takeUntil(this.destroy$)).subscribe((response) => {
         // console.log(response);         
-        this.GetImageComments(alb_id);
-        // this.Comments = response.comment        
+        this.GetImageComments(alb_id);  
+        
       });
     };
   };
+  
 
   ngOnDestroy() {
     this.destroy$.next(true);
