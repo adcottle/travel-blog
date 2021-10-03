@@ -29,7 +29,7 @@
               </div> 
 
            
-            <img mat-card-image [src]="('http://localhost:4000/images/file/' + a.filename) | safe: 'url'"
+            <img mat-card-image [src]="(serverURI + '/images/file/' + a.filename) | safe: 'url'"
               alt={{a.metadata.caption}} (click)="openModal(a.filename)">
           </div>
           <!--/.cardImg-->

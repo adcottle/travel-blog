@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalConstants } from 'src/app/service/global.variables';
 import { ImagesService } from '../../service/images/images.service';
 import { CrudService } from '../../service/crud/crud.service';
 import { UserService } from '../../service/user/user.service';
@@ -16,6 +17,8 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
 })
 export class AlbumViewComponent implements OnInit, OnDestroy {
 
+  baseURI: string;
+  serverURI: string;
   id: any;
   user_id: any = [];
   albumImage: any = [];
@@ -36,6 +39,8 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     private userService: UserService,
     public dialog: MatDialog, public fb: FormBuilder) {
     this.user_id = localStorage.getItem('user');
+    this.baseURI = GlobalConstants.baseURI;
+    this.serverURI = GlobalConstants.serverURI;
     this.id = this.actRoute.snapshot.paramMap.get('id');
     this.commentForm = this.fb.group({
       comment: ['', [Validators.required]],
@@ -105,7 +110,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   getCover(id) {
     this.imageService.GetCover(id).pipe(takeUntil(this.destroy$)).subscribe(coverImage => {
       var ci = coverImage
-      var uri = 'http://localhost:4000/images/file/'
+      var uri = this.serverURI + '/images/file/'
       var CIuri = ci[0].filename;
       this.Cover = uri + CIuri;
     });

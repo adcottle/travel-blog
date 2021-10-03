@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { GlobalConstants } from 'src/app/service/global.variables';
 import { CrudService } from '../../service/crud/crud.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -19,14 +20,17 @@ export interface tableData {
 export class ListAllComponent implements OnInit {
 
 
-  Table:any = [];
+  Table: any = [];
+  baseURI: string;
 
-  displayedColumns: string[] = ['title', 'state', 'tags', 'category']; 
+  displayedColumns: string[] = ['title', 'state', 'tags', 'category'];
   dataSource: MatTableDataSource<tableData>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private crudService: CrudService) { }
+  constructor(private crudService: CrudService) {
+    this.baseURI = GlobalConstants.baseURI;    
+   }
 
   ngOnInit(): void {
     this.populateTable();

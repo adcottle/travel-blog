@@ -5,7 +5,7 @@
        [containerInside]="false" ngStickyNav>
   
        <!-- Navbar brand -->
-       <mdb-navbar-brand><a class="navbar-brand" href="home"><mdb-icon class="homelogo" fas icon="compass"></mdb-icon> Explore With Us</a></mdb-navbar-brand>
+       <mdb-navbar-brand><a class="navbar-brand" href="{{baseURI}}/home"><mdb-icon class="homelogo" fas icon="compass"></mdb-icon> Explore With Us</a></mdb-navbar-brand>
        
        <!-- Collapsible content -->
        <links>
@@ -36,14 +36,14 @@
                 </div>
              </li> -->
              <li class="nav-item">
-                <a class="nav-link waves-light" mdbWavesEffect href="list-all">
+                <a class="nav-link waves-light" mdbWavesEffect href="{{baseURI}}/list-all">
                    <mdb-icon fas icon="list"></mdb-icon>
                    Album List
                 </a>
              </li>
              <!-- Dropdown -->
              <li class="nav-item">
-               <a class="nav-link waves-light" mdbWavesEffect href="{{'http://localhost:4200/user-profile/' + user_id}}">
+               <a class="nav-link waves-light" mdbWavesEffect href="{{baseURI}}/user-profile/{{user_id}}">
                   <mdb-icon fas icon="user"></mdb-icon>Profile                 
                </a>
             </li>

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, ComponentFactoryResolver } from '@angular/core';
+import { GlobalConstants } from 'src/app/service/global.variables';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../service/auth/auth.service';
 import { UserService } from '../../service/user/user.service';
@@ -17,13 +18,16 @@ export class ProfileComponent implements OnInit {
   currentUser: any =[];
   thumbnailName: any =[];
   thumbnailCaption: any =[]; 
+  serverURI: string;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(public authService: AuthService, private imageService: ImagesService,
     private actRoute: ActivatedRoute, private userService: UserService, public dialog: MatDialog  ) {
-    let id = this.actRoute.snapshot.paramMap.get('id');
-    this.authService.getUserProfile(id).subscribe((res:any) => {      
+    let id = this.actRoute.snapshot.paramMap.get('id');    
+    this.serverURI = GlobalConstants.serverURI;
+    let uid = localStorage.getItem('user');
+    this.authService.getUserProfile(uid).subscribe((res:any) => {      
       this.currentUser = res.msg;
     })
   }
