@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import { GlobalConstants } from 'src/app/service/global.variables';
 import { Router } from '@angular/router';
 import { ImagesService } from '../../service/images/images.service';
 import { CrudService } from '../../service/crud/crud.service';
@@ -86,7 +87,8 @@ interface ExampleFlatNode {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-
+  
+  serverURI: string;
   Metadata: any = [];
   Images: any = [];
   tripDate: any = [];
@@ -136,8 +138,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 }];
 
 constructor(private imageService: ImagesService, private crudService: CrudService, public router: Router) { 
-
-    this.dataSource.data = TREE_DATA;
+  this.serverURI = GlobalConstants.serverURI;
+  this.dataSource.data = TREE_DATA;
 }
 hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 

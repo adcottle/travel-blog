@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   signupForm: FormGroup;
   submitted = false;
+  
  
 
   constructor(public fb: FormBuilder,
@@ -44,10 +45,13 @@ export class LoginComponent implements OnInit {
   loginUser() {
     this.submitted = true;
 
-        // stop here if form is invalid
-        if (this.loginForm.invalid) {
-            return;
-        }
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
+    let loweremail = this.loginForm.get('email').value.toLowerCase( );
+    console.log(loweremail);
+    this.loginForm.get('email').setValue(loweremail);
     this.authService.signIn(this.loginForm.value)
   }
 
@@ -60,14 +64,17 @@ export class LoginComponent implements OnInit {
   registerUser() {
     this.submitted = true;
 
-        // stop here if form is invalid
-        if (this.signupForm.invalid) {
-            return;
-        }
-
+    // stop here if form is invalid
+    if (this.signupForm.invalid) {
+      return;
+    }    
+    
+    let loweremail = this.signupForm.get('email').value.toLowerCase( );
+    console.log(loweremail);
+    this.signupForm.get('email').setValue(loweremail);
     this.authService.signUp(this.signupForm.value).subscribe((res) => {
       if (res.result) {
-        this.signupForm.reset()
+        this.signupForm.reset();
         //this.router.navigate(['login']);
         document.querySelector('.cont').classList.toggle('s--signup');
         var message = "Profile created. Please login";

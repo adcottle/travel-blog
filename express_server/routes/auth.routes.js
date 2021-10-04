@@ -46,7 +46,7 @@ router.post("/register-user",
                     password: hash
                 });
                 user.save().then((response) => {
-                    console.log(response)
+                    // console.log(response)
                     res.status(201).json({
                         message: "User successfully created!",
                         result: response

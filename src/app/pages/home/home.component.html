@@ -93,7 +93,7 @@
                   </button>
                </div>
             </div>
-            <img mat-card-image [src]="('http://localhost:4000/images/file/' + m.filename) | safe: 'url'"
+            <img mat-card-image [src]="(serverURI + '/images/file/' + m.filename) | safe: 'url'"            
                alt="m.metadata.caption" (click)="openAlbum(m.metadata.album_id)">
             <mat-card-content>
                <figcaption>{{m.metadata.caption}}</figcaption>

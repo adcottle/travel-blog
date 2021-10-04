@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { GlobalConstants } from '../global.variables';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -10,15 +10,18 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 export class ImagesService {
     // Node/Express API
-    REST_API: string = 'http://localhost:4000/images';
-    
+    REST_API: string;
+    serverURI: string; 
     
 
     // Http Header
     httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');   
   
 
-  constructor(private httpClient: HttpClient ) {}
+  constructor(private httpClient: HttpClient ) {
+    this.serverURI = GlobalConstants.serverURI;
+    this.REST_API = this.serverURI + '/images';
+  }
 
    // Get all Images in JSON
    GetImagesList() {

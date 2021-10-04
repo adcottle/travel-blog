@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GlobalConstants } from '../global.variables';
 import { Trip } from '../Trip';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
@@ -10,15 +11,18 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 
 export class CrudService { 
-
-  // Node/Express API
-  endpoint: string = 'http://localhost:4000/trips';
+  endpoint: string;
+  serverURI: string; 
+  
 
   // Http Header
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient,
-    public router: Router) { }
+    public router: Router) { 
+      this.serverURI = GlobalConstants.serverURI;
+      this.endpoint = this.serverURI + '/trips';
+    }
 
  
     // Add
