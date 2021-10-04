@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GlobalConstants } from '../global.variables';
 import { User } from '../user';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -10,7 +11,10 @@ import { Router } from '@angular/router';
 })
 
 export class AuthService {
-  endpoint: string = 'http://localhost:4000/auth';
+
+  endpoint: string;
+  serverURI: string;
+  
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
   
@@ -19,6 +23,8 @@ export class AuthService {
     private http: HttpClient,
     public router: Router
   ) {
+    this.serverURI = GlobalConstants.serverURI;
+    this.endpoint = this.serverURI + '/auth';
   }
 
   // Sign-up

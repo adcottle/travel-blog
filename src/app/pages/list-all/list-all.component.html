@@ -16,7 +16,7 @@
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
         <td mat-cell *matCellDef="let row">
-            <a href="{{'http://localhost:4200/album-view/' + row._id}}">
+            <a [href]="(baseURI + '/album-view/' + row._id)">
                 {{row.album_title}}
             </a>
         </td>

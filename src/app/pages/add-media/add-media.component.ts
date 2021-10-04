@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { GlobalConstants } from 'src/app/service/global.variables';
 import { takeUntil } from 'rxjs/operators';
 import { CrudService } from '../../service/crud/crud.service';
 import { ImagesService } from '../../service/images/images.service';
@@ -17,10 +19,15 @@ export class AddMediaComponent implements OnInit , OnDestroy{
   submitted = false;
   destroy$: Subject<boolean> = new Subject<boolean>();
   List: any = [];
+  controllerSrc: any;
+  serverURI: string;
   
    
-  constructor(public fb: FormBuilder, public tripService: CrudService,
-              ) {  }
+  constructor(public fb: FormBuilder, public tripService: CrudService, private sanitizer: DomSanitizer) { 
+    this.serverURI = GlobalConstants.serverURI;
+    const url= this.serverURI + '/images';
+    this.controllerSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+   }
 
   ngOnInit(): void {
 

@@ -1,90 +1,137 @@
-<h2 class="introHead">Create a Post <mdb-icon far icon="images"></mdb-icon></h2>
+<h2 class="introHead">Create a Post <mdb-icon far icon="images"></mdb-icon>
+</h2>
 
 <div class="row">
-<div class=col-6>
-<mdb-card>
-  <mdb-card-header class="formTitle">Add Album</mdb-card-header>
-  <mat-divider></mat-divider>
+  <div class=col-6>
+    <mdb-card>
+      <mdb-card-header class="formTitle">Add Album</mdb-card-header>
+      <mat-divider></mat-divider>
 
-  <mdb-card-body>
-    
-    
-    <form [formGroup]="addMediaForm" (ngSubmit)="addMedia()">
-    <div class="row my-3">
-      <div class="col-6">
-        <mat-form-field appearance="standard">
-          <mat-label>Album Title</mat-label>
-          <input matInput placeholder="Enter Album Title" formControlName="album_title" > 
-           
-        </mat-form-field>
-      </div>
-      <div class="col-6">
-        <mat-form-field appearance="standard">
-          <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="trip_date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row my-3">
-      <div class="col-12">
-        <mat-form-field appearance="standard">
-          <mat-label>Album Description</mat-label>
-          <textarea matInput placeholder="Enter post description" formControlName="album_desc"></textarea>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row my-3">
-      <div class="col-12">
-        <mat-form-field appearance="standard">
-          <mat-label>Tags</mat-label>
-          <textarea matInput placeholder="Enter tags" formControlName="tags"></textarea>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row my-3">
-      <div class="col-6">
-
-        <mat-form-field appearance="outline">
-          <mat-label>States</mat-label>
-          <mat-select formControlName="state" placeholder="state" multiple>
-            <mat-option value="wv">West Virginia</mat-option>
-            <mat-option value="tx">Texas</mat-option>
-            <mat-option value="ut">Utah</mat-option>
-            <mat-option value="az">Arizona</mat-option>
-          </mat-select>
-        </mat-form-field>    
-        
-        
-      </div>
-      <div class="col-6">
-        <mat-form-field appearance="outline">
-          <mat-label>Category</mat-label>
-          <mat-select formControlName="category" multiple>
-            <mat-option value="vacation">Vacation</mat-option>
-            <mat-option value="marching band">Marching Band</mat-option>
-          </mat-select>
-        </mat-form-field> 
-      </div>
-    </div>
-  
-    <button type="submit" >Register</button>
-  </form>
+      <mdb-card-body>
 
 
-  </mdb-card-body>
-</mdb-card>
+        <form [formGroup]="addMediaForm" (ngSubmit)="addMedia()">
+          <div class="row my-3">
+            <div class="col-6">
+              <mat-form-field appearance="standard">
+                <mat-label>Album Title</mat-label>
+                <input matInput placeholder="Enter Album Title" formControlName="album_title">
+
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="standard">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="trip_date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col-12">
+              <mat-form-field appearance="standard">
+                <mat-label>Album Description</mat-label>
+                <textarea matInput placeholder="Enter post description" formControlName="album_desc"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col-12">
+              <mat-form-field appearance="standard">
+                <mat-label>Tags</mat-label>
+                <textarea matInput placeholder="Enter tags" formControlName="tags"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col-6">
+
+              <mat-form-field appearance="outline">
+                <mat-label>States</mat-label>
+                <mat-select formControlName="state" placeholder="state" multiple>
+                  <mat-option value="AK">Alaska</mat-option>
+                  <mat-option value="AZ">Arizona</mat-option>
+                  <mat-option value="AR">Arkansas</mat-option>
+                  <mat-option value="CA">California</mat-option>
+                  <mat-option value="CO">Colorado</mat-option>
+                  <mat-option value="CT">Connecticut</mat-option>
+                  <mat-option value="DE">Delaware</mat-option>
+                  <mat-option value="DC">District Of Columbia</mat-option>
+                  <mat-option value="FL">Florida</mat-option>
+                  <mat-option value="GA">Georgia</mat-option>
+                  <mat-option value="HI">Hawaii</mat-option>
+                  <mat-option value="ID">Idaho</mat-option>
+                  <mat-option value="IL">Illinois</mat-option>
+                  <mat-option value="IN">Indiana</mat-option>
+                  <mat-option value="IA">Iowa</mat-option>
+                  <mat-option value="KS">Kansas</mat-option>
+                  <mat-option value="KY">Kentucky</mat-option>
+                  <mat-option value="LA">Louisiana</mat-option>
+                  <mat-option value="ME">Maine</mat-option>
+                  <mat-option value="MD">Maryland</mat-option>
+                  <mat-option value="MA">Massachusetts</mat-option>
+                  <mat-option value="MI">Michigan</mat-option>
+                  <mat-option value="MN">Minnesota</mat-option>
+                  <mat-option value="MS">Mississippi</mat-option>
+                  <mat-option value="MO">Missouri</mat-option>
+                  <mat-option value="MT">Montana</mat-option>
+                  <mat-option value="NE">Nebraska</mat-option>
+                  <mat-option value="NV">Nevada</mat-option>
+                  <mat-option value="NH">New Hampshire</mat-option>
+                  <mat-option value="NJ">New Jersey</mat-option>
+                  <mat-option value="NM">New Mexico</mat-option>
+                  <mat-option value="NY">New York</mat-option>
+                  <mat-option value="NC">North Carolina</mat-option>
+                  <mat-option value="ND">North Dakota</mat-option>
+                  <mat-option value="OH">Ohio</mat-option>
+                  <mat-option value="OK">Oklahoma</mat-option>
+                  <mat-option value="OR">Oregon</mat-option>
+                  <mat-option value="PA">Pennsylvania</mat-option>
+                  <mat-option value="RI">Rhode Island</mat-option>
+                  <mat-option value="SC">South Carolina</mat-option>
+                  <mat-option value="SD">South Dakota</mat-option>
+                  <mat-option value="TN">Tennessee</mat-option>
+                  <mat-option value="TX">Texas</mat-option>
+                  <mat-option value="UT">Utah</mat-option>
+                  <mat-option value="VT">Vermont</mat-option>
+                  <mat-option value="VA">Virginia</mat-option>
+                  <mat-option value="WA">Washington</mat-option>
+                  <mat-option value="WV">West Virginia</mat-option>
+                  <mat-option value="WI">Wisconsin</mat-option>
+                  <mat-option value="WY">Wyoming</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category" multiple>
+                  <mat-option value="vacation">Vacation</mat-option>
+                  <mat-option value="marching band">Marching Band</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <button type="submit">Register</button>
+        </form>
+
+
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+  <div class="col-6">
+
+    <mdb-card>
+      <iframe [src]="controllerSrc" title="upload form" style="height: 400px;" frameborder="0">
+      </iframe>
+      <div class="forRef" id="album_title"></div> &nbsp;
+      <div class="forRef" id="album_id"></div>
+    </mdb-card>
+  </div>
+
 </div>
-<div class="col-6">
-  
-<mdb-card>
-  <iframe src="http://localhost:4000/images" title="upload form" style="height: 400px;" frameborder="0">
-  </iframe>
-  <div class="forRef" id="album_title" ></div> &nbsp;
-  <div class="forRef" id="album_id" ></div>
-</mdb-card>
-</div>
-
-</div><!---./row-->
-
+<!---./row-->

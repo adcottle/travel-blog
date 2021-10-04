@@ -1,7 +1,8 @@
 import { BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { AuthInterceptor } from './service/authconfig.interceptor'
+import { AuthInterceptor } from './service/authconfig.interceptor';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -61,11 +62,8 @@ import { ListAllComponent } from './pages/list-all/list-all.component';
     SafePipeModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
+    { provide: LocationStrategy, useClass: HashLocationStrategy},
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   entryComponents: [ImageModalComponent],
   bootstrap: [AppComponent]
