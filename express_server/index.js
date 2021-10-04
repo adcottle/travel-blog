@@ -3,6 +3,8 @@ const express = require('express');
 const app = express(); 
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
+const http = require('http');
 const chalk = require('chalk');
 
 // Express settings
@@ -38,10 +40,14 @@ mongoose.set('useCreateIndex', true);
 app.set('view engine','ejs');
 
 //Define Routes
-app.use('/trips', trips)
-app.use('/auth', auth)
-app.use('/images', images)
-app.use('/users', users)
+app.use('/trips', trips);
+app.use('/auth', auth);
+app.use('/images', images);
+app.use('/users', users);
+app.use(express.static(__dirname + '/dist'))
+
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
+
 
 // Define PORT
 const port = process.env.PORT || 4000;
