@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   signupForm: FormGroup;
   submitted = false;
-  
+  currentUser = {};
+  errorMsg: any;
  
 
   constructor(public fb: FormBuilder,
@@ -49,10 +50,23 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    let loweremail = this.loginForm.get('email').value.toLowerCase( );
-    console.log(loweremail);
+    let loweremail = this.loginForm.get('email').value.toLowerCase();
     this.loginForm.get('email').setValue(loweremail);
-    this.authService.signIn(this.loginForm.value)
+    this.authService.signIn(this.loginForm.value).subscribe((tkn: any) => {
+      // console.log(tkn);
+      localStorage.setItem('access_token', tkn.token)
+      this.authService.getUserProfile(tkn._id).subscribe((res) => {
+        // console.log(res)
+        this.currentUser = res;
+        var uid = res.msg._id
+        localStorage.setItem('uid', uid)
+        this.router.navigate(['home']);
+      })
+    },
+    (err) => { 
+      // console.log(err)
+       this.errorMsg = "Unauthorized! Check username or password"
+    });
   }
 
   toggleForm() {
@@ -69,8 +83,7 @@ export class LoginComponent implements OnInit {
       return;
     }    
     
-    let loweremail = this.signupForm.get('email').value.toLowerCase( );
-    console.log(loweremail);
+    let loweremail = this.signupForm.get('email').value.toLowerCase( );    
     this.signupForm.get('email').setValue(loweremail);
     this.authService.signUp(this.signupForm.value).subscribe((res) => {
       if (res.result) {

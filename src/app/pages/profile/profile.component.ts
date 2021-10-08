@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
     private actRoute: ActivatedRoute, private userService: UserService, public dialog: MatDialog  ) {
     let id = this.actRoute.snapshot.paramMap.get('id');    
     this.serverURI = GlobalConstants.serverURI;
-    let uid = localStorage.getItem('user');
+    let uid = localStorage.getItem('uid');
     this.authService.getUserProfile(uid).subscribe((res:any) => {      
       this.currentUser = res.msg;
     })
@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
    }
 
   myFavorites() {
-    var user_id = localStorage.getItem('user');
+    var user_id = localStorage.getItem('uid');
     this.userService.GetMyFavorites(user_id).pipe(takeUntil(this.destroy$)).subscribe(response => {    
       // console.log(response.favorites);      
       let result = response.favorites.map(({ _id }) => _id);

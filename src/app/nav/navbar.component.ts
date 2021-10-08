@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
   baseURI: string;
 
   constructor() { 
-    this.user_id = localStorage.getItem('user'); 
+    this.user_id = localStorage.getItem('uid'); 
     this.baseURI = GlobalConstants.baseURI;
   }
 

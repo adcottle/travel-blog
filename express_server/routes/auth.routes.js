@@ -77,7 +77,7 @@ router.post("/signin", (req, res, next) => {
         getUser = user;
         return bcrypt.compare(req.body.password, user.password);
     }).then(response => {
-        if (!response) {
+        if (!response) {            ;
             return res.status(401).json({
                 message: "Authentication failed"
             });

@@ -38,17 +38,27 @@ export class AuthService {
   }
 
   // Sign-in
+  // signIn(user: User) {
+  //   return this.http.post<any>(`${this.endpoint}/signin`, user)
+  //     .subscribe((tkn: any) => { 
+  //       localStorage.setItem('access_token', tkn.token)
+  //       this.getUserProfile(tkn._id).subscribe((res) => {
+  //         this.currentUser = res;
+  //         var uid = res.msg._id
+  //         localStorage.setItem('uid', uid)
+  //         this.router.navigate(['home']);
+  //       })
+  //     })      
+  // }
+
   signIn(user: User) {
     return this.http.post<any>(`${this.endpoint}/signin`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token)
-        this.getUserProfile(res._id).subscribe((res) => {
-          this.currentUser = res;       
-          var user = res.msg._id
-          localStorage.setItem('user', user)
-          this.router.navigate(['home']);
-        })
-      })
+    .pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
   }
 
   getToken() {
