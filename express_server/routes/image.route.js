@@ -182,7 +182,7 @@ router.route('/view-album/:id')
  router.route('/album-comments/:id').get((req, res) => {
   Image.find({ "metadata.album_id": req.params.id })
   .sort('-uploadDate')
-  .select('comments').lean().exec( (err, collection) => {    
+  .select('comments').lean().then( (err, collection) => {    
     if (err) {
       console.log(err);
     } else {
