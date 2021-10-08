@@ -48,10 +48,11 @@ app.use(express.static(__dirname + '/dist'))
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
+const server = http.createServer(app);
 
 // Define PORT
 const port = process.env.PORT || 4000;
-app.listen(port, err => {
+server.listen(port, err => {
     if (err)
         throw err
     console.log(chalk.yellowBright('Server listening on port', port));

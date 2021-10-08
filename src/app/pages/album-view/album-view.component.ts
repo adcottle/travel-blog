@@ -38,7 +38,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     private crudService: CrudService,
     private userService: UserService,
     public dialog: MatDialog, public fb: FormBuilder) {
-    this.user_id = localStorage.getItem('user');
+    this.user_id = localStorage.getItem('uid');
     this.baseURI = GlobalConstants.baseURI;
     this.serverURI = GlobalConstants.serverURI;
     this.id = this.actRoute.snapshot.paramMap.get('id');
@@ -142,7 +142,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     if (this.commentForm.invalid) {
       return;
     }
-    this.commentForm.get('user').setValue(localStorage.getItem('user'));
+    this.commentForm.get('user').setValue(localStorage.getItem('uid'));
     // console.log(this.commentForm.value);
     this.imageService.AddComment(id, this.commentForm.value)
     this.commentForm.reset();
