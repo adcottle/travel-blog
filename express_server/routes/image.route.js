@@ -189,34 +189,6 @@ router.route('/latest-posts')
     });
   }); 
 
-//   router.route('/album-comments/:id').get((req, res) => {
-//     Image.find({ "metadata.album_id": req.params.id })
-//     .sort('-uploadDate')
-//     .select('comments').lean().exec( (error, collection) => { 
-//       if (error) {
-//         return next(error);
-//       } else {
-//         var findIDs = [];
-//       var commObj = [];
-//       for (let i = 0; i < collection.length; i++ ) {   
-//         var no = [collection[i].comments];      
-       
-//         commObj.push(collection[i].comments)
-//         console.log(no.filter(def => def !== undefined))
-//         // for (let j = 0; j < no.length; j++) {
-//         //   //console.log(no[j].user)
-//         //   findIDs.push(no[j].user)
-//         // }        
-// //       
-        
-       
-//       }
-//       res.json(commObj)
-//     }
-//     });
-//   });
-  
-
 
  //Get specific album comments
  router.route('/album-comments/:id').get((req, res) => {
