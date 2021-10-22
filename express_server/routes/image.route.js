@@ -164,7 +164,19 @@ router.route('/latest-posts')
 
 
 //GET: Fetches all images of specified album as JSON
-router.route('/view-album/:id')
+// router.route('/view-album/:id').get((req, res) => {
+//   Image.find({ "metadata.album_id": req.params.id }).sort('-uploadDate').exec((error, data) => {
+//     if (error) {
+//       return res.status(404).json({
+//                 err: "No files exist"
+//               });
+//             };
+//             //file exist
+//             return res.json(data)
+//           });
+//         });
+
+  router.route('/view-album/:id')
   .get((req, res, next) => {
     gfs.files.find({ "metadata.album_id": req.params.id }).sort('uploadDate', -1).toArray((err, files) => {
       if (!files || files.length == 0) {
@@ -175,27 +187,56 @@ router.route('/view-album/:id')
       //file exist
       return res.json(files)
     });
-  });
+  }); 
 
+//   router.route('/album-comments/:id').get((req, res) => {
+//     Image.find({ "metadata.album_id": req.params.id })
+//     .sort('-uploadDate')
+//     .select('comments').lean().exec( (error, collection) => { 
+//       if (error) {
+//         return next(error);
+//       } else {
+//         var findIDs = [];
+//       var commObj = [];
+//       for (let i = 0; i < collection.length; i++ ) {   
+//         var no = [collection[i].comments];      
+       
+//         commObj.push(collection[i].comments)
+//         console.log(no.filter(def => def !== undefined))
+//         // for (let j = 0; j < no.length; j++) {
+//         //   //console.log(no[j].user)
+//         //   findIDs.push(no[j].user)
+//         // }        
+// //       
+        
+       
+//       }
+//       res.json(commObj)
+//     }
+//     });
+//   });
   
+
+
  //Get specific album comments
  router.route('/album-comments/:id').get((req, res) => {
-  Image.find({ "metadata.album_id": req.params.id })
+  Image.find({ "metadata.album_id": req.params.id, "comments" : { $ne: null } })
   .sort('-uploadDate')
-  .select('comments').lean().then( (err, collection) => {    
+  .select('comments').lean().exec( (err, collection) => {       
     if (err) {
-      console.log(err);
-    } else {
+     // console.log(err);
+     console.log('in err')
+    } else {     
       var findIDs = [];
       var commObj = [];
-      for (let i = 0; i < collection.length; i++) {
-        var no = collection[i].comments;
+      for (let i = 0; i < collection.length; i++ ) {   
+        var no = collection[i].comments;     
         commObj.push(collection[i].comments)
         for (let j = 0; j < no.length; j++) {
           //console.log(no[j].user)
           findIDs.push(no[j].user)
         }        
-      }
+      }     
       Users.find({"_id": findIDs}, '_id firstName lastName', (err, collection2) => {        
         var newObj =[];  
         if (err) {
@@ -227,14 +268,10 @@ router.route('/view-album/:id')
           })          
           return res.json(updatedCollection1)
         }
-      });
-    }
+      });//to here
+     }
   });
 });
-
-
-
-
 
 
 
