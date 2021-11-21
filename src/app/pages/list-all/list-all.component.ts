@@ -38,8 +38,7 @@ export class ListAllComponent implements OnInit {
 
   populateTable() { 
     this.crudService.GetTrips().subscribe(res => {
-      this.Table = res
-      console.log(this.Table)
+      this.Table = res      
       this.dataSource = new MatTableDataSource(this.Table);      
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;                 

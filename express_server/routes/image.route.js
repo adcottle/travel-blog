@@ -258,8 +258,7 @@ router.route('/album-comments/:id').get((req, res) => {
                 var pech = main.comments.map(itm1 => itm1);
                 //filter out duplicates
                 //var unique = res2.filter((v, i, a) => a.indexOf(v) === i);
-                var commWithName = pech.map(obj => res2.find(o => o.cid === obj._id) || obj);
-                console.log(commWithName);
+                var commWithName = pech.map(obj => res2.find(o => o.cid === obj._id) || obj);                
                 finalResults.push({ ...main, comments: commWithName })
               }
             });
@@ -269,9 +268,6 @@ router.route('/album-comments/:id').get((req, res) => {
       }
     });
 });
-
-
-
 
 // Add Comments to image
 router.route('/add-comment/:id').put((req, res, next) => {
@@ -286,16 +282,17 @@ router.route('/add-comment/:id').put((req, res, next) => {
       }
       ]//'inserted Array containing the list of object'
     }
-  }, { upsert: true, new: true }, (error, data) => {
-    if (error) {
-      console.log(error);
-      return next(error);
-    } else {
-      res.json(data)
-      // console.log(chalk.cyanBright('Data updated successfully'));
-    };
-  });
+  }, { upsert: true, new: true })
+  .then(data => {
+    res.json(data)
+  })
+  .catch(err => console.log(err));
+
 });
+
+
+
+
 
 //Let only user who made comment delete
 router.route('/delete-comment/:img_id/:com_id').delete((req, res, next) => {
