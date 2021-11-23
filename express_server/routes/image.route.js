@@ -282,14 +282,16 @@ router.route('/add-comment/:id').put((req, res, next) => {
       }
       ]//'inserted Array containing the list of object'
     }
-  }, { upsert: true, new: true })
-  .then(data => {
-    res.json(data)
-  })
-  .catch(err => console.log(err));
-
+  }, { upsert: true, new: true }, (error, data) => {
+    if (error) {
+      console.log(error);
+      return next(error);
+    } else {
+      res.json(data)
+      // console.log(chalk.cyanBright('Data updated successfully'));
+    };
+  });
 });
-
 
 
 

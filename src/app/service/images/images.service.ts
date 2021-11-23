@@ -96,23 +96,13 @@ export class ImagesService {
   }
   
   //AddComment to Image
-  AddComment(id: any, data: any) {    
+  AddComment(id: any, data: any, album: string) {    
     let API_URL = `${this.REST_API}/add-comment/${id}`;
     return this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
     .subscribe(data => {
-    });
-  }
-   //AddComment to Image
-
-  // AddComment(id: any, data: any): Observable<any>  {  
-  //   console.log(data);
-  //   let API_URL = `${this.REST_API}/add-comment/${id}`;
-  //   return this.httpClient.put(API_URL, data,{ headers: this.httpHeaders }).pipe(
-  //     catchError(this.handleError)
-  //   )
-  // }
- 
-   
+      this.GetAlbumComments(album)
+    });    
+  }   
 
   //Remove a comment
   deleteComment(img_id:any, c_id: any): Observable<any> {
