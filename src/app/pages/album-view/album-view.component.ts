@@ -136,17 +136,17 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     });   
   };
 
+
   addComment(id, album_id) {
     //console.log(album_id);
     this.submitted = true;
     // stop here if form is invalid
     if (this.commentForm.invalid) {
       return;
-    }
-    
+    }    
     this.commentForm.get('user').setValue(localStorage.getItem('uid'));
     // console.log(this.commentForm.value);
-    this.imageService.AddComment(id, this.commentForm.value)
+    this.imageService.AddComment(id, this.commentForm.value, album_id)
     this.commentForm.reset();
     Object.keys(this.commentForm.controls).forEach(key => {
       this.commentForm.controls[key].setErrors(null)
