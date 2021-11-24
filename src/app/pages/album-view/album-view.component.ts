@@ -41,7 +41,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     this.user_id = localStorage.getItem('uid');
     this.baseURI = GlobalConstants.baseURI;
     this.serverURI = GlobalConstants.serverURI;
-    this.id = this.actRoute.snapshot.paramMap.get('id');    
+    this.id = this.actRoute.snapshot.paramMap.get('id');
     this.commentForm = this.fb.group({
       comment: ['', [Validators.required]],
       user: []
@@ -52,7 +52,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getMerged(this.id);
-    this.getCover(this.id);   
+    this.getCover(this.id);
   }
 
   getMerged(id) {
@@ -67,7 +67,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
           //console.log(mergedObj);
           this.albumImage.push(mergedObj);
         });
-      this.GetImageComments(id);
+        this.GetImageComments(id);
       });
     });
   };
@@ -130,11 +130,10 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   };
 
   GetImageComments(album_id) {
-    
     this.imageService.GetAlbumComments(album_id).pipe(takeUntil(this.destroy$))
-    .subscribe(com =>  { 
-     this.Comments = com;     
-    });   
+      .subscribe(com => {
+        if (com) { this.Comments = com; }
+      });
   };
 
 
@@ -152,7 +151,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
       Object.keys(this.commentForm.controls).forEach(key => {
         this.commentForm.controls[key].setErrors(null)
       });
-      if (album_id) { this.GetImageComments(album_id); }
+      this.GetImageComments(album_id);
     }
   };
 
@@ -160,11 +159,11 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     if (window.confirm('Delete your comment?')) {
       this.imageService.deleteComment(img_id, c_id).pipe(takeUntil(this.destroy$)).subscribe((response) => {
         // console.log(response);         
-        this.GetImageComments(alb_id);          
+        this.GetImageComments(alb_id);
       });
     };
   };
-  
+
 
   ngOnDestroy() {
     this.destroy$.next(true);
