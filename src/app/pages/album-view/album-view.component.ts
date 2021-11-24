@@ -67,7 +67,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
           //console.log(mergedObj);
           this.albumImage.push(mergedObj);
         });
-        this.GetImageComments(id);
+      this.GetImageComments(id);
       });
     });
   };
@@ -130,9 +130,10 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   };
 
   GetImageComments(album_id) {
+    
     this.imageService.GetAlbumComments(album_id).pipe(takeUntil(this.destroy$))
     .subscribe(com =>  { 
-      this.Comments = com;
+     this.Comments = com;     
     });   
   };
 
@@ -146,13 +147,12 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     }    
     this.commentForm.get('user').setValue(localStorage.getItem('uid'));
     // console.log(this.commentForm.value);
-    this.imageService.AddComment(id, this.commentForm.value, album_id)
+    this.imageService.AddComment(id, this.commentForm.value)
     this.commentForm.reset();
     Object.keys(this.commentForm.controls).forEach(key => {
       this.commentForm.controls[key].setErrors(null)
     });
-    this.GetImageComments(album_id); 
-      
+    if (album_id) {this.GetImageComments(album_id); }     
   };
 
   deleteComment(img_id, c_id, alb_id) {

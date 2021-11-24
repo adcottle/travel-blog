@@ -96,11 +96,10 @@ export class ImagesService {
   }
   
   //AddComment to Image
-  AddComment(id: any, data: any, album: string) {    
+  AddComment(id: any, data: any) {    
     let API_URL = `${this.REST_API}/add-comment/${id}`;
     return this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
-    .subscribe(data => {
-      this.GetAlbumComments(album)
+    .subscribe(data => {      
     });    
   }   
 
