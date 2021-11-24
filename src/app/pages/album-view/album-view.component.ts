@@ -144,15 +144,16 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     // stop here if form is invalid
     if (this.commentForm.invalid) {
       return;
-    }    
-    this.commentForm.get('user').setValue(localStorage.getItem('uid'));
-    // console.log(this.commentForm.value);
-    this.imageService.AddComment(id, this.commentForm.value)
-    this.commentForm.reset();
-    Object.keys(this.commentForm.controls).forEach(key => {
-      this.commentForm.controls[key].setErrors(null)
-    });
-    if (album_id) {this.GetImageComments(album_id); }     
+    } else {
+      this.commentForm.get('user').setValue(localStorage.getItem('uid'));
+      // console.log(this.commentForm.value);
+      this.imageService.AddComment(id, this.commentForm.value)
+      this.commentForm.reset();
+      Object.keys(this.commentForm.controls).forEach(key => {
+        this.commentForm.controls[key].setErrors(null)
+      });
+      if (album_id) { this.GetImageComments(album_id); }
+    }
   };
 
   deleteComment(img_id, c_id, alb_id) {
