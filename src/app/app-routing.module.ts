@@ -24,7 +24,7 @@ const routes: Routes = [
   
 
   // otherwise redirect to 404 Error
-  {path: '**', redirectTo: '/404'}
+  {path: '**', redirectTo: '/home'}
 
 ];
 
