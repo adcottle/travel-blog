@@ -24,3 +24,13 @@ mat-label, input {
  
   font-size: large;
 }
+
+.btnSubmit {
+  background-color: cornflowerblue;
+  border-radius: 8px;
+  color: white;
+  padding: 12px 18px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}

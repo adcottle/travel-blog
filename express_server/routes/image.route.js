@@ -10,7 +10,6 @@ ObjectID = require('mongodb').ObjectID
 
 const Image = require('../model/Image');
 const Users = require('../model/User');
-const { consoleTestResultHandler } = require("tslint/lib/test");
 
 
 const conn = mongoose.createConnection(process.env.DB, {
@@ -59,8 +58,8 @@ router.get('/', (req, res) => {
 
 // //post file
 router.post('/upload', upload.single('file'), (req, res) => {
-  // console.log(req.file)
-  res.json({ "file": req.file.originalname });
+  res.json(req.file);``
+  //res.json({ "file": req.file.originalname });
 });
 
 
@@ -293,7 +292,25 @@ router.route('/add-comment/:id').put((req, res, next) => {
   });
 });
 
-
+// Add tags to image
+router.route('/add-tags/:id').put((req, res, next) => {
+  // console.log(chalk.greenBright(req.params.id));
+  // console.log(chalk.yellowBright(req.body));
+  // console.log(chalk.blueBright(req.body.comment));
+  Image.findByIdAndUpdate(req.params.id, {
+    $addToSet: {
+      tags: [req.body]//'inserted Array containing the list of object'
+    }
+  }, { upsert: true, new: true }, (error, data) => {
+    if (error) {
+      console.log(error);
+      return next(error);
+    } else {
+      res.json(data)
+      // console.log(chalk.cyanBright('Data updated successfully'));
+    };
+  });
+});
 
 
 //Let only user who made comment delete

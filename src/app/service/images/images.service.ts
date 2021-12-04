@@ -9,35 +9,35 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
   providedIn: 'root'
 })
 export class ImagesService {
-    // Node/Express API
-    REST_API: string;
-    serverURI: string; 
-    
+  // Node/Express API
+  REST_API: string;
+  serverURI: string;
 
-    // Http Header
-    httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');   
-  
 
-  constructor(private httpClient: HttpClient ) {
+  // Http Header
+  httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+
+
+  constructor(private httpClient: HttpClient) {
     this.serverURI = GlobalConstants.serverURI;
     this.REST_API = this.serverURI + '/images';
   }
 
-   // Get all Images in JSON
-   GetImagesList() {
+  // Get all Images in JSON
+  GetImagesList() {
     return this.httpClient.get(`${this.REST_API}/files`);
   }
-  
+
   GetLatest() {
     return this.httpClient.get(`${this.REST_API}/latest-posts`);
   }
 
-  
+
   //Get Cover photo
-  GetCover(album_id:any): Observable<any>  {
+  GetCover(album_id: any): Observable<any> {
     let API_URL = `${this.REST_API}/cover/${album_id}`;
     // console.log(API_URL);
-    return this.httpClient.get(API_URL, { headers: this.httpHeaders })      
+    return this.httpClient.get(API_URL, { headers: this.httpHeaders })
   }
 
   // Get single trip
@@ -45,7 +45,7 @@ export class ImagesService {
     let API_URL = `${this.REST_API}/view-album/${id}`;
     return this.httpClient.get(API_URL, { headers: this.httpHeaders })
       .pipe(map((res: any) => {
-       
+
         return res || {}
       }),
         catchError(this.handleError)
@@ -84,7 +84,7 @@ export class ImagesService {
       )
   };
   //  //Get Album Comments
-   GetAlbumComments(id: any): Observable<any> {
+  GetAlbumComments(id: any): Observable<any> {
     //  console.log(id)     
     let API_URL = `${this.REST_API}/album-comments/${id}`;
     return this.httpClient.get(API_URL, { headers: this.httpHeaders })
@@ -94,24 +94,33 @@ export class ImagesService {
         catchError(this.handleError)
       )
   }
-  
+
   //AddComment to Image
-  AddComment(id: any, data: any) {    
+  AddComment(id: any, data: any) {
     let API_URL = `${this.REST_API}/add-comment/${id}`;
     return this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
-    .subscribe(data => {      
-    });    
-  }   
+      .subscribe(data => {
+      });
+  }
+
+  //Add tags to Image
+  AddTags(id: any, data: any) {
+    let API_URL = `${this.REST_API}/add-tags/${id}`;
+    return this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   //Remove a comment
-  deleteComment(img_id:any, c_id: any): Observable<any> {
+  deleteComment(img_id: any, c_id: any): Observable<any> {
     // console.log('made it to service' + '     ' + img_id  + '     ' + c_id)
-    let  API_URL = `${this.REST_API}/delete-comment/${img_id}/${c_id}`;
-    return this.httpClient.delete( API_URL, { headers: this.httpHeaders }).pipe(
+    let API_URL = `${this.REST_API}/delete-comment/${img_id}/${c_id}`;
+    return this.httpClient.delete(API_URL, { headers: this.httpHeaders }).pipe(
       catchError(this.handleError)
     )
   }
-   
+
   // Error 
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
@@ -125,6 +134,6 @@ export class ImagesService {
     console.log(errorMessage);
     return throwError(errorMessage);
   }
- 
-  
+
+
 }

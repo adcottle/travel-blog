@@ -16,6 +16,7 @@ import { Subject } from 'rxjs';
 export class AddMediaComponent implements OnInit , OnDestroy{
 
   addMediaForm: FormGroup;
+  addTagsForm: FormGroup;
   submitted = false;
   destroy$: Subject<boolean> = new Subject<boolean>();
   List: any = [];
@@ -23,7 +24,7 @@ export class AddMediaComponent implements OnInit , OnDestroy{
   serverURI: string;
   
    
-  constructor(public fb: FormBuilder, public tripService: CrudService, private sanitizer: DomSanitizer) { 
+  constructor(public fb: FormBuilder, public tripService: CrudService, public imageService: ImagesService, private sanitizer: DomSanitizer) { 
     this.serverURI = GlobalConstants.serverURI;
     const url= this.serverURI + '/images';
     this.controllerSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -48,23 +49,23 @@ export class AddMediaComponent implements OnInit , OnDestroy{
         upload_date: [],
         // upload_date: [currentDate]    
       });
-     
-    
+      this.addTagsForm = this.fb.group({
+        pic_id: ['', [Validators.required]],
+        tags: ['', [Validators.required]]
+      });   
   }
 
   get f() { return this.addMediaForm.controls; }  
+  get t() { return this.addTagsForm.controls; }  
 
   addMedia() { 
     // var dv = this.addMediaForm.get('trip_date').value
     // const tripDate = this.datePipe.transform(dv, 'MMMM-dd-yyyy');    
     // this.addMediaForm.get('trip_date').setValue(tripDate);   
-    // console.log('hi')
-
     var tagv = this.addMediaForm.get('tags').value
-    var tagArray = tagv.split(',');
-   
+    var tagArray = tagv.split(',');   
     this.addMediaForm.get('tags').setValue(tagArray);   
-    console.log(tagArray)
+    //console.log(tagArray)
     this.addMediaForm.get('upload_date').setValue(new Date());
     this.tripService.AddTrip(this.addMediaForm.value).subscribe((res) =>{     
       console.log(res.result._id);
@@ -74,6 +75,17 @@ export class AddMediaComponent implements OnInit , OnDestroy{
       document.getElementById("album_title").innerHTML = album_title;
       this.addMediaForm.reset();
     });    
+  }
+
+  addTags() {
+    var tagv = this.addTagsForm.get('tags').value
+    var tagArray = tagv.split(',');       
+    this.addTagsForm.get('tags').setValue(tagArray); 
+    var data = this.addTagsForm.get('tags').value;    
+    var pic_id = this.addTagsForm.get('pic_id').value    
+    this.imageService.AddTags(pic_id, data).subscribe((res) =>{ 
+      this.addTagsForm.reset();
+    }); 
   }
  
 
