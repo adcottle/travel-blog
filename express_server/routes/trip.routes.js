@@ -81,7 +81,7 @@ router.post("/add-trip",
         upload_date: req.body.upload_date
       });
       trip.save().then((response) => {
-        console.log(response)
+        // console.log(response)
         res.status(201).json({
           message: "trip successfully created!",
           result: response

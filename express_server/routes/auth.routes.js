@@ -25,10 +25,10 @@ router.post("/register-user",
         check('email', 'Email is required')
             .not()
             .isEmpty(),
-        check('password', 'Password should be between 4 to 8 characters long')
+        check('password', 'Password should be a miniumn of 4 characters long')
             .not()
             .isEmpty()
-            .isLength({ min: 4, max: 8 })
+            .isLength({ min: 4 })
     ],
     (req, res, next) => {
         const errors = validationResult(req);
@@ -54,7 +54,8 @@ router.post("/register-user",
                 }).catch(error => {
                     console.log(error);
                     res.status(500).json({
-                        error: error
+                        error: error,
+                        message: "User error!",
                         
                     });
                 });
