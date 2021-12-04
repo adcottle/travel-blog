@@ -6,13 +6,13 @@ let imageSchema = new Schema({
     __id: mongoose.Schema.Types.ObjectId, 
     filename: { type: String },  
     uploadDate: {type: Date },
+    tags: { type: Array },
     metadata:[{
         caption: {type: String},
         city: {type: String},    
         state: {type: String},
         country: {type: String},
         cover_photo: {type: Boolean},
-        tags: {type: Array,},
         photo_date: {type: Date },
         album_id: {type: String}
     }],    
