@@ -50,49 +50,32 @@
     font-family: "Handlee";
 }
 
-
 /*****ALBUM PICS****/
 
-/* .img-holder {
-    width: 100%;
-    height: 300px;
-}
-.card-image {
-    width: 100%;
-    height: 100%; 
-    background-size: cover;
+.img-fluid {
     cursor: pointer;
-} */
-
-.card-img-top {
-  cursor: pointer;
-  max-height: 250px;  
 }
 .card {
-  min-height: 575px;
-  max-height: 575px;
-  -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;   /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;     /* Firefox 3.5 - 3.6 */
-    box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;
+  min-height: 625px;
+  max-height: 625px;
+  /* -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;   /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    /* -moz-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25)
+     !important;     /* Firefox 3.5 - 3.6 */
+  /*  box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;  */
 }
-
-
-
-mat-card-title, .card-title{
+.card-title{
     color: mediumseagreen;
     font-family: "Thasadith";
-    font-weight: bold;
-    font-size: 20px;
-}
-
-mat-card-content, .card-text {
-    font-family: "Delius";
+    font-weight: bolder;
     font-size: 16px;
+}
+.card-text {
+    font-family: "Delius";
+    font-size: 14px;
 }
 .mat-form-field {
     width: 100%;
 }
-
 .comIcon {
     color: mediumseagreen;
 }
@@ -104,7 +87,6 @@ mat-icon {
     background-color: transparent !important;
     border: transparent !important;
 }
-
 .favIcons {
     position: absolute;
     top: 0;
@@ -113,37 +95,23 @@ mat-icon {
 }
 .comments {
     font-family: "Delius";
-    min-height: 200px;
-    max-height: 200px;
+    min-height: 120px;
+    max-height: 120px;
     overflow-y: auto;
 }
 .comments li {
     border-top: none;
     border-left: none;
     border-right: none;
+    font-size: 12px;
     /* border-style: none; */
 }
 
 /* Small devices (portrait phones, 576px and down) */
-/* @media only screen and (max-width: 576px) {
-    .my-container {
-    background-color: lightcoral;
-    }
-  } */
+/* @media only screen and (max-width: 576px) { } */
 
 /* Medium devices (landscape tablets, 768px and up) */
-/* @media only screen and (min-width: 578px) {
-    .my-container {
-    background-color: powderblue;
-  }
-    .card-img-top {
-      margin: auto;
-      display: block;
-      min-height: 255px;
-      max-height: 255px;
-    }
-  } */
-
+/* @media only screen and (min-width: 578px) {} */
 /* Large devices (laptops/desktops, 768px and up) */
 /* @media only screen and (min-width: 768px) {  } */
 /* Large devices (desktops, 992px and up) */
