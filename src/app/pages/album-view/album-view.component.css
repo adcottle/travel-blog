@@ -1,9 +1,7 @@
 .pageView {
     background-color: #f7f7f7;
 }
-
 /*************TOP Banner*************/
-
 
 .hero {
     background: center;
@@ -20,7 +18,6 @@
 .hero > * {
     color: white;
 }
-
 
 .boxborder {
     position: relative;
@@ -56,26 +53,39 @@
 
 /*****ALBUM PICS****/
 
-mat-card > img {
-    min-height: 400px;
-    max-height: 400px;
-    min-width: 100%;
-    cursor: pointer;
+/* .img-holder {
+    width: 100%;
+    height: 300px;
 }
-mat-card {
-    -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important; /* Firefox 3.5 - 3.6 */
-    box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;    
+.card-image {
+    width: 100%;
+    height: 100%; 
+    background-size: cover;
+    cursor: pointer;
+} */
+
+.card-img-top {
+  cursor: pointer;
+  max-height: 250px;  
+}
+.card {
+  min-height: 575px;
+  max-height: 575px;
+  -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;   /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;     /* Firefox 3.5 - 3.6 */
+    box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;
 }
 
-mat-card-title {
+
+
+mat-card-title, .card-title{
     color: mediumseagreen;
     font-family: "Thasadith";
     font-weight: bold;
     font-size: 20px;
 }
 
-mat-card-content {
+mat-card-content, .card-text {
     font-family: "Delius";
     font-size: 16px;
 }
@@ -95,18 +105,6 @@ mat-icon {
     border: transparent !important;
 }
 
-.cardImg {
-    position: relative;
-
-}
-.cardImg img {
-    display: block;
-    margin-top: -15px;
-    min-height: 400px;
-    max-height: 400px;
-    min-width: 100%;
-    cursor: pointer;
-}
 .favIcons {
     position: absolute;
     top: 0;
@@ -117,12 +115,37 @@ mat-icon {
     font-family: "Delius";
     min-height: 200px;
     max-height: 200px;
-    overflow-y:auto;
+    overflow-y: auto;
 }
 .comments li {
     border-top: none;
     border-left: none;
     border-right: none;
-    /*   border-style: none; */
-    border-bottom-color: #bfdaf4;
+    /* border-style: none; */
 }
+
+/* Small devices (portrait phones, 576px and down) */
+/* @media only screen and (max-width: 576px) {
+    .my-container {
+    background-color: lightcoral;
+    }
+  } */
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 578px) {
+    .my-container {
+    background-color: powderblue;
+  }
+    .card-img-top {
+      margin: auto;
+      display: block;
+      min-height: 255px;
+      max-height: 255px;
+    }
+  } */
+
+/* Large devices (laptops/desktops, 768px and up) */
+/* @media only screen and (min-width: 768px) {  } */
+/* Large devices (desktops, 992px and up) */
+/* @media only screen and (min-width: 992px) {}  
+  @media only screen and (min-width: 1260px) {} */
