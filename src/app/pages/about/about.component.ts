@@ -27,6 +27,8 @@ export class AboutComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+
+
   constructor(private crudService: CrudService) { }
 
   ngOnInit(): void {
@@ -35,7 +37,10 @@ export class AboutComponent implements OnInit {
       /*console.log(res)*/
       this.Trips =res;
     });    
+    
   }
+
+
 
   populateTable() { 
     this.crudService.GetTrips().subscribe(res => {

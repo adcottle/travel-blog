@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
 
+
 @Component({
   selector: 'app-album-view',
   templateUrl: './album-view.component.html',
@@ -30,7 +31,6 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   Favorites: any = [];
   Comments: any = [];
 
-
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private actRoute: ActivatedRoute,
@@ -45,8 +45,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     this.commentForm = this.fb.group({
       comment: ['', [Validators.required]],
       user: []
-    })
-
+    });
   }
   get f() { return this.commentForm.controls; }
 
@@ -66,6 +65,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
           const mergedObj = { ...t, ...element };
           //console.log(mergedObj);
           this.albumImage.push(mergedObj);
+          // console.log(this.albumImage)
         });
         this.GetImageComments(id);
       });

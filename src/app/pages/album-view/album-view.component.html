@@ -1,53 +1,46 @@
 <div class="pageView">
-<main class="wrapper">
+  <main class="wrapper">
     <section class="hero" [ngStyle]="{'background-image': 'url('+ Cover+')'}">
       <h1 class="boxborder"><small> </small> {{Post.album_title}} <small>{{Post.album_desc}}</small></h1>
-
     </section>
   </main>
   <!-- start nav-->
   <app-navbar></app-navbar>
 
-  <div class="row ">
-    <ng-container *ngFor="let a of albumImage;let i = index">
-      <div class="col-12 col-md-4">
-        <mat-card class="mb-3">
-          <div class="cardImg">   
-            <div class="favIcons">
-                <div *ngIf="Favorites[i]?.favorite; else elseTemplate">
-                  <button mat-button (click)="removeFavorite(a._id)">
-                    <mat-icon>favorite</mat-icon>
-                  </button>
-               </div>               
-               <ng-template #elseTemplate>
-                  <div>
-                    <button mat-button (click)="makeFavorite(a._id)">
-                      <mat-icon>favorite_border</mat-icon>
-                    </button>
-                  </div>
-               </ng-template>  
-              </div> 
 
-           
-            <img mat-card-image [src]="(serverURI + '/images/file/' + a.filename) | safe: 'url'"
-              alt={{a.metadata.caption}} (click)="openModal(a.filename)">
+  <!--Start Album view-->
+  <div class="row">
+    <ng-container *ngFor="let a of albumImage;let i = index">
+      <div class="mb-2 col-sm-6 col-md-6 col-lg-4 col-xl-3 col-xxl-2">
+        <div class="card z-depth-2">
+          <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+            <img class="img-fluid"  [src]="(serverURI + '/images/file/' + a.filename) | safe: 'url'" alt={{a.metadata.caption}}
+            (click)="openModal(a.filename)"/>
+            <div class="favIcons">
+              <div *ngIf="Favorites[i]?.favorite; else elseTemplate">
+                <button mat-button (click)="removeFavorite(a._id)">
+                  <mat-icon>favorite</mat-icon>
+                </button>
+              </div>
+              <ng-template #elseTemplate>
+                <div>
+                  <button mat-button (click)="makeFavorite(a._id)">
+                    <mat-icon>favorite_border</mat-icon>
+                  </button>
+                </div>
+              </ng-template>
+            </div>
           </div>
-          <!--/.cardImg-->
-          <mat-card-title>{{a.metadata.caption}}<p class="trip-date float-right">{{a.trip_date | date: 'MMMM/dd/yyyy'}}
+          <div class="card-body">
+            <h5 class="card-title">{{a.metadata.caption}}<span class="float-right">{{a.metadata.photo_date | date: 'MMMM dd, yyyy'}}</span></h5>
+            <p class="card-text">
+              {{a.metadata.city}}, {{a.metadata.state}}<span
+                class="float-right"><strong>Tags:</strong>{{a.tags}}</span>
             </p>
-          </mat-card-title>
-          <mat-card-content>
-            <br>
-            <p>{{a.metadata.city}}, {{a.metadata.state}}</p>
-            <p><strong>Tags:</strong>{{a.tags}}</p>
-          </mat-card-content>
-          <mat-card-actions>
-            
             <form [formGroup]="commentForm" (ngSubmit)="addComment(a._id, a.metadata.album_id)">
               <div class="row my-3">
                 <div class="commentForm col-12">
                   <mat-form-field appearance="standard">
-                    <!-- <mat-label>Add A Comment</mat-label> -->
                     <input matInput placeholder="comment" formControlName="comment">
                     <button matSuffix type="submit">
                       <mat-icon matSuffix class="comIcon">add_comment</mat-icon>
@@ -56,43 +49,32 @@
                 </div>
               </div>
             </form>
-          </mat-card-actions>
-          <div class="comments" > 
-            <!-- <div class="comments" *ngFor="let c of Comments[i]">  -->
-             <!-- <div class="user-comments" >
-              
-               <button mat-button (click)="deleteComment(a._id, c._id, a.metadata.album_id)" *ngIf="user_id === c.user ">
-              <mat-icon>delete_outline</mat-icon>
-            </button>  
-              <p><strong>{{c.firstName}} {{c.lastName}} </strong>: {{c.comment}}<button style="text-align: right;" mat-button (click)="deleteComment(a._id, c._id, a.metadata.album_id)" *ngIf="user_id === c.user ">
-                delete
-              </button></p>             
-                           
-            </div> -->
             <div class="comments">
               <ul class="list-group">
                 <li class="list-group-item" *ngFor="let c of Comments[i]?.comments">
-                  <span style="float:left; color:blue">{{c.firstName}} {{c.lastName}} : &nbsp;</span>   
-                 {{c.comment}}
-                 <span style="float:right; color:red">
-                    <button mat-button (click)="deleteComment(a._id, c.cid, a.metadata.album_id)" *ngIf="user_id === c.uid ">
+                  <span style="float:left; color:blue">{{c.firstName}} {{c.lastName}} : &nbsp;</span>
+                  {{c.comment}}
+                  <span style="float:right; color:red">
+                    <button mat-button (click)="deleteComment(a._id, c.cid, a.metadata.album_id)"
+                      *ngIf="user_id === c.uid ">
                       <i class="far fa-trash-alt"></i>
-                  </button>
-                </span>
-                  
+                    </button>
+                  </span>
                 </li>
-                
               </ul>
             </div>
-         </div>         
-          
-        </mat-card>
+          </div>
+        </div>
+
+
+
+
+
+
+       
       </div>
     </ng-container>
   </div>
-
-
-
 </div>
 <!--pageView-->
 
