@@ -4,8 +4,15 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-const http = require('http');
+// const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const chalk = require('chalk');
+
+const options = {
+    key: fs.readFileSync('./certs/cert.key'),
+    cert: fs.readFileSync('./certs/cert.crt')
+}
 
 // Express settings
 app.use(express.json());
@@ -48,10 +55,10 @@ app.use(express.static(__dirname + '/dist'))
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
-const server = http.createServer(app);
+const server = https.createServer(options, app);
 
 // Define PORT
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8000;
 server.listen(port, err => {
     if (err)
         throw err

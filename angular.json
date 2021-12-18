@@ -48,8 +48,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
+              "sourceMap": false,              
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -72,7 +71,10 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "travel-blog:build"
+            "browserTarget": "travel-blog:build",
+            "ssl": true,
+            "sslCert": "./express_server/certs/cert.crt",
+            "sslKey": "./express_server/certs/cert.key"
           },
           "configurations": {
             "production": {
