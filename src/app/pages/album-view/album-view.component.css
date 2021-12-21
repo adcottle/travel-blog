@@ -63,13 +63,13 @@
      !important;     /* Firefox 3.5 - 3.6 */
   /*  box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;  */
 }
-.card-title{
+.card-title, mat-card-title{
     color: mediumseagreen;
     font-family: "Thasadith";
     font-weight: bolder;
     font-size: 16px;
 }
-.card-text {
+.card-text, mat-card-content {
     font-family: "Delius";
     font-size: 14px;
 }
@@ -90,7 +90,7 @@ mat-icon {
 .favIcons {
     position: absolute;
     top: 0;
-    right: -15px;
+    right: -5px;
     color: red;
 }
 .comments {
@@ -117,3 +117,8 @@ mat-icon {
 /* Large devices (desktops, 992px and up) */
 /* @media only screen and (min-width: 992px) {}  
   @media only screen and (min-width: 1260px) {} */
+
+  .example-card {
+    max-width: 400px;
+    margin-bottom: 8px;
+  }
