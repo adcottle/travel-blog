@@ -16,6 +16,7 @@ const storage = new GridFsStorage({
             // filename: `${Date.now()}-any-name-${file.originalname}`,
             filename: file.originalname,          
             metadata: { caption: req.body.caption, 
+                        description: req.body.description,
                         city: req.body.city, 
                         state: req.body.state, 
                         country: req.body.country,

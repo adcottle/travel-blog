@@ -9,6 +9,7 @@ let imageSchema = new Schema({
     tags: { type: Array },
     metadata:[{
         caption: {type: String},
+        description: {type: String},
         city: {type: String},    
         state: {type: String},
         country: {type: String},
