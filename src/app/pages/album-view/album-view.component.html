@@ -7,19 +7,81 @@
   <!-- start nav-->
   <app-navbar></app-navbar>
 
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+  <ng-container *ngFor="let a of albumImage;let i = index">    
+      <div class="col mb-4">
+        <div class="card">
+          <img [src]="(serverURI + '/images/file/' + a.filename) | safe: 'url'" alt={{a.metadata.caption}} (click)="openModal(a.filename)"/>
+          <div class="favIcons">
+            <div *ngIf="Favorites[i]?.favorite; else elseTemplate">
+              <button mat-button (click)="removeFavorite(a._id)">
+                <mat-icon>favorite</mat-icon>
+              </button>
+            </div>
+            <ng-template #elseTemplate>
+              <div>
+                <button mat-button (click)="makeFavorite(a._id)">
+                  <mat-icon>favorite_border</mat-icon>
+                </button>
+              </div>
+            </ng-template>
+          </div>
+          <div class="card-body">
+            <p class="card-title">{{a.metadata.caption}}<span class="float-right">{{a.metadata.photo_date | date: 'MMMM dd, yyyy'}}</span></p>
+            <p class="card-text">{{a.metadata.city}}, {{a.metadata.state}}</p>
+            <p></p>
+            <p class="card-text">{{a.metadata.description}}</p>
+          </div>
+          <div class="form-box">
+          <form [formGroup]="commentForm" (ngSubmit)="addComment(a._id, a.metadata.album_id)">
+            <div class="row my-3">
+              <div class="commentForm col-12">
+                <mat-form-field appearance="standard">
+                  <input matInput placeholder="comment" formControlName="comment">
+                  <button matSuffix type="submit">
+                    <mat-icon matSuffix class="comIcon">add_comment</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+          <div class="comments">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let c of Comments[i]?.comments">
+                <span style="float:left; color:blue">{{c.firstName}} {{c.lastName}} : &nbsp;</span>
+                {{c.comment}}
+                <span style="float:right; color:red">
+                  <button mat-button (click)="deleteComment(a._id, c.cid, a.metadata.album_id)"
+                    *ngIf="user_id === c.uid ">
+                    <i class="far fa-trash-alt"></i>
+                  </button>
+                </span>
+              </li>
+            </ul>
+          
+        </div>
+      </div>
+      </div> 
+      </div>
+  </ng-container>
+</div>
+
+
 
   <!--Start Album view-->
-  <div class="row">
+  <!-- <div class="row">
     <ng-container *ngFor="let a of albumImage;let i = index">
-      <div class="mb-2 col-sm-6 col-md-6 col-lg-4 col-xl-3 col-xxl-2">
+
+
+     <div class="mb-2 col-sm-6 col-md-6 col-lg-4 col-xl-3 col-xxl-2">
 
         <mat-card class="example-card -depth-2">
           <mat-card-title-group>
             <mat-card-title> {{a.metadata.caption}}</mat-card-title>
-            <mat-card-subtitle>{{a.metadata.city}}, {{a.metadata.state}}</mat-card-subtitle>  
-            <mat-card-subtitle>{{a.metadata.photo_date | date: 'MMMM dd, yyyy'}}</mat-card-subtitle>          
-            <img mat-card-xl-image [src]="(serverURI + '/images/file/' + a.filename) | safe: 'url'" alt={{a.metadata.caption}}
-            (click)="openModal(a.filename)" />
+            <mat-card-subtitle>{{a.metadata.city}}, {{a.metadata.state}}</mat-card-subtitle>
+            <mat-card-subtitle>{{a.metadata.photo_date | date: 'MMMM dd, yyyy'}}</mat-card-subtitle>
+            <img mat-card-xl-image [src]="(serverURI + '/images/file/' + a.filename) | safe: 'url'"
+              alt={{a.metadata.caption}} (click)="openModal(a.filename)" />
             <div class="favIcons">
               <div *ngIf="Favorites[i]?.favorite; else elseTemplate">
                 <button mat-button (click)="removeFavorite(a._id)">
@@ -33,77 +95,16 @@
                   </button>
                 </div>
               </ng-template>
-            </div>          
-          </mat-card-title-group>
+            </div>
+          </mat-card-title-group> -->
           <!-- <mat-card-content>
             <p class="float-right">{{a.metadata.photo_date | date: 'MMMM dd, yyyy'}}</p>
            </mat-card-content> -->
-          <mat-card-content>
+          <!-- <mat-card-content> -->
             <!-- <p><strong>Tags:</strong>{{a.tags}}</p> -->
-            <p class="img-desc">{{a.metadata.description}}</p> 
+            <!-- <p class="img-desc">{{a.metadata.description}}</p>
           </mat-card-content>
-        <mat-card-content>
-        <form [formGroup]="commentForm" (ngSubmit)="addComment(a._id, a.metadata.album_id)">
-          <div class="row my-3">
-            <div class="commentForm col-12">
-              <mat-form-field appearance="standard">
-                <input matInput placeholder="comment" formControlName="comment">
-                <button matSuffix type="submit">
-                  <mat-icon matSuffix class="comIcon">add_comment</mat-icon>
-                </button>
-              </mat-form-field>
-            </div>
-          </div>
-        </form>
-        <div class="comments">
-          <ul class="list-group">
-            <li class="list-group-item" *ngFor="let c of Comments[i]?.comments">
-              <span style="float:left; color:blue">{{c.firstName}} {{c.lastName}} : &nbsp;</span>
-              {{c.comment}}
-              <span style="float:right; color:red">
-                <button mat-button (click)="deleteComment(a._id, c.cid, a.metadata.album_id)"
-                  *ngIf="user_id === c.uid ">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </mat-card-content>
-        </mat-card>
-
-
-
-
-
-
-
-
-        <!-- <div class="card z-depth-2">
-          <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-            <img class="img-fluid"  [src]="(serverURI + '/images/file/' + a.filename) | safe: 'url'" alt={{a.metadata.caption}}
-            (click)="openModal(a.filename)"/>
-            <div class="favIcons">
-              <div *ngIf="Favorites[i]?.favorite; else elseTemplate">
-                <button mat-button (click)="removeFavorite(a._id)">
-                  <mat-icon>favorite</mat-icon>
-                </button>
-              </div>
-              <ng-template #elseTemplate>
-                <div>
-                  <button mat-button (click)="makeFavorite(a._id)">
-                    <mat-icon>favorite_border</mat-icon>
-                  </button>
-                </div>
-              </ng-template>
-            </div>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">{{a.metadata.caption}}<span class="float-right">{{a.metadata.photo_date | date: 'MMMM dd, yyyy'}}</span></h5>
-            <p class="card-text">
-              {{a.metadata.city}}, {{a.metadata.state}}<span
-                class="float-right"><strong>Tags:</strong>{{a.tags}}</span>
-            </p>
+          <mat-card-content>
             <form [formGroup]="commentForm" (ngSubmit)="addComment(a._id, a.metadata.album_id)">
               <div class="row my-3">
                 <div class="commentForm col-12">
@@ -130,18 +131,13 @@
                 </li>
               </ul>
             </div>
-          </div>
-        </div> -->
+          </mat-card-content>
+        </mat-card>
+      </div> 
 
 
-
-
-
-
-       
-      </div>
-    </ng-container>
-  </div>
+          </ng-container>
+  </div> -->
 </div>
 <!--pageView-->
 

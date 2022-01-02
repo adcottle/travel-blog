@@ -55,21 +55,27 @@
 img {
     cursor: pointer;
 }
+.form-box {
+    width: 97%;
+    align-self: center;
+    height: 75%;
+    padding: 10px;
+}
 .card {
-  min-height: 625px;
-  max-height: 625px;
+  min-height: 600px;
+  max-height: 600px;
   /* -webkit-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;   /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     /* -moz-box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25)
      !important;     /* Firefox 3.5 - 3.6 */
   /*  box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.25) !important;  */
 }
-.card-title, mat-card-title{
+.card-title{
     color: mediumseagreen;
     font-family: "Thasadith";
     font-weight: bolder;
     font-size: 16px;
 }
-.card-text, mat-card-content, img-desc {
+.card-text {
     font-family: "Delius";
     font-size: 14px;
 }
@@ -118,7 +124,27 @@ mat-icon {
 /* @media only screen and (min-width: 992px) {}  
   @media only screen and (min-width: 1260px) {} */
 
-  .example-card {
-    max-width: 400px;
-    margin-bottom: 8px;
+  @media (max-width: 576px) {  
+    .xs {color:red;font-weight:bold;}
   }
+  
+  /* Small devices (landscape phones, 576px and up) */
+  @media (min-width: 576px) and (max-width:768px) {  
+    .sm {color:red;font-weight:bold;}
+  }
+   
+  /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+  @media (min-width: 768px) and (max-width:992px) {  
+   .md {color:red;font-weight:bold;}
+  }
+   
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) and (max-width:1200px) { 
+   .lg {color:red;font-weight:bold;}
+  }
+   
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {  
+      .xl {color:red;font-weight:bold;}
+  }
+   
