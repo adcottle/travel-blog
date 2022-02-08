@@ -30,8 +30,9 @@ import { AddMediaComponent } from './pages/add-media/add-media.component';
 import { AlbumViewComponent } from './pages/album-view/album-view.component';
 
 //Modal Components
-  import { ImageModalComponent } from './pages/album-view/image-modal/image-modal.component';
+import { ImageModalComponent } from './pages/album-view/image-modal/image-modal.component';
 import { ListAllComponent } from './pages/list-all/list-all.component';
+import { FormModalComponent } from './pages/album-view/form-modal/form-modal.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ListAllComponent } from './pages/list-all/list-all.component';
     ImageModalComponent,
     NavbarComponent,
     FooterComponent,
-    ListAllComponent
+    ListAllComponent,
+    FormModalComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,7 @@ import { ListAllComponent } from './pages/list-all/list-all.component';
     { provide: LocationStrategy, useClass: HashLocationStrategy},
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
-  entryComponents: [ImageModalComponent],
+  entryComponents: [ImageModalComponent, FormModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

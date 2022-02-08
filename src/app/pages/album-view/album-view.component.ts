@@ -6,10 +6,9 @@ import { CrudService } from '../../service/crud/crud.service';
 import { UserService } from '../../service/user/user.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import { ImageModalComponent } from './image-modal/image-modal.component';
-
+import { FormModalComponent } from './form-modal/form-modal.component';
 
 @Component({
   selector: 'app-album-view',
@@ -17,19 +16,16 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
   styleUrls: ['./album-view.component.css']
 })
 export class AlbumViewComponent implements OnInit, OnDestroy {
-
   baseURI: string;
   serverURI: string;
   id: any;
-  user_id: any = [];
+  user_id: string;
   albumImage: any = [];
   imageData: any = [];
   Post: any = [];
   Cover: any;
-  commentForm: FormGroup;
   submitted = false;
-  Favorites: any = [];
-  Comments: any = [];
+  Favorites: any = [];  
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -37,17 +33,12 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     private imageService: ImagesService,
     private crudService: CrudService,
     private userService: UserService,
-    public dialog: MatDialog, public fb: FormBuilder) {
+    public dialog: MatDialog ) {
     this.user_id = localStorage.getItem('uid');
     this.baseURI = GlobalConstants.baseURI;
     this.serverURI = GlobalConstants.serverURI;
     this.id = this.actRoute.snapshot.paramMap.get('id');
-    this.commentForm = this.fb.group({
-      comment: ['', [Validators.required]],
-      user: []
-    });
-  }
-  get f() { return this.commentForm.controls; }
+    }
 
   ngOnInit() {
     this.getMerged(this.id);
@@ -66,8 +57,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
           //console.log(mergedObj);
           this.albumImage.push(mergedObj);
           // console.log(this.albumImage)
-        });
-        this.GetImageComments(id);
+        });        
       });
     });
   };
@@ -116,7 +106,6 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     });
   };
 
-
   openModal(filename) {
     this.imageService.OpenImage(filename).pipe(takeUntil(this.destroy$)).subscribe(img => {
       this.dialog.open(ImageModalComponent, {
@@ -129,41 +118,19 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
     });
   };
 
-  GetImageComments(album_id) {
-    this.imageService.GetAlbumComments(album_id).pipe(takeUntil(this.destroy$))
-      .subscribe(com => {
-        if (com) { this.Comments = com; }
+  openFormModal(filename) {
+    this.imageService.OpenImage(filename).pipe(takeUntil(this.destroy$)).subscribe(img => {
+      this.dialog.open(FormModalComponent, {
+        height: '50%',
+        width: '30%',
+        data: {
+          imageData: img
+        },
+        hasBackdrop: true,
+        
       });
-  };
-
-
-  addComment(id, album_id) {
-    //console.log(album_id);
-    this.submitted = true;
-    // stop here if form is invalid
-    if (this.commentForm.invalid) {
-      return;
-    } else {
-      this.commentForm.get('user').setValue(localStorage.getItem('uid'));
-      // console.log(this.commentForm.value);
-      this.imageService.AddComment(id, this.commentForm.value)
-      this.commentForm.reset();
-      Object.keys(this.commentForm.controls).forEach(key => {
-        this.commentForm.controls[key].setErrors(null)
-      });
-      this.GetImageComments(album_id);
-    }
-  };
-
-  deleteComment(img_id, c_id, alb_id) {
-    if (window.confirm('Delete your comment?')) {
-      this.imageService.deleteComment(img_id, c_id).pipe(takeUntil(this.destroy$)).subscribe((response) => {
-        // console.log(response);         
-        this.GetImageComments(alb_id);
-      });
-    };
-  };
-
+    });
+  }
 
   ngOnDestroy() {
     this.destroy$.next(true);
