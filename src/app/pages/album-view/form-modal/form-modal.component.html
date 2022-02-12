@@ -1,70 +1,42 @@
-<div class="bg">
-
-  <section class="panel">
-    <h2>This is glassmorphism</h2>
-    <div class="card__text">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum tenetur vel accusamus. Cumque, iste asperiores. Perferendis odio magnam nisi, eos provident nobis maxime nostrum nam, ipsum blanditiis quasi saepe aliquid!</p>
-    </div>
-    <a href="#" class='button'>Button</a>
-  </section>
-
-</div>
-
-<!-- <div class='glass-bkg'>
-<div class="container-glass">
-  <img class="img" src="https://c4.wallpaperflare.com/wallpaper/764/431/702/river-trees-forest-clouds-wallpaper-preview.jpg" alt="">
-  <p class="text">
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-	aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-  <button class="btn">Discover</button>
-</div>
-</div> -->
-
-<!-- end glass -->
-
-<!-- <div class="modal-bkg">
-
-{{imgTitle}}
-
-{{city}},{{state}}
- 
-
-<span class="day">{{imgDate | date: 'MMMM dd, yyyy'}}</span>
-{{imgDesc}}
-
-<div class="comm-content">
-<form [formGroup]="commentForm" (ngSubmit)="addComment()">
-    <div class="row my-3">
-      <div class="form-box col-12">
-        <mat-form-field appearance="standard">
-          <input matInput placeholder="comment" formControlName="comment">
-          <button matSuffix type="submit">
-            <mat-icon matSuffix class="comIcon">add_comment</mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
-    </div>
-  </form>
-
-  <ng-container *ngFor="let cx of imgComms">
-  <div class="comments">
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let c of cx.comments">
-        <span style="float:left; color:blue">{{c.firstName}} {{c.lastName}} : &nbsp;</span>
-        {{c.comment}}
-        <span>
-          <button mat-button (click)="deleteComment(cx._id, c.cid)"
-            *ngIf="user_id === c.uid ">
-            <i class="far fa-trash-alt"></i>
-          </button>
-        </span>
-      </li>
-    </ul>
+<div class="modal-bkg">
+  <div class="img-data">
+    <p class=img-title>{{imgTitle}}</p>
+    <p class="city-state">{{city}},{{state}} &nbsp; <span class="day">{{imgDate | date: 'MMM dd, yyyy'}}</span></p>
+    <p class="img-desc">{{imgDesc}}</p>
   </div>
+  <div class="psuedo-text">
 
-</ng-container>
+    <div class="comm-box">
+      
+        <form [formGroup]="commentForm" (ngSubmit)="addComment()">
+          <div class="row my-3">
+            <div class="form-box col-12">
+              <mat-form-field appearance="standard">
+                <input matInput placeholder="comment" formControlName="comment">
+                <button matSuffix type="submit">
+                  <mat-icon matSuffix class="comIcon">add_comment</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+
+        <ng-container *ngFor="let cx of imgComms">
+          <div class="comments">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let c of cx.comments">
+                <span style="float:left; color:blue">{{c.firstName}} {{c.lastName}} : &nbsp;</span>
+                {{c.comment}}
+                <span>
+                  <button mat-button (click)="deleteComment(cx._id, c.cid)" *ngIf="user_id === c.uid ">
+                    <i class="far fa-trash-alt"></i>
+                  </button>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </ng-container>
+     
+    </div>
+  </div>
 </div>
-
-</div> -->
-<!--end modal-bkg-->

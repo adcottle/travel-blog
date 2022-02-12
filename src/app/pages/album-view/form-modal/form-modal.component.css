@@ -1,210 +1,99 @@
-body {
-    font-family: "Space Grotesk", Helvetica, Arial, sans-serif;
-    color: rgba(9, 19, 60, 1);
+.modal-bkg {
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
-.bg {
-    background-image: url(https://source.unsplash.com/n7a2OJDSZns/2200x1100);
-    background-position: center;
-    background-size: cover;
-    min-height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.modal-bkg::before {
+  content: '';
+  background-image: url('../../../../assets/pics/postcard.jpg');
+  background-size: cover;
+  /* background-repeat: no-repeat; */
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.2;
 }
-.panel {
-    background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
-    backdrop-filter: blur(6px);
-    border-radius: 12px;
-    width: 320px;
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    border-left: 1px solid rgba(255, 255, 255, 0.5);
-    padding: 60px;
-    box-shadow: rgba(255, 255, 255, 0.5) -20px -20px 45px inset, rgba(0, 0, 0, 0.1) 10px 10px 20px, rgba(0, 0, 0, 0.06) 5px 5px 10px;
-    position: relative;
+.psuedo-text {
+  position: relative;
+  /* position: absolute; */
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%); 
+  width: 80%;  
 }
-.panel::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0) 40%);
-    pointer-events: none;
+.img-data {  
+ padding-left: 10px;
+ padding-top: 1%;
 }
-h2 {
-    font-size: 2em;
-    font-weight: 1000;
-    margin-top: 0;
+.img-title{
+  font-family:'Arsenal';
+  font-size: x-large;
+  color: mediumseagreen;
+  font-weight: bolder;
 }
-.card__text {
-    font-size: 14px;
-    line-height: 1.45;
-    opacity: 0.8;
-    margin-bottom: 2em;
+.city-state{
+  font-size: large;  
+  font-family: 'Arsenal'; 
 }
-.button {
-    display: inline-block;
-    padding: 1.5em 3em;
-    background-image: linear-gradient(-45deg, rgba(9, 28, 60, 1) 0%, rgba(67, 46, 103, 1) 100%);
-    text-decoration: none;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 14px;
-    letter-spacing: 0.2em;
-    border-radius: 10em;
-    color: white;
+.img-desc {
+  font-size: large;
+  column-rule: navy;
+  font-family: 'Arsenal';
+  font-weight: bolder;
 }
-
-
-/*************GLASS***********************/
-* {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .glass-bkg {
-    font-size: 13px;
-    /* height: 100vh; */
-    background: url('https://images.unsplash.com/photo-1542332213-31f87348057f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'PT Sans', sans-serif;
-    background-color: rgba(0, 0, 0, .2);
-    background-blend-mode: overlay;
-  }  
-  .container-glass,
-  .container-glass::before,
-  .container-glass::after {
-    border-radius: 7px;
-    background-color: rgba(255, 255, 255, .2);
-    backdrop-filter: blur(5px);
-    box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.08);
-  }
-  .container-glass {
-    position: relative;
-    padding: 2rem 1.5rem;
-    width: 100%;
-    max-width: 100%;
-  }
-  .container-glass::before,
-  .container-glass::after {
-    content: '';
-    position: absolute;
-  }
-  .container-glass::before {
-    height: 80px;
-    width: 80px;
-    top: -10px;
-    left: -40px;
-    z-index: -1;
-  }
-  .container-glass::after {
-    height: 40px;
-    width: 40px;
-    bottom: 20px;
-    right: -10px;
-    z-index: 2;
-  }
-  
-  .container-glass .img {
-    width: 100%;
-    border-radius: 7px;
-  }
-  
-  .container-glass .text {
-    font-size: 1.01rem;
-    color: #DDD;
-    margin: 2rem 0;
-    text-align: justify;
-  }
-  
-  .container-glass .btn {
-    display: block;
-    margin: auto;
-    font-family: 'PT Sans', sans-serif;
-    font-size: 1.02rem;
-    width: 80%;
-    max-width: 200px;
-    padding: .6rem 1rem;
-    background-color: transparent;
-    border: 1px solid #ffdd00;
-    border-radius: 5px;
-    color: #ffdd00;
-    cursor: pointer;
-    transition: all .2s linear;
-  }
-  .container-glass .btn:hover {
-    background-color: #ffdd00;
-    color: #333;
-  }
-
-/************************************/
-/* .modal-bkg {
-    position:relative;
+.comm-box {
+  background: rgba(248, 248, 248, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(9.5px);
+  -webkit-backdrop-filter: blur(9.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);   
 }
-.modal-bkg::before{
-    content: ""; 
-    background-image: url(../../../../assets/pics/postcard.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100%;
-    width: 100%;
-    position:absolute;
-    top: 0;
-    left: 0;
-    z-index: 1; 
-    opacity: 0.2;  
-}
-.comm-content{
-    position:relative;
-} */
+.list-group-item{ background-color: transparent;}
 .form-box {
-    width: 97%;
-    align-self: center;
-    /* height: 75%; */
-    padding: 10px;
+  width: 90%;
+  /* align-self: center; */
+  padding: 10px;
 }
 .mat-form-field {
-    width: 100%;
+  width: 95%;
+  padding-left: 50px;
 }
 .comIcon {
-    color: mediumseagreen;
+  color: mediumseagreen;
 }
+
 button {
-    all: initial;
-    background-color: transparent !important;
-    border: transparent !important;
-    line-height:80%;
+  all: initial;
+  background-color: transparent !important;
+  border: transparent !important;
+  line-height: 80%;
 }
-.list-group-item button {    
-    float:right; 
-    color:red
+.list-group-item button {
+  float: right;
+  color: red
 }
 mat-icon {
-    background-color: transparent !important;
-    border: transparent !important;
+  background-color: transparent !important;
+  border: transparent !important;
 }
 .comments {
-    font-family: "Delius";
-    width: 97%;
-    align-self: center;
-    overflow-y: auto;
+  font-family: 'Arsenal';
+  font-weight: bold;
+  width: 97%;
+  align-self: center;
+  overflow-y:auto;
+  max-height: 200px;
 }
 .comments ul {
-    line-height:80%;
+  line-height: 80%;
 }
 .comments li {
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    font-size: 12px;
-    /* border-style: none; */
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-size: 12px; 
 }

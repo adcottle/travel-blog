@@ -108,7 +108,7 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
 
   openModal(filename) {
     this.imageService.OpenImage(filename).pipe(takeUntil(this.destroy$)).subscribe(img => {
-      this.dialog.open(ImageModalComponent, {
+      this.dialog.open(ImageModalComponent, {       
         height: '100%',
         width: 'auto',
         data: {
@@ -121,8 +121,9 @@ export class AlbumViewComponent implements OnInit, OnDestroy {
   openFormModal(filename) {
     this.imageService.OpenImage(filename).pipe(takeUntil(this.destroy$)).subscribe(img => {
       this.dialog.open(FormModalComponent, {
-        height: '50%',
-        width: '30%',
+        panelClass: 'custom-dialog-container',
+        height: '70%',
+        width: '40%',
         data: {
           imageData: img
         },
