@@ -95,3 +95,7 @@ body {
     margin: 25px;
     font-family: Thasadith, sans-serif;
 }
+.custom-dialog-container .mat-dialog-container {
+    padding: 0px !important;
+}
+

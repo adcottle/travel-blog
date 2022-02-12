@@ -190,9 +190,9 @@ router.route('/view-album/:id')
   });
 
 
-//Get specific album comments
-router.route('/album-comments/:id').get((req, res) => {
-  Image.find({ "metadata.album_id": req.params.id })
+//Get specific image comments
+router.route('/image-comments/:id').get((req, res) => {
+  Image.find({ _id: req.params.id })
     .sort('-uploadDate')
     .select('comments').lean().exec((err, collection) => {
       if (err) {

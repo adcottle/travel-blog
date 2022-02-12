@@ -86,7 +86,7 @@ export class ImagesService {
   //  //Get Album Comments
   GetAlbumComments(id: any): Observable<any> {
     //  console.log(id)     
-    let API_URL = `${this.REST_API}/album-comments/${id}`;
+    let API_URL = `${this.REST_API}/image-comments/${id}`;
     return this.httpClient.get(API_URL, { headers: this.httpHeaders })
       .pipe(map(res => {
         return res || {}

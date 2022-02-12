@@ -1,0 +1,99 @@
+.modal-bkg {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.modal-bkg::before {
+  content: '';
+  background-image: url('../../../../assets/pics/postcard.jpg');
+  background-size: cover;
+  /* background-repeat: no-repeat; */
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.2;
+}
+.psuedo-text {
+  position: relative;
+  /* position: absolute; */
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%); 
+  width: 80%;  
+}
+.img-data {  
+ padding-left: 10px;
+ padding-top: 1%;
+}
+.img-title{
+  font-family:'Arsenal';
+  font-size: x-large;
+  color: mediumseagreen;
+  font-weight: bolder;
+}
+.city-state{
+  font-size: large;  
+  font-family: 'Arsenal'; 
+}
+.img-desc {
+  font-size: large;
+  column-rule: navy;
+  font-family: 'Arsenal';
+  font-weight: bolder;
+}
+.comm-box {
+  background: rgba(248, 248, 248, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(9.5px);
+  -webkit-backdrop-filter: blur(9.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);   
+}
+.list-group-item{ background-color: transparent;}
+.form-box {
+  width: 90%;
+  /* align-self: center; */
+  padding: 10px;
+}
+.mat-form-field {
+  width: 95%;
+  padding-left: 50px;
+}
+.comIcon {
+  color: mediumseagreen;
+}
+
+button {
+  all: initial;
+  background-color: transparent !important;
+  border: transparent !important;
+  line-height: 80%;
+}
+.list-group-item button {
+  float: right;
+  color: red
+}
+mat-icon {
+  background-color: transparent !important;
+  border: transparent !important;
+}
+.comments {
+  font-family: 'Arsenal';
+  font-weight: bold;
+  width: 97%;
+  align-self: center;
+  overflow-y:auto;
+  max-height: 200px;
+}
+.comments ul {
+  line-height: 80%;
+}
+.comments li {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-size: 12px; 
+}
