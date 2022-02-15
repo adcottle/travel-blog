@@ -24,7 +24,7 @@
     transform: translate3d(-50%, -50%, 0);
     z-index: 99;
     text-align: center;
-    font-family: "Amaranth";
+    font-family: 'Amaranth';
     font-weight: 300;
     text-transform: uppercase;
     background-color: rgba(0, 0, 0, 0.55);
@@ -44,7 +44,7 @@
 .boxborder small:last-child {
     border-top: 1px solid rgba(255, 255, 255, 0.25);
     padding-top: 0.5em;
-    font-family: "Handlee";
+    font-family: 'Handlee';
 }
 
 /*****ALBUM PICS****/
@@ -84,7 +84,7 @@
 }
 .card .date {
     position: absolute;
-    font-family: "Amaranth";
+    font-family: 'Amaranth';
     width: 9%;
     height: 60px;
     top: 0;
@@ -108,16 +108,18 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 .card .card-content .card-title,
-.card .card-content button {
-    font-size: 24px;
-    font-weight: 200;
+.card .card-content button {   
     z-index: 1;
     bottom: 0;
     color: #fff;
     position: absolute;
 }
 .card .card-content .card-title {
-    left: 10px;
+    left: 10px;    
+    white-space: nowrap;
+    font-family: 'Arsenal';
+    font-weight: bold;
+    font-size: 20px;
 }
 .card .card-content button {
     right: 5px;
@@ -126,12 +128,6 @@
     background-color: transparent;
     font-size: 18px;
 
-}
-.card-title {
-    color: white;
-    font-family: "Amaranth";
-    font-weight: 700;
-    font-size: 16px;
 }
 button {
     background-color: transparent !important;
