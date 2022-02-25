@@ -1,3 +1,4 @@
+
 <div class="row intro m-auto mat-elevation-z8">
    <div class="col-md-8 ">
       <img class="compass" src="../../../assets/pics/vc.png">
@@ -19,14 +20,53 @@
    </div>
 </div>
 <app-navbar></app-navbar>
-<div class="row">
-   <div class="col-sm-5"><img class="plane" src="../../../assets/pics/plane2.gif"></div>
-   <div class="col-sm-7 mapTitle my-2">Where we've Been</div>
+
+
+<div class="postTitle my-5">Latest Posts</div>
+<br>
+<div class="cards">
+   <ng-container *ngFor="let m of Metadata">
+      <div class="card">
+         <img class="card-img mat-elevation-z8" [src]="(serverURI + '/images/file/' + m.filename) | safe: 'url'"
+            alt="m.metadata.caption" (click)="openAlbum(m.metadata.album_id)">
+         <div class="card-info-wrapper">
+            <mat-card-title>{{m.album_title}}
+               <button style="float: right;" class="albumBtn" mat-button matTooltip="Open Album"
+                  (click)="openAlbum(m.metadata.album_id)">
+                  <mat-icon style="float: right;" class="albumBtn">collections</mat-icon>
+               </button>
+            </mat-card-title>
+            <mat-card-content>
+               <figcaption>{{m.album_desc}}</figcaption>              
+            </mat-card-content>
+            <p class="trip-date">{{m.trip_date | date: 'MMM. dd, yyyy'}}</p>
+         </div>
+        
+      </div>
+   </ng-container>
 </div>
 
-<div class="coming-soon">
-   <h1 class="animatedclass"> Coming Soon!</h1>
+<br>
+<hr>
+
+<div class="map-div">
+   <div class="row">
+      <div class="col-sm-5">
+         <img class="plane" src="../../../assets/pics/plane2.gif">
+      </div>
+      <div class="col-sm-7 mapTitle my-2">Where we've Been</div>      
+   </div>
+   <div class="row">
+      <div class="col-6"><h1 class="animatedclass">Coming Soon!</h1></div>
+      <div class="col-6"><h1 class="animatedclass center">Coming Soon!</h1></div>
+   </div>
 </div>
+
+
+
+
+
+
 <!-- <ng-template #marqueeContent>
    <mark class="scrollText">coming soon!</mark>
 </ng-template>
@@ -77,38 +117,6 @@
      
    </div>
  </div> -->
-<hr>
+<br><br>
 
-<div class="postTitle my-5">Latest Posts</div>
-<div class="row">
-   <ng-container *ngFor="let m of Metadata">
-      <div class="col-12 col-md-4 postBox">
-         <mat-card class="mb-3">
-            <div class="row">
-               <div class="col-10">
-                  <mat-card-title style="float: left;">{{m.album_title}}</mat-card-title>
-               </div>
-               <div class="col-2">
-                  <button style="float: right;" class="albumBtn" mat-button matTooltip="Open Album"
-                     (click)="openAlbum(m.metadata.album_id)">
-                     <mat-icon style="float: right;" class="albumBtn">collections</mat-icon>
-                  </button>
-               </div>
-            </div>
-            <img mat-card-image [src]="(serverURI + '/images/file/' + m.filename) | safe: 'url'"            
-               alt="m.metadata.caption" (click)="openAlbum(m.metadata.album_id)">
-            <mat-card-content>
-               <figcaption>{{m.metadata.caption}}</figcaption>
-               <p class="trip-date">{{m.trip_date | date: 'MMMM/dd/yyyy'}}</p>
-               <br>
-
-            </mat-card-content>
-            <mat-card-actions>
-            </mat-card-actions>
-         </mat-card>
-      </div>
-   </ng-container>
-</div>
-<br>
-<br>
 <app-footer></app-footer>
